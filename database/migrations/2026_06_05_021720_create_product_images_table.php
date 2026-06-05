@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_images', function (Blueprint $table) {
-            $table->id();
+             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->string('image_url');
             $table->unsignedInteger('sort_order')->default(0);
