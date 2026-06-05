@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\BuyleadCredit;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Service;
@@ -100,6 +101,11 @@ class Stand extends Model
         }
 
         return $slug;
+    }
+
+     public function buyleadCredits(): HasOne
+    {
+        return $this->hasOne(BuyleadCredit::class);
     }
 
     public function incrementViews(): void
