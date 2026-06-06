@@ -1,124 +1,112 @@
-<section class="relative py-24 md:py-32 bg-gradient-to-br from-[#0B3A36] to-[#0A2E65] overflow-hidden flex items-center">
-    
-    <!-- Background Artistic Grid -->
-    <div class="absolute inset-0 pointer-events-none opacity-20">
-        <div class="absolute top-[-10%] left-[-5%] w-[60%] h-[120%] grid grid-cols-3 grid-rows-5 gap-4 rotate-[-5deg]">
-            @for ($i = 0; $i < 15; $i++)
-                <div class="w-full h-full bg-white/5 rounded-3xl backdrop-blur-sm border border-white/10"></div>
-            @endfor
-        </div>
+<section class="py-24 md:py-32 bg-[#FDFBF4] relative overflow-hidden">
+    <!-- Subtle Top Border / Divider -->
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[1px] bg-gradient-to-r from-transparent via-zinc-200 to-transparent">
     </div>
-    
-    <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-transparent via-[#0B3A36]/50 to-transparent pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto px-6 relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
-        
-        <!-- Left Side: Staggered Images -->
-        <div class="lg:col-span-5 relative min-h-[500px] md:min-h-[600px] flex justify-center lg:justify-start">
-            
-            <!-- Image 1 (Top Right) -->
-            <div class="absolute top-0 right-[10%] w-[55%] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl shadow-black/40 border border-white/10 animate-float-slow z-20">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" alt="Vendeur" class="w-full h-full object-cover">
-            </div>
-            
-            <!-- Image 2 (Middle Left) -->
-            <div class="absolute top-[25%] left-[5%] w-[55%] aspect-square rounded-[2rem] overflow-hidden shadow-2xl shadow-black/40 border border-white/10 animate-float-slow" style="animation-delay: 1.5s;">
-                <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=600" alt="Artisan" class="w-full h-full object-cover grayscale-[20%] sepia-[10%]">
-            </div>
-            
-            <!-- Image 3 (Bottom Right) -->
-            <div class="absolute bottom-[-5%] right-[15%] w-[50%] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl shadow-black/40 border border-white/10 animate-float-slow z-30" style="animation-delay: 3s;">
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=600" alt="Créatrice" class="w-full h-full object-cover">
-            </div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center">
 
-            <!-- Floating Decoration -->
-            <div class="absolute top-[45%] left-0 w-16 h-16 bg-emerald-500/20 backdrop-blur-xl rounded-full border border-emerald-500/30 flex items-center justify-center animate-pulse">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-            </div>
-        </div>
-
-        <!-- Right Side: Content -->
-        <div class="lg:col-span-7 lg:pl-10 text-white flex flex-col justify-center">
-            
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-6" style="font-family: 'Playfair Display', Georgia, serif;">
-                Pourquoi choisir Kelbom
-            </h2>
-            
-            <p class="text-white/70 text-lg leading-relaxed mb-16 max-w-2xl">
-                Votre partenaire de confiance pour le succès de vos ventes en ligne. Forts d'une technologie robuste et d'un accompagnement personnalisé, nous sommes là pour vous guider vers la réussite de votre stand.
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <h2 class="text-sm font-bold tracking-widest text-[#0A2E65] uppercase mb-4">Pourquoi Kelbom ?</h2>
+            <h3 class="text-4xl md:text-5xl font-extrabold text-zinc-900 tracking-tight mb-6">
+                L'infrastructure de pointe pour votre commerce.
+            </h3>
+            <p class="text-lg text-zinc-500 leading-relaxed">
+                Nous avons repensé la vente en ligne pour vous offrir une plateforme robuste, rapide et intuitive.
+                Concentrez-vous sur vos produits, nous gérons la technologie.
             </p>
+        </div>
 
-            <!-- Features Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-12">
-                
-                <!-- Feature 1 -->
-                <div class="group relative">
-                    <div class="mb-5 text-emerald-400 transform transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-medium mb-3 border-b border-white/10 pb-3 group-hover:border-white/30 transition-colors">Technologie de pointe</h3>
-                    <p class="text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
-                        Bénéficiez de notre infrastructure moderne et ultra-rapide pour garantir une expérience sans faille à vos clients, du catalogue au paiement.
-                    </p>
+        <!-- Features Grid -->
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 w-full animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+
+            <!-- Feature 1 -->
+            <div class="flex flex-col group">
+                <div
+                    class="w-14 h-14 rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center mb-6 text-[#0A2E65] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                 </div>
-
-                <!-- Feature 2 -->
-                <div class="group relative">
-                    <div class="mb-5 text-emerald-400 transform transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-medium mb-3 border-b border-white/10 pb-3 group-hover:border-white/30 transition-colors">Service Personnalisé</h3>
-                    <p class="text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
-                        Profitez de solutions sur-mesure adaptées à vos besoins uniques. Notre équipe garantit une attention individuelle pour atteindre vos objectifs.
-                    </p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="group relative">
-                    <div class="mb-5 text-emerald-400 transform transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-medium mb-3 border-b border-white/10 pb-3 group-hover:border-white/30 transition-colors">Vision d'Avenir</h3>
-                    <p class="text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
-                        Accédez à des stratégies novatrices qui maximisent votre potentiel de vente. Gardez une longueur d'avance dans un marché en constante évolution.
-                    </p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="group relative">
-                    <div class="mb-5 text-emerald-400 transform transition-transform duration-300 group-hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-medium mb-3 border-b border-white/10 pb-3 group-hover:border-white/30 transition-colors">Résultats Prouvés</h3>
-                    <p class="text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
-                        Faites confiance à notre historique de succès. Nous avons aidé de nombreux vendeurs à atteindre et dépasser leurs aspirations financières.
-                    </p>
-                </div>
-
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Performances Extrêmes</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
+                    Une architecture optimisée pour des temps de chargement instantanés. Ne perdez plus aucune vente à
+                    cause de la lenteur.
+                </p>
             </div>
 
-            <!-- Call To Action -->
-            <div class="mt-16">
-                <a href="#" class="inline-flex items-center gap-3 bg-white text-[#0A2E65] px-8 py-4 rounded-full text-base font-bold shadow-xl shadow-black/20 hover:scale-105 hover:bg-zinc-50 transition-all group">
-                    <span>Créer mon stand gratuitement</span>
-                    <span class="bg-[#0A2E65]/10 p-1.5 rounded-full group-hover:bg-[#0A2E65]/20 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                    </span>
-                </a>
+            <!-- Feature 2 -->
+            <div class="flex flex-col group">
+                <div
+                    class="w-14 h-14 rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center mb-6 text-[#0A2E65] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                </div>
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Sécurité Bancaire</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
+                    Transactions cryptées de bout en bout et paiements sécurisés. La confiance de vos clients est notre
+                    priorité absolue.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="flex flex-col group">
+                <div
+                    class="w-14 h-14 rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center mb-6 text-[#0A2E65] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                    </svg>
+                </div>
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Gestion Centralisée</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
+                    Un tableau de bord puissant pour piloter vos stocks, vos commandes et analyser vos revenus en temps
+                    réel.
+                </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="flex flex-col group">
+                <div
+                    class="w-14 h-14 rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center mb-6 text-[#0A2E65] transition-transform duration-300 group-hover:scale-110 group-hover:shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </div>
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Support Dédié</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
+                    Une équipe d'experts à votre écoute pour vous accompagner dans votre croissance et résoudre vos
+                    problèmes techniques.
+                </p>
             </div>
 
         </div>
+
+        <!-- Call To Action -->
+        <div class="mt-20 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            <a href=""
+                class="group relative flex items-center gap-3 bg-[#0A2E65] text-white px-8 py-4 rounded-full text-base font-bold shadow-xl shadow-[#0A2E65]/20 hover:bg-[#0A2E65]/90 transition-all active:scale-[0.98]">
+                <span>Commencer à vendre maintenant</span>
+                <span class="bg-white/10 p-1.5 rounded-full group-hover:bg-white/20 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </span>
+            </a>
+        </div>
+
     </div>
 </section>

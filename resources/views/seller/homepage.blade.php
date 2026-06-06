@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +9,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -32,22 +34,17 @@
         }
     </style>
 </head>
+
 <body class="bg-white text-zinc-950 min-h-[100dvh] flex flex-col selection:bg-blue-100 selection:text-blue-900">
 
     <x-seller.header :transparent="true" />
 
     <x-seller.hero />
-    <x-seller.features />
-    <footer class="py-10 border-t border-zinc-100">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-sm text-zinc-500">© 2026 {{ config('app.name', 'Kelbom') }}. Tous droits réservés.</p>
-            <div class="flex gap-8 text-sm text-zinc-500 font-medium">
-                <a href="#" class="hover:text-zinc-950 transition-colors">Confidentialité</a>
-                <a href="#" class="hover:text-zinc-950 transition-colors">CGV</a>
-                <a href="#" class="hover:text-zinc-950 transition-colors">Contact</a>
-            </div>
-        </div>
-    </footer>
+
+    <x-seller.how-it-works />
+    <x-seller.why-choose-business />
+    <x-seller.footer />
 
 </body>
+
 </html>

@@ -30,7 +30,7 @@
         <!-- Logo -->
         <div class="flex items-center gap-2 group transition-transform duration-300 active:scale-95 shrink-0 pl-2">
             <a href="/" class="flex items-center gap-3 group transition-transform duration-300 active:scale-95 shrink-0">
-                <img src="{{ asset('assets/img/kelbom-Photoroom.png') }}" alt="Kelbom" class="h-8 md:h-12 w-auto">
+                <img src="{{ asset('assets/img/kelbom-Photoroom.png') }}" alt="Kelbom" class="h-15 md:h-12 w-auto">
                 <h1 class="text-xl font-extrabold tracking-tight text-zinc-950 lowercase hidden sm:block">kelbom.</h1>
             </a>
         </div>
