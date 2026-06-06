@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -22,6 +21,8 @@ return new class extends Migration
             $table->string('website_url')->nullable();
             $table->string('whatsapp_number', 20)->nullable();
             $table->boolean('is_verified')->default(false);
+            $table->string('logo')->nullable();
+            $table->string('cover')->nullable();
             $table->decimal('rating_avg', 2, 1)->default(0.0);
             $table->unsignedInteger('total_reviews')->default(0);
             $table->string('contact_email')->nullable();
