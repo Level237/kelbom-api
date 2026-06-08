@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->statefulApi();  // ← Active le mode cookie pour les routes API
 
+        // Enregistrer les alias de middleware
+        $middleware->alias([
+            'seller.access' => \App\Http\Middleware\SellerAccess::class,
+        ]);
+
         // Ou de façon plus explicite (équivalent) :
         // $middleware->api(prepend: [
         //     \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,

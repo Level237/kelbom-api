@@ -11,30 +11,71 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
+    /**
+     * Show registration form
+     */
+    public function showRegister()
+    {
+        return view('seller.auth.register');
+    }
+
+    /**
+     * Show login form
+     */
+    public function showLogin()
+    {
+        return view('seller.auth.login');
+    }
+
+    /**
+     * Handle registration
+     */
     public function register(Request $request)
     {
-        // MÊME validation, MÊME logique
         $validated = $request->validate([
-            'name'   => 'required|string|max:100',
-            'phone_number' => 'required|string|max:20|unique:users',
-            'password'     => ['required', 'confirmed', Password::min(8)],
+            'name'           => 'required|string|max:100',
+            'phone_number'   => 'required|string|max:20|unique:users',
+            'password'       => ['required', 'confirmed', Password::min(8)],
         ]);
 
-        // MÊME création
+        // Créer l'utilisateur
         $user = User::create([
-            'name'   => $validated['first_name'],
-            'last_name'    => '',
-            'phone_number' => $validated['phone_number'],
-            'password'     => Hash::make($validated['password']),
+            'name'           => $validated['name'],
+            'phone_number'   => $validated['phone_number'],
+            'password'       => Hash::make($validated['password']),
         ]);
 
+        // Assigner le rôle 'seller'
         $user->assignRole('seller');
 
-        // Session web (pas de token)
+        // Connexion automatique
         Auth::login($user);
         $request->session()->regenerate();
 
-        // RETOURNE UNE REDIRECTION, PAS DU JSON
+        // Rediriger vers la création de stand
         return redirect()->route('seller.stand.create');
     }
+
+    /**
+     * Smart redirect based on user status
+     * Used by hero CTA button to route correctly
+     */
+    public function getAccessRoute()
+    {
+        // Si pas authentifié → /register
+        if (!Auth::check()) {
+            return redirect()->route('seller.register');
+        }
+
+        $user = Auth::user();
+
+        // Si pas de stand → /stand/create
+        if (!$user->stand()->exists()) {
+            return redirect()->route('seller.stand.create');
+        }
+
+        // Si stand existe → /dashboard
+        return redirect()->route('seller.dashboard');
+    }
 }
+

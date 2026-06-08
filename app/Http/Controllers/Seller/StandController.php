@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class StandController extends Controller
 {
+
+
+public function create()
+    {
+        return view('seller.create-stand');
+    }
+
     public function show(Request $request): JsonResponse
     {
         $seller = $request->user()->seller;

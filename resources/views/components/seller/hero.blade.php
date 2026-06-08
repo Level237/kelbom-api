@@ -37,7 +37,7 @@
         <!-- Call to Actions -->
         <div
             class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            <a href=""
+            <a href="{{ route('seller.access-route') }}"
                 class="group relative flex items-center justify-center gap-2 bg-[#0A2E65] text-white px-8 py-4 rounded-full text-base font-bold hover:bg-[#0A2E65]/80 transition-all shadow-lg shadow-emerald-900/20 active:scale-[0.98]">
                 <span>Créer mon stand</span>
                 <svg xmlns="http://www.w3.org/2000/svg"
