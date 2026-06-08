@@ -51,7 +51,7 @@
                 </a>
             </div>
             
-            <a href="" class="group relative flex items-center gap-2 bg-[#0A2E65] text-white pl-5 pr-1.5 py-1.5 rounded-full text-sm font-medium hover:bg-zinc-800 transition-all active:scale-[0.98]">
+            <a href="/create-stand" class="group relative flex items-center gap-2 bg-[#0A2E65] text-white pl-5 pr-1.5 py-1.5 rounded-full text-sm font-medium hover:bg-zinc-800 transition-all active:scale-[0.98]">
                 <span>Ouvrir mon stand</span>
                 <span class="bg-white text-zinc-950 rounded-full p-1.5 transition-transform duration-300 group-hover:rotate-45">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

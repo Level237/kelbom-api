@@ -14,16 +14,14 @@ class RegisterController extends Controller
     public function register(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'first_name'   => 'required|string|max:100',
-            'last_name'    => 'required|string|max:100',
+            'name'   => 'required|string|max:100',
             'phone_number' => 'required|string|max:20|unique:users',
-            'email'        => 'nullable|email|unique:users',
             'password'     => ['required', 'confirmed', Password::min(8)],
             'role'         => 'required|in:buyer,seller,delivery_person',
         ]);
 
         $user = \App\Models\User::create([
-            'first_name'   => $validated['first_name'],
+            'name'   => $validated['first_name'],
             'last_name'    => $validated['last_name'],
             'phone_number' => $validated['phone_number'],
             'email'        => $validated['email'] ?? null,
