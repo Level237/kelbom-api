@@ -11,7 +11,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $parent = [
-            'id' => 1,
+            'id' => 23,
             'name' => 'Produits',
             'slug' => 'produits',
             'icon' => 'fa-box',

@@ -24,7 +24,7 @@ class StandController extends Controller
         $step = (int) $request->get('step', 1);
 
         // Ensure we don't skip steps
-        if ($step > 1 && ! session()->has(self::SESSION_KEY)) {
+        if ($step > 1 && !session()->has(self::SESSION_KEY)) {
             return redirect()->route('seller.stand.create', ['step' => 1]);
         }
 
@@ -32,7 +32,7 @@ class StandController extends Controller
 
         return view('seller.create-stand', [
             'currentStep' => $step,
-            'data'        => $data,
+            'data' => $data,
         ]);
     }
 
@@ -40,12 +40,12 @@ class StandController extends Controller
     {
         $step = (int) $request->input('current_step');
         $validatedData = [];
-        
+
         switch ($step) {
             case 1:
                 $validatedData = $request->validate([
                     'stand_name' => 'required|string|max:255',
-                    'category'   => 'required|string',
+                    'category' => 'required|string',
                     'short_desc' => 'required|string|max:150',
                 ]);
                 break;
@@ -53,18 +53,18 @@ class StandController extends Controller
             case 2:
                 $validatedData = $request->validate([
                     'country' => 'required|string|max:100',
-                    'city'    => 'required|string|max:100',
-                    'zone'    => 'required|string|max:255',
+                    'city' => 'required|string|max:100',
+                    'zone' => 'required|string|max:255',
                     'address' => 'nullable|string|max:500',
                 ]);
                 break;
 
             case 3:
                 $validatedData = $request->validate([
-                    'phone'    => 'required|string|max:20',
+                    'phone' => 'required|string|max:20',
                     'whatsapp' => 'nullable|string|max:20',
-                    'email'    => 'nullable|email|max:255',
-                    'website'  => 'nullable|url|max:255',
+                    'email' => 'nullable|email|max:255',
+                    'website' => 'nullable|url|max:255',
                 ]);
                 break;
 
@@ -81,12 +81,12 @@ class StandController extends Controller
     public function store(Request $request)
     {
         $phone = session('registered_seller_phone');
-        if (! $phone) {
+        if (!$phone) {
             return redirect()->route('seller.register')->with('error', 'Session expirée, veuillez recommencer.');
         }
 
         $user = \App\Models\User::where('phone_number', $phone)->first();
-        if (! $user) {
+        if (!$user) {
             return redirect()->route('seller.register')->with('error', 'Utilisateur non trouvé.');
         }
 
@@ -102,21 +102,21 @@ class StandController extends Controller
         ]);
 
         $logoPath = $request->hasFile('logo') ? $request->file('logo')->store('stands/logos', 'public') : null;
-        $coverPath = $request->hasFile('cover') ? $request->file('cover')->store('stands/covers', 'public') : null;
+        $coverPath = $request->hasFile('cover_image') ? $request->file('cover_image')->store('stands/covers', 'public') : null;
 
         $seller = $user->stand()->create([
-            'stand_name'      => $sessionData['stand_name'],
-            'slug'            => Str::slug($sessionData['stand_name']) . '-' . $user->id,
-            'description'     => $sessionData['short_desc'],
-            'city'            => $sessionData['city'],
-            'country'         => $sessionData['country'],
-            'address'         => ($sessionData['zone'] ?? '') . ' - ' . ($sessionData['address'] ?? ''),
-            'contact_phone'   => $sessionData['phone'],
+            'stand_name' => $sessionData['stand_name'],
+            'slug' => Str::slug($sessionData['stand_name']) . '-' . $user->id,
+            'description' => $sessionData['short_desc'],
+            'city' => $sessionData['city'],
+            'country' => $sessionData['country'],
+            'address' => ($sessionData['zone'] ?? '') . ' - ' . ($sessionData['address'] ?? ''),
+            'contact_phone' => $sessionData['phone'],
             'whatsapp_number' => $sessionData['whatsapp'] ?? null,
-            'contact_email'   => $sessionData['email'] ?? $user->email,
-            'website_url'     => $sessionData['website'] ?? null,
-            'logo_url'        => $logoPath ? Storage::url($logoPath) : null,
-            'cover_url'       => $coverPath ? Storage::url($coverPath) : null,
+            'contact_email' => $sessionData['email'] ?? $user->email,
+            'website_url' => $sessionData['website'] ?? null,
+            'logo_url' => $logoPath ? Storage::url($logoPath) : null,
+            'cover_url' => $coverPath ? Storage::url($coverPath) : null,
         ]);
 
         $seller->buyleadCredits()->create(['available_credits' => 0]);
@@ -137,7 +137,7 @@ class StandController extends Controller
     public function update(Request $request)
     {
         $stand = $request->user()->stand;
-        
+
         $validated = $request->validate([
             'stand_name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -164,7 +164,7 @@ class StandController extends Controller
             $stand->logo_url = Storage::url($path);
         }
 
-        if ($request->hasFile('cover')) {
+        if ($request->hasFile('cover_image')) {
             if ($stand->cover_url) {
                 Storage::disk('public')->delete(str_replace('/storage/', '', $stand->cover_url));
             }
