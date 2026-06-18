@@ -1,3 +1,4 @@
+@props(['data' => []])
 <section class="min-h-[100dvh] bg-gradient-to-br from-[#FDFBF4] via-white to-emerald-50/30 py-8 md:py-12 px-4">
     <!-- Background Texture -->
     <div class="fixed inset-0 opacity-[0.02] pointer-events-none"
@@ -45,7 +46,9 @@
             </div>
 
             <!-- Form Content -->
-            <form class="p-8 md:p-10 space-y-8">
+            <form action="{{ route('seller.stand.storeStep') }}" method="POST" enctype="multipart/form-data" class="p-8 md:p-10 space-y-8">
+                @csrf
+                <input type="hidden" name="current_step" value="4">
 
                 <!-- Section 1: Logo du stand -->
                 <div class="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -166,25 +169,25 @@
                         <!-- Nom -->
                         <div class="flex items-start justify-between py-2 border-b border-zinc-200/50">
                             <span class="text-sm font-semibold text-zinc-700">Nom</span>
-                            <span class="text-sm font-semibold text-zinc-900 text-right">Épicerie Chez Aminata</span>
+                            <span class="text-sm font-semibold text-zinc-900 text-right">{{ $data['stand_name'] ?? 'N/A' }}</span>
                         </div>
 
                         <!-- Catégorie -->
                         <div class="flex items-start justify-between py-2 border-b border-zinc-200/50">
                             <span class="text-sm font-semibold text-zinc-700">Catégorie</span>
-                            <span class="text-sm font-semibold text-zinc-900 text-right">Alimentation et boissons</span>
+                            <span class="text-sm font-semibold text-zinc-900 text-right">{{ $data['category'] ?? 'N/A' }}</span>
                         </div>
 
                         <!-- Ville -->
                         <div class="flex items-start justify-between py-2 border-b border-zinc-200/50">
                             <span class="text-sm font-semibold text-zinc-700">Ville</span>
-                            <span class="text-sm font-semibold text-zinc-900 text-right">Lomé, Tokoin</span>
+                            <span class="text-sm font-semibold text-zinc-900 text-right">{{ $data['city'] ?? 'N/A' }}, {{ $data['zone'] ?? 'N/A' }}</span>
                         </div>
 
                         <!-- Téléphone -->
                         <div class="flex items-start justify-between py-2 border-b border-zinc-200/50">
                             <span class="text-sm font-semibold text-zinc-700">Téléphone</span>
-                            <span class="text-sm font-semibold text-zinc-900 text-right">+228 90 00 00 00</span>
+                            <span class="text-sm font-semibold text-zinc-900 text-right">{{ $data['phone'] ?? 'N/A' }}</span>
                         </div>
 
                         <!-- Logo Status -->
@@ -222,7 +225,7 @@
                     </div>
                 </div>
 
-            </form>
+            
 
             <!-- Form Footer / Actions -->
             <div class="px-8 md:px-10 py-8 border-t border-zinc-100/50 bg-gradient-to-r from-zinc-50 to-white flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -245,8 +248,8 @@
                         Annuler
                     </button>
                     <button
-                        type="button"
-                        class="w-full sm:flex-1 px-8 py-3.5 text-sm font-bold text-white bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full hover:from-emerald-600 hover:to-emerald-700 shadow-lg shadow-emerald-500/30 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
+                        type="submit"
+                        class="w-full sm:flex-1 px-8 py-3.5 text-sm font-bold text-white bg-[#0A2E65]  rounded-full  transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
                     >
                         <span>Créer mon stand</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -255,6 +258,7 @@
                     </button>
                 </div>
             </div>
+            </form>
         </div>
 
         <!-- Support Section -->

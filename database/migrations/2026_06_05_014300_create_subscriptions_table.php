@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
            $table->id();
-            $table->foreignId('seller_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('transaction_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('stand_id')->unique()->constrained()->cascadeOnDelete();
             $table->string('plan_slug', 100);
             $table->string('plan_name');
             $table->unsignedBigInteger('price_amount');
@@ -28,7 +27,6 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index('seller_id');
             $table->index('plan_slug');
             $table->index('status');
             $table->index('end_date');

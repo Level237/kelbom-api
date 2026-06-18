@@ -1,3 +1,4 @@
+@props(['data' => []])
 <section class="min-h-[100dvh] bg-gradient-to-br from-[#FDFBF4] via-white to-emerald-50/30 py-8 md:py-12 px-4">
     <!-- Background Texture -->
     <div class="fixed inset-0 opacity-[0.02] pointer-events-none"
@@ -45,7 +46,9 @@
             </div>
 
             <!-- Form Content -->
-            <form class="p-8 md:p-10 space-y-8">
+            <form action="{{ route('seller.stand.storeStep') }}" method="POST" class="p-8 md:p-10 space-y-8">
+                @csrf
+                <input type="hidden" name="current_step" value="2">
 
                 <!-- Field 1: Pays -->
                 <div class="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -53,21 +56,28 @@
                         Pays <span class="text-red-500">*</span>
                     </label>
                     <div class="relative group">
+                        @php
+                            $selectedCountry = old('country', $data['country'] ?? 'cameroun');
+                        @endphp
                         <select
                             id="country"
                             name="country"
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 appearance-none cursor-pointer"
+                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 appearance-none cursor-pointer @error('country') border-red-500 @enderror"
                         >
                             <option value="">Sélectionnez un pays</option>
-                            <option value="togo" selected>Togo</option>
-                            <option value="benin">Bénin</option>
-                            <option value="burkina">Burkina Faso</option>
-                            <option value="cotedivoire">Côte d'Ivoire</option>
-                            <option value="ghana">Ghana</option>
-                            <option value="mali">Mali</option>
-                            <option value="niger">Niger</option>
-                            <option value="senegal">Sénégal</option>
+                            <option value="cameroun" {{ $selectedCountry == 'cameroun' ? 'selected' : '' }}>Cameroun</option>
+                            <option value="togo" {{ $selectedCountry == 'togo' ? 'selected' : '' }}>Togo</option>
+                            <option value="benin" {{ $selectedCountry == 'benin' ? 'selected' : '' }}>Bénin</option>
+                            <option value="burkina" {{ $selectedCountry == 'burkina' ? 'selected' : '' }}>Burkina Faso</option>
+                            <option value="cotedivoire" {{ $selectedCountry == 'cotedivoire' ? 'selected' : '' }}>Côte d'Ivoire</option>
+                            <option value="ghana" {{ $selectedCountry == 'ghana' ? 'selected' : '' }}>Ghana</option>
+                            <option value="mali" {{ $selectedCountry == 'mali' ? 'selected' : '' }}>Mali</option>
+                            <option value="niger" {{ $selectedCountry == 'niger' ? 'selected' : '' }}>Niger</option>
+                            <option value="senegal" {{ $selectedCountry == 'senegal' ? 'selected' : '' }}>Sénégal</option>
                         </select>
+                        @error('country')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -82,18 +92,24 @@
                         Ville <span class="text-red-500">*</span>
                     </label>
                     <div class="relative group">
+                        @php
+                            $selectedCity = old('city', $data['city'] ?? 'lome');
+                        @endphp
                         <select
                             id="city"
                             name="city"
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 appearance-none cursor-pointer"
+                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 appearance-none cursor-pointer @error('city') border-red-500 @enderror"
                         >
                             <option value="">Sélectionnez une ville</option>
-                            <option value="lome" selected>Lomé</option>
-                            <option value="sokode">Sokodé</option>
-                            <option value="kara">Kara</option>
-                            <option value="mango">Mango</option>
-                            <option value="dapaong">Dapaong</option>
+                            <option value="lome" {{ $selectedCity == 'lome' ? 'selected' : '' }}>Lomé</option>
+                            <option value="sokode" {{ $selectedCity == 'sokode' ? 'selected' : '' }}>Sokodé</option>
+                            <option value="kara" {{ $selectedCity == 'kara' ? 'selected' : '' }}>Kara</option>
+                            <option value="mango" {{ $selectedCity == 'mango' ? 'selected' : '' }}>Mango</option>
+                            <option value="dapaong" {{ $selectedCity == 'dapaong' ? 'selected' : '' }}>Dapaong</option>
                         </select>
+                        @error('city')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -114,9 +130,12 @@
                             id="zone"
                             name="zone"
                             placeholder="ex: Tokoin"
-                            value="Tokoin"
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300"
+                            value="{{ old('zone', $data['zone'] ?? '') }}"
+                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 @error('zone') border-red-500 @enderror"
                         />
+                        @error('zone')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         <div class="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -138,8 +157,11 @@
                             name="address"
                             rows="3"
                             placeholder="ex: Derrière le marché de Tokoin, près de la station Total"
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 resize-none"
-                        >Derrière le marché de Tokoin, près de la station Total</textarea>
+                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 resize-none @error('address') border-red-500 @enderror"
+                        >{{ old('address', $data['address'] ?? '') }}</textarea>
+                        @error('address')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         <div class="absolute bottom-3 right-4 text-xs text-zinc-400">
                             <span class="char-count">50</span>/300
                         </div>
@@ -148,21 +170,7 @@
                 </div>
 
                 <!-- Location Map Preview (Optional Visual) -->
-                <div class="mt-8 pt-8 border-t border-zinc-100">
-                    <div class="space-y-3">
-                        <label class="block text-sm font-bold text-zinc-900">Aperçu de la localisation</label>
-                        <div class="w-full h-64 bg-gradient-to-br from-zinc-100 to-zinc-50 rounded-xl border-2 border-dashed border-zinc-200 flex items-center justify-center">
-                            <div class="text-center">
-                                <svg class="w-12 h-12 mx-auto text-zinc-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                <p class="text-sm font-semibold text-zinc-700">Carte interactive</p>
-                                <p class="text-xs text-zinc-500 mt-1">Cliquez pour afficher votre localisation sur la carte</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <!-- Required Fields Note -->
                 <div class="pt-4 px-5 py-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-100/50 flex items-start gap-3">
@@ -175,7 +183,7 @@
                     </div>
                 </div>
 
-            </form>
+         
 
             <!-- Form Footer / Actions -->
             <div class="px-8 md:px-10 py-8 border-t border-zinc-100/50 bg-gradient-to-r from-zinc-50 to-white flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -209,6 +217,7 @@
                     </button>
                 </div>
             </div>
+            </form>
         </div>
 
         <!-- Support Section -->
@@ -239,6 +248,7 @@
         const citySelect = document.getElementById('city');
 
         const citiesByCountry = {
+            'cameroun': ['Douala', 'Yaoundé', 'Garoua', 'Bamenda'],
             'togo': ['Lomé', 'Sokodé', 'Kara', 'Mango', 'Dapaong'],
             'benin': ['Cotonou', 'Porto-Novo', 'Parakou', 'Djougou'],
             'burkina': ['Ouagadougou', 'Bobo-Dioulasso', 'Koudougou'],
@@ -247,10 +257,10 @@
             'mali': ['Bamako', 'Ségou', 'Kayes'],
             'niger': ['Niamey', 'Maradi', 'Zinder'],
             'senegal': ['Dakar', 'Thiès', 'Kaolack', 'Saint-Louis']
+            
         };
 
-        countrySelect.addEventListener('change', function() {
-            const country = this.value;
+        const updateCities = (country, selectedCity = null) => {
             citySelect.innerHTML = '<option value="">Sélectionnez une ville</option>';
             
             if (country && citiesByCountry[country]) {
@@ -258,10 +268,22 @@
                     const option = document.createElement('option');
                     option.value = city.toLowerCase().replace(/\s+/g, '-');
                     option.textContent = city;
+                    if (selectedCity && option.value === selectedCity) {
+                        option.selected = true;
+                    }
                     citySelect.appendChild(option);
                 });
             }
+        };
+
+        countrySelect.addEventListener('change', function() {
+            updateCities(this.value);
         });
+
+        // Initialize cities on load if country is already selected
+        if (countrySelect.value) {
+            updateCities(countrySelect.value, '{{ $selectedCity }}');
+        }
 
         // Form validation feedback
         document.querySelectorAll('input[type="text"], select, textarea').forEach(field => {

@@ -1,3 +1,4 @@
+@props(['data' => []])
 <section class="min-h-[100dvh] bg-gradient-to-br from-[#FDFBF4] via-white to-emerald-50/30 py-8 md:py-12 px-4">
     <!-- Background Texture -->
     <div class="fixed inset-0 opacity-[0.02] pointer-events-none"
@@ -45,7 +46,9 @@
             </div>
 
             <!-- Form Content -->
-            <form class="p-8 md:p-10 space-y-8">
+            <form action="{{ route('seller.stand.storeStep') }}" method="POST" class="p-8 md:p-10 space-y-8">
+                @csrf
+                <input type="hidden" name="current_step" value="1">
 
                 <!-- Field 1: Nom du stand -->
                 <div class="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -57,10 +60,13 @@
                             type="text"
                             id="stand_name"
                             name="stand_name"
-                            placeholder="ex: Épicerie Chez Aminata"
-                            value="Épicerie Chez Aminata"
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300"
+                            value="{{ old('stand_name', $data['stand_name'] ?? '') }}"
+                            placeholder="Entrez le nom de votre stand"
+                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 @error('stand_name') border-red-500 @enderror"
                         />
+                        @error('stand_name')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         <div class="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m7-4a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -76,19 +82,25 @@
                         Catégorie principale <span class="text-red-500">*</span>
                     </label>
                     <div class="relative group">
+                        @php
+                            $selectedCategory = old('category', $data['category'] ?? '');
+                        @endphp
                         <select
                             id="category"
                             name="category"
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 appearance-none cursor-pointer"
+                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 appearance-none cursor-pointer @error('category') border-red-500 @enderror"
                         >
                             <option value="">Sélectionnez une catégorie</option>
-                            <option value="alimentation" selected>Alimentation et boissons</option>
-                            <option value="vetements">Vêtements et accessoires</option>
-                            <option value="electronique">Électronique</option>
-                            <option value="maison">Maison et décoration</option>
-                            <option value="beaute">Beauté et santé</option>
-                            <option value="services">Services</option>
+                            <option value="alimentation" {{ $selectedCategory == 'alimentation' ? 'selected' : '' }}>Mode & Vetements</option>
+                            <option value="vetements" {{ $selectedCategory == 'vetements' ? 'selected' : '' }}>Maison & Equipement</option>
+                            <option value="electronique" {{ $selectedCategory == 'electronique' ? 'selected' : '' }}>Beauté & Bien etre</option>
+                            <option value="maison" {{ $selectedCategory == 'maison' ? 'selected' : '' }}>Maison et décoration</option>
+                            <option value="beaute" {{ $selectedCategory == 'beaute' ? 'selected' : '' }}>Beauté et santé</option>
+                            <option value="services" {{ $selectedCategory == 'services' ? 'selected' : '' }}>Services</option>
                         </select>
+                        @error('category')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -109,8 +121,11 @@
                             name="short_desc"
                             rows="3"
                             placeholder="Décrivez brièvement votre stand. Ex: Vente de produits alimentaires de qualité au meilleur prix..."
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 resize-none"
-                        >Vente de produits alimentaires de qualité au meilleur prix...</textarea>
+                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 resize-none @error('short_desc') border-red-500 @enderror"
+                        >{{ old('short_desc', $data['short_desc'] ?? '') }}</textarea>
+                        @error('short_desc')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         <div class="absolute bottom-3 right-4 text-xs text-zinc-400">
                             <span class="char-count">45</span>/150
                         </div>
@@ -118,25 +133,7 @@
                     <p class="text-xs text-zinc-500">Maximum 150 caractères. Soyez concis et attractif.</p>
                 </div>
 
-                <!-- Field 4: Description détaillée -->
-                <div class="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300">
-                    <label for="detailed_desc" class="block text-sm font-bold text-zinc-900">
-                        Description détaillée
-                    </label>
-                    <div class="relative group">
-                        <textarea
-                            id="detailed_desc"
-                            name="detailed_desc"
-                            rows="4"
-                            placeholder="Racontez l'histoire de votre stand, vos spécialités, votre engagement envers la qualité..."
-                            class="w-full px-5 py-3.5 text-base bg-white border-2 border-zinc-200 rounded-xl text-zinc-900 placeholder:text-zinc-400 transition-all duration-300 focus:outline-none focus:border-[#0A2E65] focus:ring-4 focus:ring-blue-50 hover:border-zinc-300 resize-none"
-                        ></textarea>
-                        <div class="absolute bottom-3 right-4 text-xs text-zinc-400">
-                            <span class="char-count">0</span>/500
-                        </div>
-                    </div>
-                    <p class="text-xs text-zinc-500">Optionnel. Jusqu'à 500 caractères pour séduire vos clients.</p>
-                </div>
+              
 
                 <!-- Required Fields Note -->
                 <div class="pt-4 px-5 py-4 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-xl border border-blue-100/50 flex items-start gap-3">
@@ -149,7 +146,7 @@
                     </div>
                 </div>
 
-            </form>
+            
 
             <!-- Form Footer / Actions -->
             <div class="px-8 md:px-10 py-8 border-t border-zinc-100/50 bg-gradient-to-r from-zinc-50 to-white flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -184,6 +181,7 @@
                     </button>
                 </div>
             </div>
+            </form>
         </div>
 
         <!-- Support Section -->

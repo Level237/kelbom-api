@@ -50,19 +50,19 @@
     <!-- Dynamic Step Component Loader -->
     @switch($currentStep)
         @case(1)
-            <x-seller.stand-creation-step-1 />
+            <x-seller.stand-creation-step-1 :data="$data" />
             @break
         @case(2)
-            <x-seller.stand-creation-step-2 />
+            <x-seller.stand-creation-step-2 :data="$data" />
             @break
         @case(3)
-            <x-seller.stand-creation-step-3 />
+            <x-seller.stand-creation-step-3 :data="$data" />
             @break
         @case(4)
-            <x-seller.stand-creation-step-4 />
+            <x-seller.stand-creation-step-4 :data="$data" />
             @break
         @default
-            <x-seller.stand-creation-step-1 />
+            <x-seller.stand-creation-step-1 :data="$data" />
     @endswitch
 
     <script>
@@ -70,7 +70,7 @@
         const navigateToStep = (stepNumber) => {
             const totalSteps = 4;
             if (stepNumber >= 1 && stepNumber <= totalSteps) {
-                window.location.href = `?step=${stepNumber}`;
+                window.location.href = `{{ route('seller.stand.create') }}?step=${stepNumber}`;
             }
         };
 
@@ -80,14 +80,13 @@
 
         // Handle form submissions and navigation
         document.addEventListener('DOMContentLoaded', function() {
-            // Next button handler
+            // Next button handler - Now we should submit the form
             const nextButtons = document.querySelectorAll('[data-action="next-step"]');
             nextButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const nextStep = window.currentStep + 1;
-                    if (nextStep <= window.totalSteps) {
-                        navigateToStep(nextStep);
+                    const form = this.closest('form');
+                    if (form) {
+                        form.submit();
                     }
                 });
             });

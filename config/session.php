@@ -19,7 +19,7 @@ return [
     */
 
     'driver' => env('SESSION_DRIVER', 'database'),
-
+'connection' => env('DB_CONNECTION', 'mysql'),
     /*
     |--------------------------------------------------------------------------
     | Session Lifetime
@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION'),
+    'connection' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------

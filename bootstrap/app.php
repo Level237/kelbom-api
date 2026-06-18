@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->statefulApi();  // ← Active le mode cookie pour les routes API
+        //$middleware->statefulApi();  // ← Active le mode cookie pour les routes API
 
         // Enregistrer les alias de middleware
         $middleware->alias([

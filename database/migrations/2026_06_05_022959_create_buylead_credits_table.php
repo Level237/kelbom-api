@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('buylead_credits', function (Blueprint $table) {
              $table->id();
-            $table->foreignId('seller_id')->unique()->constrained()->cascadeOnDelete();
+            $table->foreignId('stand_id')->unique()->constrained()->cascadeOnDelete();
             $table->integer('available_credits')->default(0);
             $table->integer('total_purchased')->default(0);
             $table->integer('total_consumed')->default(0);

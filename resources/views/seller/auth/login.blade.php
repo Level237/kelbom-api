@@ -9,77 +9,13 @@
 <body class="bg-[#FDFBF4]">
     <div class="min-h-[100dvh] flex">
         <!-- Left Side: Visual Hero -->
-        <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#0A2E65] via-[#0A2E65]/90 to-emerald-600/20 flex-col items-center justify-center p-12 relative overflow-hidden">
+        <div style="background: url('{{ asset('assets/img/login.jpg') }}') center/cover;" class="hidden max-sm:hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#0A2E65] via-[#0A2E65]/90 to-emerald-600/20 flex-col items-center justify-center p-12 relative overflow-hidden">
             
-            <!-- Background Elements -->
-            <div class="absolute top-0 left-0 w-72 h-72 bg-emerald-300/10 blur-[120px] rounded-full -z-10"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-300/5 blur-[100px] rounded-full -z-10"></div>
             
-            <!-- Grid Pattern -->
-            <div class="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
-                style="background-image: url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg stroke=\'%23ffffff\' stroke-width=\'0.5\' fill=\'none\'%3E%3Cpath d=\'M0 0h40v40H0z\'/%3E%3C/g%3E%3C/svg%3E');">
-            </div>
-
-            <!-- Content -->
-            <div class="relative z-10 max-w-sm text-center space-y-8">
-                
-                <!-- Icon/Visual -->
-                <div class="flex justify-center">
-                    <div class="relative">
-                        <!-- Main Icon -->
-                        <div class="w-28 h-28 rounded-3xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center animate-in fade-in slide-in-from-bottom-6 duration-700">
-                            <svg class="w-16 h-16 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <!-- Accent Badge -->
-                        <div class="absolute -bottom-3 -right-3 w-12 h-12 bg-emerald-400 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                            ✓
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Heading -->
-                <div class="space-y-4 animate-in fade-in slide-in-from-bottom-7 duration-700 delay-100">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white leading-tight">
-                        Bienvenue sur Kelbom
-                    </h2>
-                    <p class="text-white/80 text-lg leading-relaxed">
-                        Accédez à votre stand et gérez vos ventes
-                    </p>
-                </div>
-
-                <!-- Features -->
-                <div class="space-y-4 pt-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
-                    <div class="flex items-center gap-3 text-white/90">
-                        <svg class="w-6 h-6 text-emerald-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                        <span class="text-sm font-medium">Accès instantané à votre tableau de bord</span>
-                    </div>
-                    <div class="flex items-center gap-3 text-white/90">
-                        <svg class="w-6 h-6 text-emerald-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                        <span class="text-sm font-medium">Suivi des commandes en temps réel</span>
-                    </div>
-                    <div class="flex items-center gap-3 text-white/90">
-                        <svg class="w-6 h-6 text-emerald-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                        <span class="text-sm font-medium">Gestion simplifiée de vos produits</span>
-                    </div>
-                </div>
-
-                <!-- Quote -->
-                <div class="pt-8 border-t border-white/10">
-                    <p class="text-white/70 italic text-sm leading-relaxed">
-                        "Vendre en ligne n'a jamais été aussi facile avec Kelbom."
-                    </p>
-                    <p class="text-white/60 text-xs mt-3">— Kofi Mensah, Accra</p>
-                </div>
-            </div>
+            <!-- Overlay Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A2E65]/96 via-transparent to-transparent"></div>
+            
+            
         </div>
 
         <!-- Right Side: Form -->
@@ -95,7 +31,7 @@
                 </div>
 
                 <!-- Form -->
-                <form action="#" method="POST" class="space-y-5 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+                <form action="{{ route('login.submit') }}" method="POST" class="space-y-5 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
                     @csrf
 
                     <!-- Phone Field -->
@@ -107,10 +43,14 @@
                             type="tel" 
                             id="phone_number" 
                             name="phone_number"
+                            value="{{ old('phone_number') }}"
                             placeholder="+228 90 00 00 00"
-                            class="w-full px-4 py-3 rounded-lg border-2 border-zinc-200 bg-white focus:border-emerald-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/10 font-medium"
+                            class="w-full px-4 py-3 rounded-lg border-2 @error('phone_number') border-red-500 @else border-zinc-200 @enderror bg-white focus:border-emerald-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/10 font-medium"
                             required
                         />
+                        @error('phone_number')
+                            <p class="text-red-500 text-xs mt-1 font-medium">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Password Field -->
