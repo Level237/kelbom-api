@@ -23,11 +23,17 @@
     <div class="max-w-[1400px] mx-auto flex items-center justify-between px-4 md:px-8 py-3 md:py-4">
         <!-- Logo & Left Nav -->
         <div class="flex items-center gap-8">
-            <a href="/" class="flex items-center gap-2 group transition-transform duration-300 active:scale-95 shrink-0">
-                <img src="{{ asset('assets/img/kelbom-Photoroom.png') }}" alt="Kelbom" 
-                     class="h-8 md:h-10 w-auto transition-all"
-                     :class="!scrolled ? 'brightness-0 invert' : ''">
-                <h1 class="text-2xl font-extrabold tracking-tight lowercase hidden sm:block transition-colors" :class="scrolled ? 'text-zinc-950' : 'text-white'">kelbom.</h1>
+            <a href="/" class="flex items-center gap-2.5 group transition-transform duration-300 active:scale-95 shrink-0">
+                <!-- Logo mark -->
+                <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A2E65] to-blue-700 text-white shadow-lg shadow-blue-900/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-white/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    <span class="relative z-10 font-black text-2xl tracking-tighter">K</span>
+                </div>
+                <!-- Text -->
+                <span class="text-2xl font-black tracking-tight hidden sm:block transition-colors duration-300" 
+                      :class="scrolled ? 'text-zinc-950' : 'text-white'">
+                    Kelbom<span class="text-blue-500">.</span>
+                </span>
             </a>
             
             <nav class="hidden lg:flex items-center gap-6">
@@ -46,7 +52,7 @@
                 </button>
             </div>
             
-            <a href="" class="hidden sm:block px-4 py-1.5 text-sm font-medium border rounded-full transition-all"
+            <a href="/login" class="hidden sm:block px-4 py-1.5 text-sm font-medium border rounded-full transition-all"
                :class="scrolled ? 'border-zinc-300 text-zinc-700 hover:bg-zinc-50' : 'border-white/50 text-white hover:bg-white/10'">
                 Connexion
             </a>

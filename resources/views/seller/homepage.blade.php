@@ -4,7 +4,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Devenir Vendeur</title>
+    <title>Créer votre stand sur Kelbom</title>
+
+    <meta name="title" content="Kelbom - Créer votre stand gratuitement">
+    <meta name="description"
+        content="Kelbom est une plateforme qui permet aux vendeurs de créer leur stand et de vendre leurs produits">
+    <meta name="keywords"
+        content="kelbom,créer votre stand,vente de produits,plateforme de vente,vente en ligne,vente locale">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="Kelbom - Créer votre stand gratuitement">
+    <meta property="og:description"
+        content="Kelbom est une plateforme qui permet aux vendeurs de créer leur stand et de vendre leurs produits">
+    <meta property="og:image" content="{{ asset('assets/img/slide.png') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="Kelbom - Créer votre stand gratuitement">
+    <meta property="twitter:description"
+        content="Kelbom est une plateforme qui permet aux vendeurs de créer leur stand et de vendre leurs produits">
+    <meta property="twitter:image" content="{{ asset('assets/img/slide.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

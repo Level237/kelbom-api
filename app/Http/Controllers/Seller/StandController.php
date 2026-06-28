@@ -30,9 +30,20 @@ class StandController extends Controller
 
         $data = session(self::SESSION_KEY, []);
 
+        $categories = Category::whereNull('parent_id')
+            ->where('is_active', true)
+            ->with([
+                'children' => function ($query) {
+                    $query->where('is_active', true);
+                }
+            ])
+            ->get();
+
+
         return view('seller.create-stand', [
             'currentStep' => $step,
             'data' => $data,
+            'categories' => $categories,
         ]);
     }
 
@@ -45,7 +56,8 @@ class StandController extends Controller
             case 1:
                 $validatedData = $request->validate([
                     'stand_name' => 'required|string|max:255',
-                    'category' => 'required|string',
+                    'categories' => 'required|array',
+                    'categories.*' => 'exists:categories,id',
                     'short_desc' => 'required|string|max:150',
                 ]);
                 break;
@@ -118,6 +130,10 @@ class StandController extends Controller
             'logo_url' => $logoPath ? Storage::url($logoPath) : null,
             'cover_url' => $coverPath ? Storage::url($coverPath) : null,
         ]);
+
+        if (!empty($sessionData['categories'])) {
+            $seller->categories()->attach($sessionData['categories']);
+        }
 
         $seller->buyleadCredits()->create(['available_credits' => 0]);
         session()->forget(self::SESSION_KEY);

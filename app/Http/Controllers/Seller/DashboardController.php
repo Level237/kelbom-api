@@ -11,9 +11,32 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
 
-public function index()
+public function index(Request $request)
     {
-        return view('seller.dashboard');
+        $seller = $request->user()->stand;
+
+        $stats = [
+            'views' => 0,
+            'inquiries' => 0,
+            'active_products' => 0,
+            'credits' => 0,
+        ];
+
+        $recentProducts = collect();
+
+        if ($seller) {
+            $stats['views'] = $seller->products()->sum('views_count');
+            $stats['inquiries'] = $seller->products()->sum('inquiries_count');
+            $stats['active_products'] = $seller->activeProducts()->count();
+            $stats['credits'] = $seller->buyleadCredits?->available_credits ?? 0;
+
+            $recentProducts = $seller->products()
+                ->latest()
+                ->take(7)
+                ->get();
+        }
+
+        return view('seller.dashboard', compact('stats', 'recentProducts'));
     }
     public function stats(Request $request): JsonResponse
     {

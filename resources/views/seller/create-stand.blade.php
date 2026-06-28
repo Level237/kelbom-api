@@ -50,7 +50,7 @@
     <!-- Dynamic Step Component Loader -->
     @switch($currentStep)
         @case(1)
-            <x-seller.stand-creation-step-1 :data="$data" />
+            <x-seller.stand-creation-step-1 :data="$data" :categories="$categories ?? []" />
             @break
         @case(2)
             <x-seller.stand-creation-step-2 :data="$data" />
@@ -62,7 +62,7 @@
             <x-seller.stand-creation-step-4 :data="$data" />
             @break
         @default
-            <x-seller.stand-creation-step-1 :data="$data" />
+            <x-seller.stand-creation-step-1 :data="$data" :categories="$categories ?? []" />
     @endswitch
 
     <script>

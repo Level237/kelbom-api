@@ -122,5 +122,7 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
+    'client_domain' => env('APP_CLIENT_DOMAIN', 'kelbom.com'),
+    'seller_domain' => env('APP_SELLER_DOMAIN', 'seller.kelbom.com'),
+    'api_domain' => env('APP_API_DOMAIN', 'api.kelbom.com'),
 ];

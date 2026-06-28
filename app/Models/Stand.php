@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Review;
 use App\Models\Service;
 use App\Models\Subscription;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -44,23 +45,23 @@ class Stand extends Model
     ];
 
     protected $casts = [
-        'is_verified'       => 'boolean',
-        'rating_avg'        => 'decimal:1',
-        'total_reviews'     => 'integer',
+        'is_verified' => 'boolean',
+        'rating_avg' => 'decimal:1',
+        'total_reviews' => 'integer',
         'total_leads_viewed' => 'integer',
-        'total_leads_won'   => 'integer',
-        'latitude'          => 'decimal:8',
-        'longitude'         => 'decimal:8',
+        'total_leads_won' => 'integer',
+        'latitude' => 'decimal:8',
+        'longitude' => 'decimal:8',
     ];
 
-     protected $hidden = ['deleted_at'];
+    protected $hidden = ['deleted_at'];
 
-     public function user(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-     public function products(): HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }
@@ -68,6 +69,11 @@ class Stand extends Model
     public function activeProducts(): HasMany
     {
         return $this->hasMany(Product::class)->where('status', 'active');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     public function services(): HasMany
@@ -107,7 +113,7 @@ class Stand extends Model
         return $slug;
     }
 
-     public function buyleadCredits(): HasOne
+    public function buyleadCredits(): HasOne
     {
         return $this->hasOne(BuyleadCredit::class);
     }
@@ -129,10 +135,10 @@ class Stand extends Model
         return $credits && $credits->available_credits >= $needed;
     }
 
-        public function consumeCredits(int $amount = 1): bool
+    public function consumeCredits(int $amount = 1): bool
     {
         $credits = $this->buyleadCredits;
-        if (! $credits || $credits->available_credits < $amount) {
+        if (!$credits || $credits->available_credits < $amount) {
             return false;
         }
 
@@ -152,7 +158,7 @@ class Stand extends Model
 
         $this->update([
             'total_reviews' => $stats->total ?? 0,
-            'rating_avg'    => round($stats->avg_rating ?? 0, 1),
+            'rating_avg' => round($stats->avg_rating ?? 0, 1),
         ]);
     }
 

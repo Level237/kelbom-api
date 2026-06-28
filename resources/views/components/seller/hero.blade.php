@@ -10,7 +10,8 @@
     <!-- Hero Content -->
     <div class="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full mt-24 md:mt-0">
         <div class="max-w-3xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <h1 class="text-5xl md:text-6xl lg:text-[4rem] font-extrabold text-white leading-[1.1] tracking-tight">
+            <h1
+                class="text-5xl max-sm:text-4xl md:text-6xl lg:text-[4rem] font-extrabold text-white leading-[1.1] tracking-tight">
                 Des milliers de vendeurs ont déjà ouvert leur stand
 
             </h1>
