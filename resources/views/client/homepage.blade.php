@@ -31,6 +31,15 @@
     <!-- Hero / Main Content Placeholder -->
     <main class="min-h-[80vh]">
         <x-client.hero />
+        
+        <!-- Stands Premiums Section -->
+        @include('client.stand-premium')
+
+        <!-- Promotional Banner -->
+        <x-client.promo-banner />
+
+        <!-- Categories Section -->
+        @include('client.categories')
     </main>
 
 </body>

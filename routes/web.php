@@ -9,10 +9,10 @@ use App\Http\Controllers\Seller\StandController;
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\Client\HomeController;
+
 Route::domain(config('app.client_domain'))->group(function () {
-    Route::get('/', function () {
-        return view("client.homepage");
-    });
+    Route::get('/', [HomeController::class, 'index'])->name('client.home');
 
 
 
