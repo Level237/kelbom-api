@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\MarketplaceController;
 
 Route::domain(config('app.client_domain'))->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('client.home');
+    Route::get('/marketplace', [MarketplaceController::class, 'index'])->name('client.marketplace');
 
 
 
