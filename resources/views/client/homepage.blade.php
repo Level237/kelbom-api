@@ -40,7 +40,12 @@
 
         <!-- Categories Section -->
         @include('client.categories')
+
+        <!-- Request CTA Section -->
+        <x-client.request-cta />
     </main>
 
+    <!-- Footer Component -->
+    <x-client.footer />
 </body>
 </html>
