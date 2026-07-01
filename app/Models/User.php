@@ -17,10 +17,11 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
 
-     protected $fillable = [
+    protected $fillable = [
         'phone_number',
+        'email',
         'password',
         'name'
     ];
@@ -30,11 +31,11 @@ class User extends Authenticatable
         'deleted_at',
     ];
 
-     protected $casts = [
+    protected $casts = [
         'email_verified_at' => 'datetime',
         'phone_verified_at' => 'datetime',
-        'last_login_at'    => 'datetime',
-        'is_active'         => 'boolean',
+        'last_login_at' => 'datetime',
+        'is_active' => 'boolean',
     ];
     /**
      * Get the attributes that should be cast.

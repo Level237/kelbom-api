@@ -17,6 +17,7 @@ Route::domain(config('app.client_domain'))->group(function () {
     // Espace Admin Protégé
     Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     });
 
 });
