@@ -1,4 +1,4 @@
-<header class="bg-white border-b border-zinc-200 sticky top-0 z-50 shadow-sm">
+<header class="bg-white border-b border-zinc-200 sticky top-0 z-50 shadow-sm" x-data="{ mobileMenuOpen: false }">
     <div class="max-w-[1400px] mx-auto px-4 md:px-8 h-[72px] flex items-center justify-between gap-8">
 
         <!-- Logo & Categories -->
@@ -69,7 +69,7 @@
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <button class="md:hidden text-zinc-900">
+            <button @click="mobileMenuOpen = true" class="md:hidden text-zinc-900 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
                     </path>
@@ -134,5 +134,89 @@
                 </a>
             </nav>
         </div>
+    </div>
+
+    <!-- Mobile Off-Canvas Menu -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition-opacity ease-linear duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity ease-linear duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm md:hidden" 
+         style="display: none;">
+         
+         <!-- Drawer -->
+         <div x-show="mobileMenuOpen"
+              x-transition:enter="transition ease-in-out duration-300 transform"
+              x-transition:enter-start="-translate-x-full"
+              x-transition:enter-end="translate-x-0"
+              x-transition:leave="transition ease-in-out duration-300 transform"
+              x-transition:leave-start="translate-x-0"
+              x-transition:leave-end="-translate-x-full"
+              @click.away="mobileMenuOpen = false"
+              class="relative w-4/5 max-w-sm h-full bg-white shadow-2xl flex flex-col overflow-y-auto">
+              
+              <!-- Menu Header -->
+              <div class="p-4 border-b border-zinc-100 flex items-center justify-between sticky top-0 bg-white z-10">
+                  <span class="text-2xl font-black text-[#0A2E65]">KELBOM</span>
+                  <button @click="mobileMenuOpen = false" class="text-zinc-500 hover:text-zinc-800 bg-zinc-100 p-2 rounded-full focus:outline-none transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                  </button>
+              </div>
+
+              <!-- Search Bar for Mobile -->
+              <div class="p-4 border-b border-zinc-100">
+                  <div class="relative flex items-center w-full h-11 rounded-lg bg-zinc-100 focus-within:ring-2 focus-within:ring-blue-500 focus-within:bg-white overflow-hidden transition-all">
+                      <div class="pl-3 text-zinc-400">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                      </div>
+                      <input type="text" placeholder="Rechercher..." class="w-full h-full px-3 bg-transparent border-none focus:outline-none text-zinc-900 placeholder-zinc-500 text-[15px]">
+                  </div>
+              </div>
+
+              <!-- Categories Accordion -->
+              <nav class="flex-1 p-4 pb-10">
+                  <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-4">Parcourir</h3>
+                  <div class="space-y-1">
+                      @foreach($navCategories as $parent)
+                          <div x-data="{ open: false }" class="border-b border-zinc-100 last:border-0">
+                              <button @click="open = !open" class="w-full flex items-center justify-between py-3 text-[15px] font-semibold text-zinc-700 hover:text-[#0A2E65] transition-colors focus:outline-none">
+                                  {{ $parent->name }}
+                                  @if($parent->children->isNotEmpty())
+                                      <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180 text-[#0A2E65]' : 'text-zinc-400'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                  @endif
+                              </button>
+                              
+                              @if($parent->children->isNotEmpty())
+                                  <!-- Subcategories -->
+                                  <div x-show="open" x-transition.opacity class="pl-3 pb-3 space-y-3" style="display: none;">
+                                      @foreach($parent->children as $child)
+                                          <a href="#" class="block text-[14px] text-zinc-500 hover:text-[#0A2E65] transition-colors">
+                                              {{ $child->name }}
+                                          </a>
+                                      @endforeach
+                                  </div>
+                              @endif
+                          </div>
+                      @endforeach
+                      <a href="#" class="block py-4 text-[15px] font-bold text-[#0A2E65] flex items-center gap-1">
+                          Toutes les offres
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                      </a>
+                  </div>
+              </nav>
+
+              <!-- Auth Actions for Mobile -->
+              <div class="p-4 border-t border-zinc-100 bg-zinc-50 mt-auto space-y-3">
+                  <a href="#" class="flex justify-center items-center w-full py-2.5 text-[15px] font-semibold text-zinc-700 bg-white border border-zinc-300 rounded-lg shadow-sm hover:bg-zinc-50 transition-colors">
+                      Se connecter
+                  </a>
+                  <a href="#" class="flex justify-center items-center w-full py-2.5 text-[15px] font-semibold text-white bg-[#0A2E65] rounded-lg shadow-sm hover:bg-blue-900 transition-colors">
+                      Créer un compte
+                  </a>
+              </div>
+         </div>
     </div>
 </header>

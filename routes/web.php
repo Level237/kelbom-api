@@ -20,7 +20,10 @@ Route::domain(config('app.client_domain'))->group(function () {
     Route::get('/demande', [RequestController::class, 'create'])->name('client.request.create');
     Route::post('/demande', [RequestController::class, 'store'])->name('client.request.store');
     Route::get('/stand/{slug}', [StandProfileController::class, 'show'])->name('client.stand.show');
-
-
-
 });
+
+// Admin Routes (Hors du domaine client pour l'instant)
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+
+Route::get('/admin-login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin-login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
