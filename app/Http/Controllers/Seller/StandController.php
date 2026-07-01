@@ -174,18 +174,18 @@ class StandController extends Controller
 
         if ($request->hasFile('logo')) {
             if ($stand->logo_url) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $stand->logo_url));
+                Storage::disk('public')->delete($stand->logo_url);
             }
             $path = $request->file('logo')->store('stands/logos', 'public');
-            $stand->logo_url = Storage::url($path);
+            $stand->logo_url = $path;
         }
 
         if ($request->hasFile('cover_image')) {
             if ($stand->cover_url) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $stand->cover_url));
+                Storage::disk('public')->delete($stand->cover_url);
             }
             $path = $request->file('cover')->store('stands/covers', 'public');
-            $stand->cover_url = Storage::url($path);
+            $stand->cover_url = $path;
         }
 
         $stand->update(collect($validated)->except(['logo', 'cover'])->toArray());

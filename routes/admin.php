@@ -18,6 +18,9 @@ Route::domain(config('app.client_domain'))->group(function () {
     Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+        
+        Route::patch('stands/{stand}/toggle-status', [\App\Http\Controllers\Admin\StandController::class, 'toggleStatus'])->name('stands.toggle-status');
+        Route::resource('stands', \App\Http\Controllers\Admin\StandController::class);
     });
 
 });

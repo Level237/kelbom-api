@@ -43,8 +43,8 @@
         <div class="mb-8">
             <h3 class="px-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3">Catalogue & Stands</h3>
             <div class="space-y-1">
-                <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg font-medium text-[14px] transition-colors">
-                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                <a href="{{ route('admin.stands.index') }}" class="flex items-center gap-3 px-3 py-2.5 {{ request()->routeIs('admin.stands.*') ? 'text-blue-700 bg-blue-50 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium' }} rounded-lg text-[14px] transition-colors">
+                    <svg class="w-5 h-5 {{ request()->routeIs('admin.stands.*') ? 'text-blue-600' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                     Boutiques (Stands)
                 </a>
                 <a href="#" class="flex items-center gap-3 px-3 py-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg font-medium text-[14px] transition-colors">
