@@ -20,5 +20,8 @@ Route::domain(config('app.client_domain'))->group(function () {
     Route::get('/demande', [RequestController::class, 'create'])->name('client.request.create');
     Route::post('/demande', [RequestController::class, 'store'])->name('client.request.store');
     Route::get('/stand/{slug}', [StandProfileController::class, 'show'])->name('client.stand.show');
+    
+    Route::get('/contact', [\App\Http\Controllers\Client\ContactController::class, 'create'])->name('client.contact.create');
+    Route::post('/contact', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('client.contact.store');
 });
 

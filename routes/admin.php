@@ -26,6 +26,10 @@ Route::domain(config('app.client_domain'))->group(function () {
         Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->only(['index', 'destroy']);
         
         Route::resource('requests', \App\Http\Controllers\Admin\RequestController::class)->only(['index', 'destroy'])->parameters(['requests' => 'client_request']);
+        
+        Route::resource('contacts', \App\Http\Controllers\Admin\ContactController::class)->only(['index', 'destroy']);
+        
+        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     });
 
 });
