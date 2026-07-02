@@ -21,6 +21,11 @@ Route::domain(config('app.client_domain'))->group(function () {
         
         Route::patch('stands/{stand}/toggle-status', [\App\Http\Controllers\Admin\StandController::class, 'toggleStatus'])->name('stands.toggle-status');
         Route::resource('stands', \App\Http\Controllers\Admin\StandController::class);
+
+        Route::patch('products/{product}/toggle-status', [\App\Http\Controllers\Admin\ProductController::class, 'toggleStatus'])->name('products.toggle-status');
+        Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->only(['index', 'destroy']);
+        
+        Route::resource('requests', \App\Http\Controllers\Admin\RequestController::class)->only(['index', 'destroy'])->parameters(['requests' => 'client_request']);
     });
 
 });

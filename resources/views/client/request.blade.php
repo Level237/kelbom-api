@@ -45,6 +45,13 @@
 
         <!-- Form Section -->
         <section class="max-w-[1000px] mx-auto px-4 md:px-8 py-12 -mt-10 relative z-20">
+            @if(session('success'))
+                <div class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-6 py-4 rounded-2xl mb-8 flex items-center gap-4 shadow-sm">
+                    <svg class="w-6 h-6 text-emerald-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p class="font-medium text-sm md:text-base">{{ session('success') }}</p>
+                </div>
+            @endif
+
             <div class="bg-white rounded-3xl shadow-xl shadow-blue-900/5 border border-zinc-200 p-6 md:p-10">
                 <form action="{{ route('client.request.store') }}" method="POST" enctype="multipart/form-data" class="space-y-12">
                     @csrf
