@@ -67,7 +67,7 @@
     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
         <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
             <h3 class="text-[15px] font-bold text-slate-800">Derniers Stands inscrits</h3>
-            <a href="#" class="text-[13px] font-bold text-blue-600 hover:text-blue-700">Voir tout</a>
+            <a href="{{ route('admin.stands.index') }}" class="text-[13px] font-bold text-blue-600 hover:text-blue-700">Voir tout</a>
         </div>
         
         <div class="flex-1">
@@ -80,24 +80,26 @@
             @else
                 <ul class="divide-y divide-slate-100">
                     @foreach($latestStands as $stand)
-                        <li class="px-5 py-3 flex items-center gap-4 hover:bg-slate-50/80 transition-colors">
-                            <div class="w-10 h-10 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 overflow-hidden text-blue-600 font-bold">
-                                @if($stand->logo)
-                                    <img src="{{ Storage::url($stand->logo) }}" alt="{{ $stand->name }}" class="w-full h-full object-cover">
-                                @else
-                                    {{ strtoupper(substr($stand->name, 0, 1)) }}
-                                @endif
+                        <a href="{{ route('admin.stands.show', $stand) }}" class="px-5 py-3 flex items-center gap-4 hover:bg-slate-50/80 transition-colors block">
+                            <div class="flex items-center w-full">
+                                <div class="w-10 h-10 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 overflow-hidden text-blue-600 font-bold mr-4">
+                                    @if($stand->logo)
+                                        <img src="{{ Storage::url($stand->logo) }}" alt="{{ $stand->stand_name }}" class="w-full h-full object-cover">
+                                    @else
+                                        {{ strtoupper(substr($stand->stand_name, 0, 1)) }}
+                                    @endif
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[14px] font-bold text-slate-900 truncate">{{ $stand->stand_name }}</p>
+                                    <p class="text-[12px] text-slate-500 truncate">{{ $stand->created_at->diffForHumans() }}</p>
+                                </div>
+                                <div>
+                                    <span class="inline-flex items-center px-2 py-1 rounded bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase tracking-wider">
+                                        Actif
+                                    </span>
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-[14px] font-bold text-slate-900 truncate">{{ $stand->name }}</p>
-                                <p class="text-[12px] text-slate-500 truncate">{{ $stand->created_at->diffForHumans() }}</p>
-                            </div>
-                            <div>
-                                <span class="inline-flex items-center px-2 py-1 rounded bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase tracking-wider">
-                                    Actif
-                                </span>
-                            </div>
-                        </li>
+                        </a>
                     @endforeach
                 </ul>
             @endif
@@ -108,7 +110,7 @@
     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
         <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
             <h3 class="text-[15px] font-bold text-slate-800">Derniers Produits ajoutés</h3>
-            <a href="#" class="text-[13px] font-bold text-blue-600 hover:text-blue-700">Voir tout</a>
+            <a href="{{ route("admin.products.index") }}" class="text-[13px] font-bold text-blue-600 hover:text-blue-700">Voir tout</a>
         </div>
         
         <div class="flex-1">
@@ -123,15 +125,15 @@
                     @foreach($latestProducts as $product)
                         <li class="px-5 py-3 flex items-center gap-4 hover:bg-slate-50/80 transition-colors">
                             <div class="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 overflow-hidden text-slate-400">
-                                @if($product->image)
-                                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                                @if($product->main_image_url)
+                                    <img src="{{ Storage::url($product->main_image_url) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
                                 @else
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 @endif
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-[14px] font-bold text-slate-900 truncate">{{ $product->name }}</p>
-                                <p class="text-[12px] font-medium text-blue-600 truncate">Par {{ $product->stand->name ?? 'Stand Inconnu' }}</p>
+                                <p class="text-[12px] font-medium text-blue-600 truncate">Par {{ $product->stand->stand_name ?? 'Stand Inconnu' }}</p>
                             </div>
                             <div class="text-right">
                                 <p class="text-[13px] font-bold text-slate-800">{{ number_format($product->price, 0, ',', ' ') }} XAF</p>

@@ -23,5 +23,7 @@ Route::domain(config('app.client_domain'))->group(function () {
     
     Route::get('/contact', [\App\Http\Controllers\Client\ContactController::class, 'create'])->name('client.contact.create');
     Route::post('/contact', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('client.contact.store');
+    
+    Route::get('/notre-histoire', [HomeController::class, 'about'])->name('client.about');
 });
 
