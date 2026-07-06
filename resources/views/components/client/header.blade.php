@@ -144,7 +144,7 @@
          x-transition:leave="transition-opacity ease-linear duration-300"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0"
-         class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm md:hidden" 
+         class="fixed inset-0 z-[900] bg-black/60 backdrop-blur-sm md:hidden" 
          style="display: none;">
          
          <!-- Drawer -->
@@ -156,7 +156,7 @@
               x-transition:leave-start="translate-x-0"
               x-transition:leave-end="-translate-x-full"
               @click.away="mobileMenuOpen = false"
-              class="relative w-4/5 max-w-sm h-full bg-white shadow-2xl flex flex-col overflow-y-auto">
+              class="relative w-4/5 z-100 max-w-sm h-full bg-white shadow-2xl flex flex-col overflow-y-auto">
               
               <!-- Menu Header -->
               <div class="p-4 border-b border-zinc-100 flex items-center justify-between sticky top-0 bg-white z-10">
@@ -167,7 +167,7 @@
               </div>
 
               <!-- Search Bar for Mobile -->
-              <div class="p-4 border-b border-zinc-100">
+              <div class="p-4 border-b  border-zinc-100">
                   <div class="relative flex items-center w-full h-11 rounded-lg bg-zinc-100 focus-within:ring-2 focus-within:ring-blue-500 focus-within:bg-white overflow-hidden transition-all">
                       <div class="pl-3 text-zinc-400">
                           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
