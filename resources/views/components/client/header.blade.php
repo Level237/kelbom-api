@@ -99,7 +99,7 @@
             <nav class="flex items-center gap-8 h-12">
                 @foreach($navCategories as $parent)
                     <div class="relative group h-full flex items-center">
-                        <a href="#"
+                        <a href="{{ route('client.category.show', $parent->slug) }}"
                             class="text-[14px] font-semibold text-zinc-600 hover:text-[#0A2E65] transition-colors flex items-center gap-1 h-full">
                             {{ $parent->name }}
                             @if($parent->children->isNotEmpty())
@@ -116,7 +116,7 @@
                             <div
                                 class="absolute top-full left-0 min-w-[220px] bg-white border border-zinc-100 rounded-b-xl shadow-xl shadow-blue-900/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-[60] py-2">
                                 @foreach($parent->children as $child)
-                                    <a href="#"
+                                    <a href="{{ route('client.category.show', $child->slug) }}"
                                         class="block px-5 py-2.5 text-[14px] font-medium text-zinc-600 hover:text-[#0A2E65] hover:bg-blue-50/50 transition-colors">
                                         {{ $child->name }}
                                     </a>
@@ -195,7 +195,7 @@
                                   <!-- Subcategories -->
                                   <div x-show="open" x-transition.opacity class="pl-3 pb-3 space-y-3" style="display: none;">
                                       @foreach($parent->children as $child)
-                                          <a href="#" class="block text-[14px] text-zinc-500 hover:text-[#0A2E65] transition-colors">
+                                          <a href="{{ route('client.category.show', $child->slug) }}" class="block text-[14px] text-zinc-500 hover:text-[#0A2E65] transition-colors">
                                               {{ $child->name }}
                                           </a>
                                       @endforeach
