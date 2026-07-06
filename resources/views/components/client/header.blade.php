@@ -16,10 +16,7 @@
                 </span>
             </a>
             
-            <nav class="hidden lg:flex items-center gap-6">
-                <a href="#" class="text-sm font-medium transition-colors" :class="scrolled ? 'text-zinc-600 hover:text-zinc-900' : 'text-white/90 hover:text-white'">Centre d'aide</a>
-                <a href="#" class="text-sm font-medium transition-colors" :class="scrolled ? 'text-zinc-600 hover:text-zinc-900' : 'text-white/90 hover:text-white'">Règles</a>
-            </nav>
+            
         </div>
 
 

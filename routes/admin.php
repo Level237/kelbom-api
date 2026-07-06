@@ -29,6 +29,9 @@ Route::domain(config('app.client_domain'))->group(function () {
         
         Route::resource('contacts', \App\Http\Controllers\Admin\ContactController::class)->only(['index', 'destroy']);
         
+        Route::patch('reviews/{review}/toggle-status', [\App\Http\Controllers\Admin\ReviewController::class, 'toggleStatus'])->name('reviews.toggle-status');
+        Route::resource('reviews', \App\Http\Controllers\Admin\ReviewController::class)->only(['index', 'destroy']);
+        
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     });
 
