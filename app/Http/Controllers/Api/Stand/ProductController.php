@@ -73,6 +73,12 @@ class ProductController extends Controller
             $product->images()->createMany($images);
         }
 
+        try {
+            \Illuminate\Support\Facades\Mail::to('bramslevel129@gmail.com')->send(new \App\Mail\ProductCreatedMail($product->load('seller', 'category')));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Erreur lors de l\'envoi de l\'email ProductCreatedMail : ' . $e->getMessage());
+        }
+
         return response()->json([
             'message' => 'Produit créé avec succès',
             'product' => new ProductResource($product->load('category', 'images')),

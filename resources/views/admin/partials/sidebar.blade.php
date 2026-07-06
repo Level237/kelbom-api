@@ -4,12 +4,19 @@
 
     <!-- Sidebar Header (Logo) -->
     <div class="flex items-center justify-between h-16 px-6 border-b border-slate-100">
-        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5">
+        <a href="/" class="flex items-center gap-2.5 group transition-transform duration-300 active:scale-95 shrink-0">
+            <!-- Logo mark -->
             <div
-                class="w-8 h-8 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
-                <span class="text-white font-bold text-lg leading-none">K</span>
+                class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A2E65] to-blue-700 text-white shadow-lg shadow-blue-900/20 overflow-hidden">
+                <div class="absolute inset-0 bg-white/10 group-hover:bg-transparent transition-colors duration-300">
+                </div>
+                <span class="relative z-10 font-black text-2xl tracking-tighter">K</span>
             </div>
-            <span class="text-[19px] font-black text-slate-900 tracking-tight">Nexus Admin</span>
+            <!-- Text -->
+            <span class="text-2xl font-black tracking-tight sm:block transition-colors duration-300"
+                :class="scrolled ? 'text-zinc-950' : 'text-white'">
+                Kelbom<span class="text-blue-500">.</span>
+            </span>
         </a>
         <button @click="sidebarOpen = false" class="md:hidden text-slate-400 hover:text-slate-600">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +101,8 @@
                     </a>
                     <a href="{{ route('admin.categories.index') }}"
                         class="flex items-center gap-3 px-3 py-2.5 {{ request()->routeIs('admin.categories.*') ? 'text-blue-700 bg-blue-50 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium' }} rounded-lg text-[14px] transition-colors">
-                        <svg class="w-5 h-5 {{ request()->routeIs('admin.categories.*') ? 'text-blue-600' : 'text-slate-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 {{ request()->routeIs('admin.categories.*') ? 'text-blue-600' : 'text-slate-400' }}"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
                                 d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
