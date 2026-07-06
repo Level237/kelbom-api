@@ -15,7 +15,7 @@ return new class extends Migration
            $table->id();
             $table->string('reviewable_type');            // App\Models\Seller, App\Models\DeliveryPerson
             $table->unsignedBigInteger('reviewable_id');
-            $table->foreignId('buyer_id')->constrained('users')->cascadeOnDelete();
+            $table->string('reviewer_name');
             $table->unsignedTinyInteger('rating');
             $table->text('comment')->nullable();
             $table->text('seller_response')->nullable();
@@ -26,9 +26,6 @@ return new class extends Migration
 
             // Index polymorphe
             $table->index(['reviewable_type', 'reviewable_id']);
-            // Un buyer ne laisse qu'un avis par entité
-            $table->unique(['buyer_id', 'reviewable_type', 'reviewable_id']);
-            $table->index('buyer_id');
             $table->index('rating');
             $table->index('is_verified');
         });

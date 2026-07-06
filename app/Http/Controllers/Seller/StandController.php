@@ -127,8 +127,8 @@ class StandController extends Controller
             'whatsapp_number' => $sessionData['whatsapp'] ?? null,
             'contact_email' => $sessionData['email'] ?? $user->email,
             'website_url' => $sessionData['website'] ?? null,
-            'logo_url' => $logoPath ? Storage::url($logoPath) : null,
-            'cover_url' => $coverPath ? Storage::url($coverPath) : null,
+            'logo_url' => $logoPath,
+            'cover_url' => $coverPath,
         ]);
 
         if (!empty($sessionData['categories'])) {
