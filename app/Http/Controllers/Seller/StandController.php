@@ -138,6 +138,12 @@ class StandController extends Controller
         $seller->buyleadCredits()->create(['available_credits' => 0]);
         session()->forget(self::SESSION_KEY);
 
+        try {
+            \Illuminate\Support\Facades\Mail::to('bramslevel129@gmail.com')->send(new \App\Mail\StandCreatedMail($seller));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Erreur lors de l\'envoi de l\'email StandCreatedMail : ' . $e->getMessage());
+        }
+
         return redirect()->route('seller.loading-stand')->with('success', 'Votre stand a été créé avec succès.');
     }
 
