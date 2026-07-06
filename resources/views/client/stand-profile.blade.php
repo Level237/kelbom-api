@@ -55,7 +55,7 @@
                     <!-- Cover Photo -->
                     <div class="w-full h-[200px] md:h-[320px] relative rounded-b-2xl md:rounded-b-[32px] overflow-hidden group bg-zinc-200">
                         @if($stand->cover_url)
-                            <img src="{{ Storage::url($stand->cover_url) }}" alt="Cover" class="w-full h-full object-cover">
+                            <img src="{{ str_starts_with($stand->cover_url, 'http') ? $stand->cover_url : Storage::url($stand->cover_url) }}" alt="Cover" class="w-full h-full object-cover">
                         @endif
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80"></div>
                     </div>
@@ -67,7 +67,7 @@
                             <div class="flex flex-col md:flex-row items-center md:items-end gap-5">
                                 <div class="w-[110px] h-[110px] md:w-[150px] md:h-[150px] rounded-full border-4 border-white bg-white shadow-md overflow-hidden relative z-10 shrink-0 flex items-center justify-center font-bold text-4xl text-blue-600">
                                     @if($stand->logo_url)
-                                        <img src="{{ Storage::url($stand->logo_url) }}" alt="Logo" class="w-full h-full object-cover">
+                                        <img src="{{ str_starts_with($stand->logo_url, 'http') ? $stand->logo_url : Storage::url($stand->logo_url) }}" alt="Logo" class="w-full h-full object-cover">
                                     @else
                                         {{ strtoupper(substr($stand->stand_name, 0, 1)) }}
                                     @endif
@@ -164,7 +164,7 @@
                                     <div class="bg-white border border-zinc-200/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer flex flex-col">
                                         <div class="relative w-full h-40 md:h-48 bg-zinc-100 overflow-hidden">
                                             @if($product->main_image_url)
-                                                <img src="{{ Storage::url($product->main_image_url) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                                <img src="{{ str_starts_with($product->main_image_url, 'http') ? $product->main_image_url : Storage::url($product->main_image_url) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                             @else
                                                 <div class="flex items-center justify-center h-full text-zinc-400"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
                                             @endif

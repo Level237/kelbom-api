@@ -20,8 +20,12 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
+        $premiumStands = \App\Models\Stand::where('is_verified', true)
+            ->orderByDesc('rating_avg')
+            ->take(8)
+            ->get();
 
-        return view('client.homepage', compact('categories'));
+        return view('client.homepage', compact('categories', 'premiumStands'));
     }
 
     public function about()
