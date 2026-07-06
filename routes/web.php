@@ -21,10 +21,12 @@ Route::domain(config('app.client_domain'))->group(function () {
     Route::post('/demande', [RequestController::class, 'store'])->name('client.request.store');
     Route::get('/stand/{slug}', [StandProfileController::class, 'show'])->name('client.stand.show');
     Route::post('/stand/{slug}/reviews', [\App\Http\Controllers\Client\ReviewController::class, 'store'])->name('client.stand.review.store');
-    
+
     Route::get('/contact', [\App\Http\Controllers\Client\ContactController::class, 'create'])->name('client.contact.create');
     Route::post('/contact', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('client.contact.store');
-    
+
     Route::get('/notre-histoire', [HomeController::class, 'about'])->name('client.about');
+
+
 });
 

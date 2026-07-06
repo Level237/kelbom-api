@@ -2,21 +2,26 @@
     <div class="max-w-[1400px] mx-auto px-4 md:px-8 h-[72px] flex items-center justify-between gap-8">
 
         <!-- Logo & Categories -->
-        <div class="flex items-center gap-6 shrink-0">
-            <a href="/" class="text-3xl font-black tracking-tighter text-zinc-950">
-                KELBOM
-            </a>
-
-            <div class="relative group hidden lg:flex items-center cursor-pointer h-[72px]">
-                <div class="flex items-center gap-1.5 text-zinc-600 hover:text-zinc-900 font-medium">
-                    <span class="text-[15px]">Category</span>
-                    <svg class="w-4 h-4 text-zinc-400 group-hover:text-zinc-600" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
+        <div class="flex items-center gap-8">
+            <a href="/" class="flex items-center gap-2.5 group transition-transform duration-300 active:scale-95 shrink-0">
+                <!-- Logo mark -->
+                <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A2E65] to-blue-700 text-white shadow-lg shadow-blue-900/20 overflow-hidden">
+                    <div class="absolute inset-0 bg-white/10 group-hover:bg-transparent transition-colors duration-300"></div>
+                    <span class="relative z-10 font-black text-2xl tracking-tighter">K</span>
                 </div>
-            </div>
+                <!-- Text -->
+                <span class="text-2xl font-black tracking-tight sm:block transition-colors duration-300" 
+                      :class="scrolled ? 'text-zinc-950' : 'text-white'">
+                    Kelbom<span class="text-blue-500">.</span>
+                </span>
+            </a>
+            
+            <nav class="hidden lg:flex items-center gap-6">
+                <a href="#" class="text-sm font-medium transition-colors" :class="scrolled ? 'text-zinc-600 hover:text-zinc-900' : 'text-white/90 hover:text-white'">Centre d'aide</a>
+                <a href="#" class="text-sm font-medium transition-colors" :class="scrolled ? 'text-zinc-600 hover:text-zinc-900' : 'text-white/90 hover:text-white'">Règles</a>
+            </nav>
         </div>
+
 
         <!-- Search Bar -->
         <div class="flex-1 max-w-2xl hidden md:block">
