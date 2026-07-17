@@ -62,11 +62,10 @@
 
             <!-- Auth -->
             <div class="hidden sm:flex items-center gap-4">
-                <a href="#"
-                    class="text-[15px] font-medium text-zinc-600 hover:text-zinc-900 transition-colors">Login</a>
-                <a href="#"
+                
+                <a href="{{ route('client.marketplace') }}"
                     class="bg-[#0A2E65] hover:bg-[#0A2E65]/90 text-white px-5 py-2.5 rounded text-[15px] font-bold transition-colors shadow-sm">
-                    Register
+                    Marketplace
                 </a>
             </div>
 
@@ -126,7 +125,7 @@
                     </div>
                 @endforeach
 
-                <a href="#"
+                <a href="{{ route('client.products') }}"
                     class="text-[14px] font-bold text-[#0A2E65] hover:text-blue-800 transition-colors ml-auto flex items-center gap-1.5">
                     Toutes les offres
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -203,7 +202,7 @@
                               @endif
                           </div>
                       @endforeach
-                      <a href="#" class="block py-4 text-[15px] font-bold text-[#0A2E65] flex items-center gap-1">
+                      <a href="{{ route('client.products') }}" class="block py-4 text-[15px] font-bold text-[#0A2E65] flex items-center gap-1">
                           Toutes les offres
                           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                       </a>

@@ -3,8 +3,10 @@
 
         <!-- Left Side: Hero Banner -->
         <div class="lg:flex-[7] relative rounded-3xl overflow-hidden shadow-sm bg-zinc-100">
-            <img src="{{ asset('assets/img/client/hero.png') }}" alt="Hero KELBOM"
-                class="absolute inset-0 w-full h-full object-contain">
+            <a href="{{ route("client.marketplace") }}">
+                <img src="{{ asset('assets/img/client/hero.png') }}" alt="Hero KELBOM"
+                    class="absolute inset-0 w-full h-full object-contain">
+            </a>
         </div>
 
         <!-- Right Side: Mini Carousel -->

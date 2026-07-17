@@ -30,4 +30,30 @@ class MarketplaceController extends Controller
 
         return view('client.marketplace', compact('stands', 'categories'));
     }
+
+    public function products(Request $request)
+    {
+        $query = \App\Models\Product::with(['category', 'stand'])->where('status', 'active');
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('categories')) {
+            $query->whereIn('category_id', $request->categories);
+        }
+
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        $products = $query->latest()->paginate(16)->withQueryString();
+        $categories = \App\Models\Category::whereNull('parent_id')->orderBy('name')->get();
+
+        return view('client.products', compact('products', 'categories'));
+    }
 }
