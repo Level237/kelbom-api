@@ -26,7 +26,14 @@ return Application::configure(basePath: dirname(__DIR__))
     
         // Enregistrer les alias de middleware
         $middleware->alias([
-            'seller.access' => \App\Http\Middleware\SellerAccess::class,
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+            /** @deprecated alias — préférer seller.stand */
+            'seller.access' => \App\Http\Middleware\EnsureSellerHasStand::class,
+            'seller.stand' => \App\Http\Middleware\EnsureSellerHasStand::class,
+            'seller.onboarding' => \App\Http\Middleware\EnsureSellerOnboarding::class,
+            'seller.role' => \App\Http\Middleware\EnsureSellerRole::class,
         ]);
 
         // Ou de façon plus explicite (équivalent) :

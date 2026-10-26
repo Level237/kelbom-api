@@ -35,19 +35,18 @@
     <main class="min-h-[80vh]">
         @include('client.stories')
         
-        <x-client.hero />
+        <x-client.hero :stands="$premiumStands" />
 
-        <!-- Stands Premiums Section -->
-        @include('client.stand-premium')
+        <x-client.category-rail :categories="$parentCategories" :stands="$homeStands" />
 
-        <!-- Promotional Banner -->
-        <x-client.promo-banner />
+        <x-client.request-cta />
+
+      
+
+    
 
         <!-- Categories Section -->
-        @include('client.categories')
-
-        <!-- Request CTA Section -->
-        <x-client.request-cta />
+       
     </main>
 
     <!-- Footer Component -->

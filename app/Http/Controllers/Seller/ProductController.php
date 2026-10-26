@@ -17,7 +17,7 @@ class ProductController extends Controller
         $stand = $request->user()->stand;
 
         if (!$stand) {
-            return redirect()->route('seller.stand.create')->with('error', 'Créez d\'abord un stand');
+            return redirect()->route('seller.create')->with('error', 'Créez d\'abord un stand');
         }
 
         $products = Product::where('stand_id', $stand->id)

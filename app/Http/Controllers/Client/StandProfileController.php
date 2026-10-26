@@ -9,9 +9,12 @@ class StandProfileController extends Controller
 {
     public function show($slug)
     {
-        $stand = \App\Models\Stand::with(['reviews' => function($query) {
-            $query->latest();
-        }])->where('slug', $slug)->first();
+        $stand = \App\Models\Stand::with([
+            'reviews' => function ($query) {
+                $query->latest();
+            },
+            'activeProducts',
+        ])->where('slug', $slug)->first();
 
         return view('client.stand-profile', compact('stand', 'slug'));
     }

@@ -14,6 +14,7 @@ class CategorySeeder extends Seeder
         $parentData = [
             'name' => 'Produits',
             'slug' => 'produits',
+            'kind' => 'product',
             'icon' => 'fa-box',
             'sort_order' => 10,
             'is_active' => true,
@@ -78,6 +79,7 @@ class CategorySeeder extends Seeder
         $parentDataServices = [
             'name' => 'Services',
             'slug' => 'services',
+            'kind' => 'service',
             'icon' => 'fa-box',
             'is_active' => true,
         ];
@@ -117,6 +119,7 @@ class CategorySeeder extends Seeder
         $parentDataAlimentation = [
             'name' => 'Alimentation & Hotellerie',
             'slug' => 'alimentation-et-hotellerie',
+            'kind' => 'service',
             'is_active' => true,
         ];
 
@@ -152,6 +155,7 @@ class CategorySeeder extends Seeder
         $parentDataImmobilier = [
             'name' => 'Immobilier',
             'slug' => 'immobilier',
+            'kind' => 'service',
             'is_active' => true,
         ];
 
@@ -187,6 +191,7 @@ class CategorySeeder extends Seeder
         $parentDataEvenements = [
             'name' => 'Evenements',
             'slug' => 'evenements',
+            'kind' => 'service',
             'is_active' => true,
         ];
 
@@ -227,6 +232,7 @@ class CategorySeeder extends Seeder
         $parentDataSante = [
             'name' => 'Santé & Médical',
             'slug' => 'sante-et-medical',
+            'kind' => 'service',
             'is_active' => true,
         ];
 
@@ -264,6 +270,7 @@ class CategorySeeder extends Seeder
         $parentIntrantsAgricoles = [
             'name' => 'Intrants Agricoles',
             'slug' => 'intrants-agricoles',
+            'kind' => 'product',
             'is_active' => true,
         ];
 
@@ -300,6 +307,7 @@ class CategorySeeder extends Seeder
         $parentConstruction = [
             'name' => 'Construction',
             'slug' => 'construction',
+            'kind' => 'service',
             'is_active' => true,
         ];
 

@@ -26,8 +26,6 @@
 <body class="bg-zinc-50 text-zinc-900 flex flex-col min-h-screen">
 
     <!-- Top Header -->
-    <x-client.top-header />
-
     <!-- Main Header -->
     <x-client.header />
 
@@ -148,10 +146,17 @@
                 </div>
 
                 <!-- Products Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                <div class="relative" x-data="{ scroll(direction) { this.$refs.row.scrollBy({ left: direction * this.$refs.row.clientWidth * 0.8, behavior: 'smooth' }) } }">
+                    <button type="button" @click="scroll(-1)" class="absolute top-24 left-0 z-10 hidden h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex" aria-label="Produits précédents">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button type="button" @click="scroll(1)" class="absolute top-24 right-0 z-10 hidden h-9 w-9 translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex" aria-label="Produits suivants">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                <div x-ref="row" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     @forelse($products as $product)
-                        <a href="#"
-                            class="group bg-white rounded-2xl border border-zinc-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <a href="{{ $product->stand ? route('client.stand.show', $product->stand->slug) : '#' }}"
+                            class="group flex w-[82%] max-w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-sm transition hover:border-kola sm:w-[46%] lg:w-[31%] xl:w-[24%]">
                             <div class="aspect-square bg-zinc-100 relative overflow-hidden">
                                 <img src="{{ Str::startsWith($product->main_image_url, 'http') ? $product->main_image_url : Storage::url($product->main_image_url) }}"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -174,6 +179,7 @@
                                     @if($product->compare_at_price > $product->price)
                                         <div class="text-zinc-400 text-[12px] line-through">{{ number_format($product->compare_at_price, 0, ',', ' ') }} FCFA</div>
                                     @endif
+                                    <span class="mt-2 inline-flex text-[13px] font-semibold text-kola-deep">Voir le stand</span>
                                 </div>
                             </div>
                         </a>
@@ -188,6 +194,7 @@
                             <p class="text-zinc-500">Modifiez vos filtres ou effectuez une autre recherche.</p>
                         </div>
                     @endforelse
+                </div>
                 </div>
 
                 <!-- Pagination -->

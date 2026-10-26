@@ -7,321 +7,188 @@
     <title>Tableau de bord | Kelbom</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        [x-cloak] {
-            display: none !important;
-        }
+        [x-cloak] { display: none !important; }
+        body { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 
-<body class="bg-[#f9fafb] text-zinc-900 font-sans antialiased" x-data="{ sidebarOpen: false }">
+<body class="bg-[#f4f1ea] text-bark antialiased" x-data="{ sidebarOpen: false }">
 
-    <!-- Sidebar Mobile Overlay -->
-    <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-300"
-        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-        x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0" @click="sidebarOpen = false"
-        class="fixed inset-0 z-40 bg-zinc-900/40 backdrop-blur-sm lg:hidden"></div>
+    <div x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"
+        class="fixed inset-0 z-40 bg-night/40 backdrop-blur-sm lg:hidden"></div>
 
     <x-seller.dashboard.sidebar />
 
-    <!-- Main Content -->
     <div class="lg:pl-72 flex flex-col min-h-screen">
-
-        <!-- Top Header Component -->
         <x-seller.dashboard.header />
 
-        <!-- Page Content -->
-        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1200px] mx-auto">
 
-            <!-- Welcome Banner -->
-            <div
-                class="relative bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 rounded-[2rem] p-8 sm:p-10 mb-8 overflow-hidden shadow-2xl shadow-zinc-900/10 border border-zinc-800/50">
-                <!-- Background decoration -->
-                <div
-                    class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none">
-                </div>
-                <div
-                    class="absolute bottom-0 left-20 w-40 h-40 bg-fuchsia-500/10 rounded-full blur-2xl pointer-events-none">
-                </div>
+            @php
+                $stand = Auth::user()->stand;
+                $kpiCards = [
+                    ['label' => 'Vues produits', 'value' => $stats['views'], 'hint' => 'Sur vos annonces', 'tone' => 'indigo'],
+                    ['label' => 'Contacts', 'value' => $stats['inquiries'], 'hint' => 'Demandes reçues', 'tone' => 'palm'],
+                    ['label' => 'Produits actifs', 'value' => $stats['active_products'], 'hint' => 'En ligne', 'tone' => 'kola'],
+                    ['label' => 'Crédits leads', 'value' => $stats['credits'], 'hint' => 'Disponibles', 'tone' => 'laterite'],
+                ];
+            @endphp
 
-                <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            {{-- En-tête + CTA principal --}}
+            <section class="mb-6 rounded-2xl border border-[#e7e2d8] bg-white p-5 sm:p-6 shadow-sm">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <h2 class="text-3xl font-extrabold tracking-tight text-white mb-2">Bonjour,
-                            {{ Auth::user()->name ?? 'Vendeur' }} 👋</h2>
-                        <p class="text-zinc-400 text-sm sm:text-base max-w-xl leading-relaxed">Bienvenue sur votre
-                            espace vendeur Kelbom. Suivez vos performances, gérez vos produits et développez votre
-                            activité en toute simplicité.</p>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-harmattan">Tableau de bord</p>
+                        <h1 class="mt-1 text-xl sm:text-2xl font-semibold text-indigo-deep">
+                            Bonjour, {{ Auth::user()->name ?? 'Vendeur' }}
+                        </h1>
+                        <p class="mt-1 text-sm text-harmattan max-w-lg">
+                            @if($stand)
+                                Gérez <span class="font-semibold text-bark">{{ $stand->stand_name }}</span> et ajoutez des produits pour être visible sur la marketplace.
+                            @else
+                                Complétez votre stand pour publier vos produits.
+                            @endif
+                        </p>
                     </div>
-                    <div class="flex flex-wrap items-center gap-3 shrink-0">
-                        <a href="#"
-                            class="px-5 py-3 bg-white text-zinc-950 hover:bg-zinc-100 font-bold rounded-xl text-sm transition-all shadow-sm hover:scale-105 active:scale-95">
-                            Personnaliser mon stand
+                    <a href="{{ route('seller.products.create') }}"
+                        class="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-indigo px-6 text-[15px] font-semibold text-shea shadow-[0_8px_20px_-10px_rgba(30,58,95,0.85)] transition hover:bg-indigo-deep active:scale-[0.99]">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                        Créer un produit
+                    </a>
+                </div>
+            </section>
+
+            {{-- KPI : carousel mobile / grille desktop --}}
+            <section class="mb-6" x-data="{
+                kpiIndex: 0,
+                kpiTotal: {{ count($kpiCards) }},
+                touchStartX: 0,
+                nextKpi() { this.kpiIndex = (this.kpiIndex + 1) % this.kpiTotal; },
+                prevKpi() { this.kpiIndex = (this.kpiIndex - 1 + this.kpiTotal) % this.kpiTotal; },
+            }">
+                <div class="mb-3 flex items-center justify-between">
+                    <h2 class="text-sm font-semibold text-indigo-deep">Indicateurs</h2>
+                    <div class="flex gap-1.5 lg:hidden">
+                        @foreach ($kpiCards as $i => $card)
+                            <button type="button" @click="kpiIndex = {{ $i }}"
+                                class="h-1.5 rounded-full transition-all"
+                                :class="kpiIndex === {{ $i }} ? 'w-6 bg-indigo' : 'w-2 bg-[#d6d0c6]'"
+                                aria-label="KPI {{ $i + 1 }}"></button>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="lg:hidden overflow-hidden rounded-2xl"
+                    @touchstart="touchStartX = $event.changedTouches[0].screenX"
+                    @touchend="const dx = $event.changedTouches[0].screenX - touchStartX; if (dx < -40) nextKpi(); if (dx > 40) prevKpi();">
+                    <div class="flex transition-transform duration-300 ease-out"
+                        :style="`transform: translateX(-${kpiIndex * 100}%)`">
+                        @foreach ($kpiCards as $card)
+                            <article class="w-full shrink-0 rounded-2xl border border-[#e7e2d8] bg-white p-5 shadow-sm">
+                                <p class="text-xs font-medium text-harmattan">{{ $card['label'] }}</p>
+                                <p class="mt-2 text-3xl font-bold tabular-nums text-indigo-deep">{{ number_format($card['value'], 0, ',', ' ') }}</p>
+                                <p class="mt-1 text-xs text-harmattan">{{ $card['hint'] }}</p>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="hidden lg:grid lg:grid-cols-4 gap-4">
+                    @foreach ($kpiCards as $card)
+                        <article class="rounded-2xl border border-[#e7e2d8] bg-white p-5 shadow-sm">
+                            <p class="text-xs font-medium text-harmattan">{{ $card['label'] }}</p>
+                            <p class="mt-2 text-3xl font-bold tabular-nums text-indigo-deep">{{ number_format($card['value'], 0, ',', ' ') }}</p>
+                            <p class="mt-1 text-xs text-harmattan">{{ $card['hint'] }}</p>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
+
+            {{-- Actions rapides --}}
+            <section class="mb-8">
+                <h2 class="mb-3 text-sm font-semibold text-indigo-deep">Actions rapides</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <a href="{{ route('seller.products.create') }}"
+                        class="flex flex-col gap-3 rounded-2xl border border-indigo/15 bg-indigo p-4 text-shea shadow-sm transition hover:bg-indigo-deep">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                        </span>
+                        <span class="text-sm font-semibold leading-tight">Créer un produit</span>
+                    </a>
+                    <a href="{{ route('seller.products.index') }}"
+                        class="flex flex-col gap-3 rounded-2xl border border-[#e7e2d8] bg-white p-4 shadow-sm transition hover:border-indigo/30">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faf8f4] text-indigo">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                        </span>
+                        <span class="text-sm font-semibold text-bark leading-tight">Mes produits</span>
+                    </a>
+                    <a href="{{ route('seller.stand.edit') }}"
+                        class="flex flex-col gap-3 rounded-2xl border border-[#e7e2d8] bg-white p-4 shadow-sm transition hover:border-indigo/30">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faf8f4] text-indigo">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        </span>
+                        <span class="text-sm font-semibold text-bark leading-tight">Modifier le stand</span>
+                    </a>
+                    <a href="{{ route('seller.stand.preview') }}"
+                        class="flex flex-col gap-3 rounded-2xl border border-[#e7e2d8] bg-white p-4 shadow-sm transition hover:border-indigo/30">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#faf8f4] text-indigo">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        </span>
+                        <span class="text-sm font-semibold text-bark leading-tight">Voir ma vitrine</span>
+                    </a>
+                </div>
+            </section>
+
+            {{-- Produits récents --}}
+            <section class="rounded-2xl border border-[#e7e2d8] bg-white shadow-sm overflow-hidden">
+                <div class="flex items-center justify-between gap-3 border-b border-[#eee8de] px-5 py-4 sm:px-6">
+                    <h2 class="text-sm font-semibold text-indigo-deep">Produits récents</h2>
+                    <a href="{{ route('seller.products.index') }}" class="text-xs font-semibold text-indigo hover:underline">Tout voir</a>
+                </div>
+
+                @if($recentProducts->isEmpty())
+                    <div class="px-5 py-12 text-center sm:px-6">
+                        <p class="text-sm text-harmattan mb-4">Aucun produit pour l’instant.</p>
+                        <a href="{{ route('seller.products.create') }}"
+                            class="inline-flex h-10 items-center rounded-lg bg-indigo px-4 text-sm font-semibold text-shea hover:bg-indigo-deep">
+                            Créer mon premier produit
                         </a>
                     </div>
-                </div>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-                <!-- Card 1 -->
-                <div
-                    class="bg-white p-6 rounded-3xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div
-                        class="absolute right-0 top-0 w-24 h-24 bg-blue-50/50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
-                    </div>
-                    <div class="relative z-10">
-                        <div
-                            class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                </path>
-                            </svg>
-                        </div>
-                        <p class="text-zinc-500 text-sm font-medium mb-1">Vues des Produits</p>
-                        <div class="flex items-end gap-3">
-                            <h3 class="text-3xl font-extrabold text-zinc-900 tracking-tight font-mono">
-                                {{ number_format($stats['views'], 0, ',', ' ') }}</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div
-                    class="bg-white p-6 rounded-3xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div
-                        class="absolute right-0 top-0 w-24 h-24 bg-emerald-50/50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
-                    </div>
-                    <div class="relative z-10">
-                        <div
-                            class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                            </svg>
-                        </div>
-                        <p class="text-zinc-500 text-sm font-medium mb-1">Contacts</p>
-                        <div class="flex items-end gap-3">
-                            <h3 class="text-3xl font-extrabold text-zinc-900 tracking-tight font-mono">
-                                {{ number_format($stats['inquiries'], 0, ',', ' ') }}</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div
-                    class="bg-white p-6 rounded-3xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div
-                        class="absolute right-0 top-0 w-24 h-24 bg-fuchsia-50/50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
-                    </div>
-                    <div class="relative z-10">
-                        <div
-                            class="w-12 h-12 bg-fuchsia-100 text-fuchsia-600 rounded-2xl flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                </path>
-                            </svg>
-                        </div>
-                        <p class="text-zinc-500 text-sm font-medium mb-1">Produits Actifs</p>
-                        <div class="flex items-end gap-3">
-                            <h3 class="text-3xl font-extrabold text-zinc-900 tracking-tight font-mono">
-                                {{ number_format($stats['active_products'], 0, ',', ' ') }}</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div
-                    class="bg-white p-6 rounded-3xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div
-                        class="absolute right-0 top-0 w-24 h-24 bg-amber-50/50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
-                    </div>
-                    <div class="relative z-10">
-                        <div
-                            class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <p class="text-zinc-500 text-sm font-medium mb-1">Crédits Lead</p>
-                        <div class="flex items-end justify-between w-full">
-                            <h3 class="text-3xl font-extrabold text-zinc-900 tracking-tight font-mono">
-                                {{ number_format($stats['credits'], 0, ',', ' ') }}</h3>
-                            <a href="#" class="text-amber-600 text-xs font-bold hover:underline mb-2">Recharger</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content Grid -->
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-
-                <!-- Left: Recent Orders -->
-                <div class="xl:col-span-2 space-y-8">
-                    <!-- Recent Products -->
-                    <div class="bg-white rounded-[2rem] border border-zinc-200/60 shadow-sm overflow-hidden">
-                        <div class="p-6 sm:px-8 sm:py-6 border-b border-zinc-100 flex items-center justify-between">
-                            <h3 class="text-lg font-bold text-zinc-900">Produits Récents</h3>
-                            <a href="#"
-                                class="text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors bg-indigo-50 px-3 py-1.5 rounded-lg">Tous
-                                les produits</a>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="bg-zinc-50/50">
-                                        <th
-                                            class="px-8 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                                            Produit</th>
-                                        <th
-                                            class="px-8 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                                            Ajouté le</th>
-                                        <th
-                                            class="px-8 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                                            Prix</th>
-                                        <th
-                                            class="px-8 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                                            Statut</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-zinc-100">
-                                    @forelse($recentProducts as $product)
-                                        <tr class="hover:bg-zinc-50 transition-colors">
-                                            <td class="px-8 py-4">
-                                                <div class="flex items-center gap-3">
-                                                    @if($product->main_image_url)
-                                                        <div
-                                                            class="w-10 h-10 rounded-xl bg-zinc-100 flex-shrink-0 overflow-hidden border border-zinc-200/60">
-                                                            <img src="{{ Storage::url($product->main_image_url)}}"
-                                                                alt="{{ $product->name }}" class="w-full h-full object-cover">
-                                                        </div>
-                                                    @else
-                                                        <div
-                                                            class="w-10 h-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-400 flex-shrink-0 border border-zinc-200/60">
-                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                                viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                                </path>
-                                                            </svg>
-                                                        </div>
-                                                    @endif
-                                                    <span
-                                                        class="text-sm font-semibold text-zinc-900 line-clamp-1">{{ $product->name }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="px-8 py-4 text-sm text-zinc-500">
-                                                {{ $product->created_at->format('d/m/Y') }}</td>
-                                            <td class="px-8 py-4 text-sm font-bold text-zinc-900">
-                                                {{ $product->formatted_price }}</td>
-                                            <td class="px-8 py-4">
-                                                @if($product->status === 'active')
-                                                    <span
-                                                        class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">Actif</span>
-                                                @else
-                                                    <span
-                                                        class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-zinc-100 text-zinc-700 border border-zinc-200">Inactif</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="4" class="px-8 py-8 text-center text-sm text-zinc-500">
-                                                Aucun produit récent trouvé.
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Sidebar -->
-                <div class="space-y-6">
-                    <!-- Promo Card -->
-                    <div
-                        class="bg-gradient-to-br from-indigo-950 via-[#0A2E65] to-zinc-900 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl shadow-[#0A2E65]/10">
-                        <!-- Abstract shapes -->
-                        <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none">
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-white/10">
-                                <svg class="w-6 h-6 text-indigo-200" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <h4 class="text-xl font-bold mb-3">Boostez vos ventes</h4>
-                            <p class="text-indigo-100/80 text-sm mb-8 leading-relaxed font-medium">Passez au plan
-                                Premium pour apparaître en tête des résultats et attirer plus de clients sur votre
-                                stand.</p>
-                            <a href="#"
-                                class="inline-flex items-center justify-center w-full gap-2 py-3.5 bg-white text-zinc-950 rounded-xl font-bold hover:bg-zinc-100 transition-all active:scale-[0.98] shadow-sm">
-                                Découvrir les offres
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Quick Help -->
-                    <div class="bg-white rounded-[2rem] border border-zinc-200/60 p-8 shadow-sm">
-                        <h4 class="text-lg font-bold text-zinc-900 mb-6">Besoin d'aide ?</h4>
-                        <div class="space-y-2">
-                            <a href="#"
-                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-zinc-50 transition-colors group">
-                                <div
-                                    class="w-10 h-10 bg-zinc-100 text-zinc-600 rounded-xl flex items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                        </path>
-                                    </svg>
+                @else
+                    <ul class="divide-y divide-[#eee8de]">
+                        @foreach($recentProducts as $product)
+                            <li class="flex items-center gap-3 px-5 py-3.5 sm:px-6 hover:bg-[#faf8f4] transition">
+                                @if($product->main_image_url)
+                                    <img src="{{ Storage::url($product->main_image_url) }}" alt=""
+                                        class="h-11 w-11 shrink-0 rounded-lg object-cover border border-[#e7e2d8]">
+                                @else
+                                    <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#faf8f4] text-harmattan border border-[#e7e2d8]">
+                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    </span>
+                                @endif
+                                <div class="min-w-0 flex-1">
+                                    <p class="truncate text-sm font-semibold text-bark">{{ $product->name }}</p>
+                                    <p class="text-xs text-harmattan">{{ $product->created_at->format('d/m/Y') }} · {{ $product->formatted_price }}</p>
                                 </div>
-                                <div>
-                                    <p class="text-sm font-bold text-zinc-900">Centre d'aide</p>
-                                    <p class="text-xs text-zinc-500 font-medium">Tutoriels et FAQ</p>
-                                </div>
-                            </a>
-                            <a href="#"
-                                class="flex items-center gap-4 p-3 rounded-2xl hover:bg-zinc-50 transition-colors group">
-                                <div
-                                    class="w-10 h-10 bg-zinc-100 text-zinc-600 rounded-xl flex items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-zinc-900">Support Chat</p>
-                                    <p class="text-xs text-zinc-500 font-medium">Nous sommes en ligne</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                @if($product->status === 'active')
+                                    <span class="shrink-0 rounded-full bg-palm/10 px-2.5 py-0.5 text-[11px] font-semibold text-palm">Actif</span>
+                                @else
+                                    <span class="shrink-0 rounded-full bg-[#f4f1ea] px-2.5 py-0.5 text-[11px] font-semibold text-harmattan">Inactif</span>
+                                @endif
+                                <a href="{{ route('seller.products.edit', $product) }}" class="shrink-0 text-xs font-semibold text-indigo hover:underline">Modifier</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
+            </section>
         </main>
     </div>
 
-    <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 

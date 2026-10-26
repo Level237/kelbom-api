@@ -3,156 +3,164 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Stand\StandResource;
+use App\Http\Requests\Seller\CreateStandRequest;
 use App\Models\Category;
-use App\Models\Stand;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class StandController extends Controller
 {
-    private const SESSION_KEY = 'stand_creation_data';
-
     public function create(Request $request)
     {
-        // Vérifier si la session possède le numéro de téléphone (venant du register)
-        if (!session()->has('registered_seller_phone')) {
-            return redirect()->route('seller.register')->with('error', 'Veuillez d\'abord créer un compte.');
+        if ($request->user()?->stand) {
+            return redirect()->route('seller.dashboard');
         }
 
-        $step = (int) $request->get('step', 1);
+        $user = $request->user();
 
-        // Ensure we don't skip steps
-        if ($step > 1 && !session()->has(self::SESSION_KEY)) {
-            return redirect()->route('seller.stand.create', ['step' => 1]);
-        }
-
-        $data = session(self::SESSION_KEY, []);
-
-        $categories = Category::whereNull('parent_id')
+        $categories = Category::query()
             ->where('is_active', true)
-            ->with([
-                'children' => function ($query) {
-                    $query->where('is_active', true);
-                }
+            ->with('parent')
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Category $category) => [
+                'id' => $category->id,
+                'label' => $category->parent
+                    ? $category->parent->name.' — '.$category->name
+                    : $category->name,
+                'kind' => $category->resolvedKind(),
             ])
-            ->get();
+            ->filter(fn (array $category) => $category['kind'] !== null)
+            ->values();
 
+        $countries = config('countries.list', []);
 
-        return view('seller.create-stand', [
-            'currentStep' => $step,
-            'data' => $data,
-            'categories' => $categories,
-        ]);
+        return view('seller.create-stand', compact('user', 'categories', 'countries'));
     }
 
-    public function storeStep(Request $request)
+    public function store(CreateStandRequest $request)
     {
-        $step = (int) $request->input('current_step');
-        $validatedData = [];
+        $validated = $request->validated();
 
-        switch ($step) {
-            case 1:
-                $validatedData = $request->validate([
-                    'stand_name' => 'required|string|max:255',
-                    'categories' => 'required|array',
-                    'categories.*' => 'exists:categories,id',
-                    'short_desc' => 'required|string|max:150',
-                ]);
-                break;
+        $category = Category::findOrFail($validated['category_id']);
 
-            case 2:
-                $validatedData = $request->validate([
-                    'country' => 'required|string|max:100',
-                    'city' => 'required|string|max:100',
-                    'zone' => 'required|string|max:255',
-                    'address' => 'nullable|string|max:500',
-                ]);
-                break;
+        $user = $request->user();
 
-            case 3:
-                $validatedData = $request->validate([
-                    'phone' => 'required|string|max:20',
-                    'whatsapp' => 'nullable|string|max:20',
-                    'email' => 'nullable|email|max:255',
-                    'website' => 'nullable|url|max:255',
-                ]);
-                break;
+        if ($user) {
+            $user->update([
+                'name' => $validated['name'],
+                'phone_number' => $validated['phone_number'],
+                'email' => $validated['email'] ?? $user->email,
+            ]);
 
-            case 4:
-                return $this->store($request);
+            if (! $user->hasRole('seller')) {
+                $user->assignRole('seller');
+            }
+        } else {
+            $user = User::create([
+                'name' => $validated['name'],
+                'phone_number' => $validated['phone_number'],
+                'email' => $validated['email'] ?? null,
+                'password' => Hash::make($validated['password']),
+            ]);
+            $user->assignRole('seller');
+            Auth::login($user);
         }
 
-        $currentData = session(self::SESSION_KEY, []);
-        session([self::SESSION_KEY => array_merge($currentData, $validatedData)]);
+        $logoPath = $request->hasFile('logo')
+            ? $request->file('logo')->store('stands/logos', 'public')
+            : null;
 
-        return redirect()->route('seller.stand.create', ['step' => $step + 1]);
-    }
+        $offer = $validated['kind'] === 'service' ? 'service' : 'produits';
+        $description = sprintf('Stand %s — %s (%s)', $validated['stand_name'], $category->name, $offer);
 
-    public function store(Request $request)
-    {
-        $phone = session('registered_seller_phone');
-        if (!$phone) {
-            return redirect()->route('seller.register')->with('error', 'Session expirée, veuillez recommencer.');
-        }
-
-        $user = \App\Models\User::where('phone_number', $phone)->first();
-        if (!$user) {
-            return redirect()->route('seller.register')->with('error', 'Utilisateur non trouvé.');
-        }
-
-        if ($user->stand) {
-            return redirect()->route('seller.dashboard')->with('error', 'Vous avez déjà un stand.');
-        }
-
-        $sessionData = session(self::SESSION_KEY, []);
-
-        $request->validate([
-            'logo' => 'nullable|image|max:2048',
-            'cover' => 'nullable|image|max:2048',
-        ]);
-
-        $logoPath = $request->hasFile('logo') ? $request->file('logo')->store('stands/logos', 'public') : null;
-        $coverPath = $request->hasFile('cover_image') ? $request->file('cover_image')->store('stands/covers', 'public') : null;
-
-        $seller = $user->stand()->create([
-            'stand_name' => $sessionData['stand_name'],
-            'slug' => Str::slug($sessionData['stand_name']) . '-' . $user->id,
-            'description' => $sessionData['short_desc'],
-            'city' => $sessionData['city'],
-            'country' => $sessionData['country'],
-            'address' => ($sessionData['zone'] ?? '') . ' - ' . ($sessionData['address'] ?? ''),
-            'contact_phone' => $sessionData['phone'],
-            'whatsapp_number' => $sessionData['whatsapp'] ?? null,
-            'contact_email' => $sessionData['email'] ?? $user->email,
-            'website_url' => $sessionData['website'] ?? null,
+        $stand = $user->stand()->create([
+            'stand_name' => $validated['stand_name'],
+            'kind' => $validated['kind'],
+            'slug' => Str::slug($validated['stand_name']).'-'.$user->id,
+            'description' => $description,
+            'city' => $validated['city'],
+            'country' => $validated['country'],
+            'contact_phone' => $validated['phone_number'],
+            'contact_email' => $validated['email'] ?? null,
             'logo_url' => $logoPath,
-            'cover_url' => $coverPath,
+            'latitude' => $validated['latitude'] ?? null,
+            'longitude' => $validated['longitude'] ?? null,
         ]);
 
-        if (!empty($sessionData['categories'])) {
-            $seller->categories()->attach($sessionData['categories']);
-        }
-
-        $seller->buyleadCredits()->create(['available_credits' => 0]);
-        session()->forget(self::SESSION_KEY);
+        $stand->categories()->attach($category->id);
+        $stand->buyleadCredits()->create(['available_credits' => 0]);
 
         try {
-            \Illuminate\Support\Facades\Mail::to('bramslevel129@gmail.com')->send(new \App\Mail\StandCreatedMail($seller));
+            \Illuminate\Support\Facades\Mail::to('bramslevel129@gmail.com')
+                ->send(new \App\Mail\StandCreatedMail($stand));
         } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('Erreur lors de l\'envoi de l\'email StandCreatedMail : ' . $e->getMessage());
+            Log::error('Erreur StandCreatedMail : '.$e->getMessage());
         }
 
-        return redirect()->route('seller.loading-stand')->with('success', 'Votre stand a été créé avec succès.');
+        return redirect()->route('seller.loading-stand')
+            ->with('success', 'Votre stand a été créé avec succès.');
+    }
+
+    public function reverseGeocode(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'lat' => ['required', 'numeric', 'between:-90,90'],
+            'lon' => ['required', 'numeric', 'between:-180,180'],
+        ]);
+
+        try {
+            $response = Http::timeout(8)
+                ->withHeaders([
+                    'User-Agent' => config('app.name', 'Kelbom').'/1.0 (stand-onboarding)',
+                    'Accept-Language' => 'fr',
+                ])
+                ->get('https://nominatim.openstreetmap.org/reverse', [
+                    'lat' => $validated['lat'],
+                    'lon' => $validated['lon'],
+                    'format' => 'json',
+                    'addressdetails' => 1,
+                ]);
+
+            if (! $response->successful()) {
+                return response()->json(['message' => 'Géocodage indisponible'], 502);
+            }
+
+            $address = $response->json('address', []);
+
+            $country = $address['country'] ?? null;
+            $city = $address['city']
+                ?? $address['town']
+                ?? $address['village']
+                ?? $address['municipality']
+                ?? $address['state']
+                ?? null;
+
+            return response()->json([
+                'country' => $country,
+                'city' => $city,
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('reverseGeocode failed: '.$e->getMessage());
+
+            return response()->json(['message' => 'Géocodage impossible'], 502);
+        }
     }
 
     public function edit(Request $request)
     {
         $stand = $request->user()->stand;
-        if (!$stand) {
-            return redirect()->route('seller.stand.create')->with('error', 'Veuillez d\'abord créer un stand.');
+        if (! $stand) {
+            return redirect()->route('seller.create')->with('error', 'Veuillez d\'abord créer un stand.');
         }
+
         return view('seller.stand.edit', compact('stand'));
     }
 
@@ -167,7 +175,7 @@ class StandController extends Controller
             'whatsapp_number' => 'nullable|string|max:20',
             'contact_email' => 'nullable|email|max:255',
             'website_url' => 'nullable|url|max:255',
-            'address' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
             'city' => 'required|string|max:100',
             'country' => 'required|string|max:100',
             'logo' => 'nullable|image|max:2048',
@@ -182,16 +190,14 @@ class StandController extends Controller
             if ($stand->logo_url) {
                 Storage::disk('public')->delete($stand->logo_url);
             }
-            $path = $request->file('logo')->store('stands/logos', 'public');
-            $stand->logo_url = $path;
+            $stand->logo_url = $request->file('logo')->store('stands/logos', 'public');
         }
 
-        if ($request->hasFile('cover_image')) {
+        if ($request->hasFile('cover')) {
             if ($stand->cover_url) {
                 Storage::disk('public')->delete($stand->cover_url);
             }
-            $path = $request->file('cover')->store('stands/covers', 'public');
-            $stand->cover_url = $path;
+            $stand->cover_url = $request->file('cover')->store('stands/covers', 'public');
         }
 
         $stand->update(collect($validated)->except(['logo', 'cover'])->toArray());
@@ -202,10 +208,11 @@ class StandController extends Controller
     public function show(Request $request)
     {
         $stand = $request->user()->stand;
-        if (!$stand) {
-            return redirect()->route('seller.stand.create')->with('error', 'Veuillez d\'abord créer un stand.');
+        if (! $stand) {
+            return redirect()->route('seller.create')->with('error', 'Veuillez d\'abord créer un stand.');
         }
         $stand->load(['products', 'activeSubscription']);
+
         return view('seller.stand.preview', compact('stand'));
     }
 }

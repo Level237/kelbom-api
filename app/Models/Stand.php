@@ -24,6 +24,7 @@ class Stand extends Model
     protected $fillable = [
         'user_id',
         'stand_name',
+        'kind',
         'slug',
         'description',
         'logo_url',

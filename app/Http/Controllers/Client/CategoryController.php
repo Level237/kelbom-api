@@ -16,14 +16,26 @@ class CategoryController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
-        // Récupérer les stands de cette catégorie
-        $stands = Stand::whereHas('categories', function($q) use ($category) {
-            $q->where('categories.id', $category->id);
-        })->where('is_verified', true)->latest()->get();
+        $categoryIds = Category::query()
+            ->where('id', $category->id)
+            ->orWhere('parent_id', $category->id)
+            ->pluck('id');
 
-        // Récupérer les produits de cette catégorie
+        $stands = Stand::query()
+            ->where('is_verified', true)
+            ->where(function ($query) use ($categoryIds) {
+                $query->whereHas('categories', function ($q) use ($categoryIds) {
+                    $q->whereIn('categories.id', $categoryIds)
+                        ->orWhereIn('categories.parent_id', $categoryIds);
+                })->orWhereHas('products', function ($q) use ($categoryIds) {
+                    $q->where('status', 'active')->whereIn('category_id', $categoryIds);
+                });
+            })
+            ->latest()
+            ->get();
+
         $products = Product::with('stand')
-            ->where('category_id', $category->id)
+            ->whereIn('category_id', $categoryIds)
             ->where('status', 'active')
             ->latest()
             ->get();

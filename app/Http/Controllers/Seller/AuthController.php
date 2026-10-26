@@ -47,7 +47,7 @@ class AuthController extends Controller
                 return redirect()->route('seller.dashboard');
             }
 
-            return redirect()->route('seller.stand.create');
+            return redirect()->route('seller.create');
         }
 
         return back()->withErrors([
@@ -77,18 +77,9 @@ class AuthController extends Controller
         $user->assignRole('seller');
 
 
-        // Connexion automatique
         Auth::login($user);
-        //$request->session()->regenerate();
-        session(['registered_seller_phone' => $validated['phone_number']]);
 
-        // Stocker le numéro de téléphone en session pour le tunnel de création de stand
-
-
-
-        // Rediriger vers la création de stand
-        //dd(session('registered_seller_phone'));
-        return to_route('seller.stand.create');
+        return to_route('seller.create');
     }
 
     /**
@@ -119,7 +110,7 @@ class AuthController extends Controller
 
         // Si pas de stand → /stand/create
         if (!$user->stand()->exists()) {
-            return redirect()->route('seller.stand.create');
+            return redirect()->route('seller.create');
         }
 
         // Si stand existe → /dashboard

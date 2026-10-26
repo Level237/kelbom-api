@@ -21,15 +21,13 @@ return new class extends Migration {
             $table->string('website_url')->nullable();
             $table->string('whatsapp_number', 20)->nullable();
             $table->boolean('is_verified')->default(false);
-            $table->string('logo')->nullable();
-            $table->string('cover')->nullable();
             $table->decimal('rating_avg', 2, 1)->default(0.0);
             $table->unsignedInteger('total_reviews')->default(0);
             $table->string('contact_email')->nullable();
-            $table->string('contact_phone', 20)->nullable();
+            $table->string('contact_phone', 20);
             $table->text('address')->nullable();
             $table->string('city', 100);
-            $table->string('country', 100)->default('Togo');
+            $table->string('country', 100);
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->unsignedInteger('total_leads_viewed')->default(0);

@@ -3,12 +3,31 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/*
+ * Kelbom — tokens « marché africain » (voir design.md)
+ * Polices : charger Fontshare dans le layout Blade (Satoshi + Clash Display).
+ */
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Satoshi', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Clash Display', 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+
+    --color-indigo: #1e3a5f;
+    --color-indigo-deep: #152a45;
+    --color-laterite: #c45c3e;
+    --color-shea: #f5ede0;
+    --color-shea-dark: #ebe0d0;
+    --color-kola: #d4a012;
+    --color-kola-deep: #a67c00;
+    --color-palm: #2d5a47;
+    --color-bark: #3d2e24;
+    --color-harmattan: #8b7d6b;
+    --color-night: #141010;
 
     --animate-float-slow: float-slow 6s ease-in-out infinite;
     --animate-bounce-slow: bounce-slow 4s ease-in-out infinite;
+    --animate-stall-in: stall-in 520ms ease-out both;
 
     @keyframes float-slow {
         0%, 100% { transform: translateY(0); }
@@ -19,9 +38,60 @@
         0%, 100% { transform: translateY(0) scale(1); }
         50% { transform: translateY(-10px) scale(1.02); }
     }
+
+    @keyframes stall-in {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@layer components {
+    .kelbom-stall {
+        @apply relative overflow-hidden rounded-lg bg-[#fffbf7] shadow-md;
+        box-shadow: 0 12px 28px -8px rgba(61, 46, 36, 0.14);
+    }
+
+    .kelbom-stall::before {
+        content: '';
+        @apply block h-1 w-full;
+        background: linear-gradient(90deg, var(--color-laterite) 0%, var(--color-indigo) 55%, var(--color-kola) 100%);
+    }
+
+    .kelbom-weave {
+        background-color: var(--color-indigo);
+        background-image:
+            repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 11px,
+                rgba(245, 237, 224, 0.045) 11px,
+                rgba(245, 237, 224, 0.045) 12px
+            ),
+            repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 17px,
+                rgba(196, 92, 62, 0.06) 17px,
+                rgba(196, 92, 62, 0.06) 18px
+            );
+    }
+
+    .kelbom-canopy-edge {
+        border-bottom: 2px solid var(--color-laterite);
+        box-shadow: inset 0 -1px 0 rgba(245, 237, 224, 0.08);
+    }
 }
 
 @layer utilities {
+    .font-display {
+        font-family: var(--font-display);
+    }
     .no-scrollbar::-webkit-scrollbar {
         display: none;
     }

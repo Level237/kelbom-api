@@ -18,7 +18,6 @@
 </head>
 <body class="bg-zinc-50 text-zinc-900 flex flex-col min-h-screen">
 
-    <x-client.top-header />
     <x-client.header />
 
     <main class="flex-grow">

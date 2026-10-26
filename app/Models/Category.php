@@ -10,6 +10,7 @@ class Category extends Model
         'name',
         'slug',
         'parent_id',
+        'kind',
         'description',
         'icon',
         'image_url',
@@ -29,5 +30,10 @@ class Category extends Model
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function resolvedKind(): ?string
+    {
+        return $this->kind ?: $this->parent?->kind;
     }
 }
