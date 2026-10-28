@@ -31,6 +31,12 @@ class CreateStandTest extends TestCase
         $response->assertOk();
     }
 
+    public function test_register_page_redirects_to_stand_creation(): void
+    {
+        $this->get($this->sellerDomainUrl('/register'))
+            ->assertRedirect($this->sellerDomainUrl('/create'));
+    }
+
     public function test_guest_can_register_and_create_stand_via_public_form(): void
     {
         $category = Category::create([

@@ -117,7 +117,7 @@ return [
         'forgot' => 'Forgot password?',
         'submit_login' => 'Log in',
         'no_account' => 'Don’t have an account yet?',
-        'sign_up' => 'Sign up',
+        'sign_up' => 'Create a stand',
         'secure_title' => 'Secure login',
         'secure_body' => '256-bit SSL encryption and 2FA',
         'register_title' => 'Create my account - Kelbom',

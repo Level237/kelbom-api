@@ -51,7 +51,7 @@
                 {{ __('seller.header.login') }}
             </a>
             
-            <a href="/register" 
+            <a href="{{ route('seller.create') }}" 
                class="flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold transition-all active:scale-[0.98]"
                :class="scrolled ? 'bg-zinc-900 text-white hover:bg-zinc-800 shadow-md' : 'bg-white text-zinc-900 hover:bg-zinc-100'">
                 <span>{{ __('seller.header.open_stand') }}</span>

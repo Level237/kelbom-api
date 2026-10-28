@@ -1,5 +1,5 @@
 <section class="max-w-[1400px] mx-auto px-4 md:px-8 py-4 mb-6">
-    <a href="{{ route('seller.register') ?? '#' }}"
+    <a href="{{ route('seller.create') }}"
         class="block w-full rounded-3xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-500 group relative">
         <div class="w-full relative overflow-hidden "> <!-- Couleur de fond jaune en fallback -->
             <img src="{{ asset('assets/img/client/create-stand.png') }}" alt="{{ __('client.promo.alt') }}"

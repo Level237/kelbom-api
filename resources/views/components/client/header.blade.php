@@ -136,10 +136,6 @@
                     <a href="{{ route('seller.dashboard') }}" class="flex w-full items-center justify-center rounded-full bg-kola py-2.5 text-[15px] font-semibold text-white">
                         {{ __('ui.my_space') }}
                     </a>
-                @else
-                    <a href="{{ route('seller.register') }}" class="flex w-full items-center justify-center rounded-full bg-kola py-2.5 text-[15px] font-semibold text-white">
-                        {{ __('ui.sign_up') }}
-                    </a>
                 @endauth
             </div>
         </div>

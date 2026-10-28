@@ -323,7 +323,7 @@
                     class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-[#153e82] hover:bg-blue-900 rounded-xl transition-colors shadow-lg shadow-blue-900/20">
                     {{ __('client.about.explore') }}
                 </a>
-                <a href="{{ route("seller.register") }}"
+                <a href="{{ route('seller.create') }}"
                     class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-900 bg-[#EAB308] hover:bg-[#CA8A04] rounded-xl transition-colors shadow-lg shadow-yellow-500/20">
                     {{ __('client.about.create') }}
                 </a>

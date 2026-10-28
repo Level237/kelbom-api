@@ -3,23 +3,11 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
-    /**
-     * Show registration form
-     */
-    public function showRegister()
-    {
-
-        return view('seller.auth.register');
-    }
-
     /**
      * Show login form
      */
@@ -56,33 +44,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Handle registration
-     */
-    public function register(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'phone_number' => 'required|string|max:20|unique:users',
-            'password' => ['required', 'confirmed', Password::min(8)],
-        ], $this->validationMessages(), $this->validationAttributes());
-
-        // Créer l'utilisateur
-        $user = User::create([
-            'name' => $validated['name'],
-            'phone_number' => $validated['phone_number'],
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        // Assigner le rôle 'seller'
-        $user->assignRole('seller');
-
-
-        Auth::login($user);
-
-        return to_route('seller.create');
-    }
-
-    /**
      * Log the user out of the application.
      */
     public function logout(Request $request)
@@ -115,9 +76,8 @@ class AuthController extends Controller
      */
     public function getAccessRoute()
     {
-        // Si pas authentifié → /register
-        if (!Auth::check()) {
-            return redirect()->route('seller.register');
+        if (! Auth::check()) {
+            return redirect()->route('seller.create');
         }
 
         $user = Auth::user();

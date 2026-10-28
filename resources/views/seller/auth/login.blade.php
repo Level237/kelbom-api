@@ -97,7 +97,7 @@
                     <div class="text-center pt-4 border-t border-zinc-200">
                         <p class="text-zinc-600 text-sm">
                             {{ __('seller.auth.no_account') }}
-                            <a href="{{ route('seller.register') }}" class="font-bold text-[#0A2E65] hover:text-[#0A2E65]/80 transition-colors">
+                            <a href="{{ route('seller.create') }}" class="font-bold text-[#0A2E65] hover:text-[#0A2E65]/80 transition-colors">
                                 {{ __('seller.auth.sign_up') }}
                             </a>
                         </p>

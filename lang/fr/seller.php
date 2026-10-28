@@ -117,7 +117,7 @@ return [
         'forgot' => 'Mot de passe oublié?',
         'submit_login' => 'Se connecter',
         'no_account' => 'Pas encore de compte ?',
-        'sign_up' => 'S\'inscrire',
+        'sign_up' => 'Créer un stand',
         'secure_title' => 'Connexion sécurisée',
         'secure_body' => 'Chiffrage SSL 256-bit et authentification 2FA',
         'register_title' => 'Créer mon compte - Kelbom',

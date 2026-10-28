@@ -21,7 +21,7 @@
             </p>
 
             <div class="pt-4 flex flex-col sm:flex-row items-start gap-4">
-                <a href="{{ route('seller.access-route') ?? '/register' }}"
+                <a href="{{ route('seller.access-route') }}"
                     class="group inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold text-[#FDFBF4] bg-black  rounded-full transition-all border border-white/10 active:scale-[0.98]">
                     <span>{{ __('seller.hero.cta') }}</span>
                     <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none"
