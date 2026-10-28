@@ -36,7 +36,7 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'phone_number' => 'required|string',
             'password' => 'required|string',
-        ]);
+        ], $this->validationMessages(), $this->validationAttributes());
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
@@ -51,7 +51,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'phone_number' => 'Identifiants incorrects.',
+            'phone_number' => __('seller.flash.invalid_credentials'),
         ])->onlyInput('phone_number');
     }
 
@@ -64,7 +64,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:100',
             'phone_number' => 'required|string|max:20|unique:users',
             'password' => ['required', 'confirmed', Password::min(8)],
-        ]);
+        ], $this->validationMessages(), $this->validationAttributes());
 
         // Créer l'utilisateur
         $user = User::create([
@@ -93,6 +93,20 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    private function validationMessages(): array
+    {
+        $messages = trans('seller.validation.messages');
+
+        return is_array($messages) ? $messages : [];
+    }
+
+    private function validationAttributes(): array
+    {
+        $attributes = trans('seller.validation.attributes');
+
+        return is_array($attributes) ? $attributes : [];
     }
 
     /**

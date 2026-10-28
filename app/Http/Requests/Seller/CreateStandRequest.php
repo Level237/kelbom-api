@@ -32,7 +32,7 @@ class CreateStandRequest extends FormRequest
                     $categoryKind = $category?->resolvedKind();
 
                     if ($categoryKind && $categoryKind !== $this->input('kind')) {
-                        $fail('Cette catégorie ne correspond pas au type de stand.');
+                        $fail(__('seller.validation.category_mismatch'));
                     }
                 },
             ],
@@ -44,7 +44,12 @@ class CreateStandRequest extends FormRequest
                 'max:20',
                 Rule::unique('users', 'phone_number')->ignore($userId),
             ],
-            'email' => ['nullable', 'email', 'max:255'],
+            'email' => [
+                'nullable',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($userId),
+            ],
             'logo' => ['nullable', 'image', 'max:2048'],
             'latitude' => ['nullable', 'numeric', 'between:-90,90'],
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
@@ -57,16 +62,26 @@ class CreateStandRequest extends FormRequest
         return $rules;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if ($this->input('email') === '') {
+            $this->merge(['email' => null]);
+        }
+    }
+
+    public function messages(): array
+    {
+        $messages = trans('seller.validation.messages');
+
+        return is_array($messages) ? $messages : [
+            'email.unique' => 'Cet e-mail est déjà utilisé. Connectez-vous ou indiquez une autre adresse.',
+        ];
+    }
+
     public function attributes(): array
     {
-        return [
-            'name' => 'nom',
-            'stand_name' => 'nom du stand',
-            'kind' => 'type de stand',
-            'category_id' => 'catégorie',
-            'phone_number' => 'téléphone',
-            'email' => 'e-mail',
-            'password' => 'mot de passe',
-        ];
+        $attributes = trans('seller.validation.attributes');
+
+        return is_array($attributes) ? $attributes : [];
     }
 }

@@ -16,6 +16,7 @@
         stands: @js($standCards),
         marketplaceUrl: @js(route('client.marketplace')),
         categoryUrls: @js($categoryUrls),
+        seeStand: @js(__('home.rail.see_stand')),
         get filtered() {
             if (this.selected === 'all') {
                 return this.stands
@@ -44,25 +45,25 @@
                 <button type="button" @click="selected = 'all'"
             :class="selected === 'all' ? 'border-kola bg-kola text-white' : 'border-zinc-200 bg-white text-bark hover:border-kola'"
             class="inline-flex h-11 shrink-0 items-center rounded-full border px-5 text-sm font-semibold whitespace-nowrap">
-            Tout
+            {{ __('home.rail.all') }}
         </button>
                 @foreach ($parents as $category)
                     <button type="button" @click="selected = '{{ $category->id }}'"
                         :class="selected === '{{ $category->id }}' ? 'border-kola bg-kola text-white' : 'border-zinc-200 bg-white text-bark hover:border-kola'"
                         class="inline-flex h-11 shrink-0 items-center rounded-full border px-5 text-sm font-semibold whitespace-nowrap">
-                        {{ $category->name }}
+                        {{ $category->translatedName() }}
                     </button>
                 @endforeach
             </div>
 
             <button type="button" @click="scrollRail(-1)"
                 class="absolute top-1/2 left-0 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex"
-                aria-label="Catégories précédentes">
+                aria-label="{{ __('home.rail.previous') }}">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             </button>
             <button type="button" @click="scrollRail(1)"
                 class="absolute top-1/2 right-0 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex"
-                aria-label="Catégories suivantes">
+                aria-label="{{ __('home.rail.next') }}">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </button>
         </div>
@@ -91,7 +92,7 @@
                         <span class="mt-2 line-clamp-2 text-[13px] leading-relaxed text-harmattan" x-text="stand.description"></span>
                         <span class="mt-auto flex items-center justify-between pt-3 text-xs font-semibold">
                             <span class="text-kola-deep">★ <span x-text="stand.rating"></span></span>
-                            <span class="text-indigo">Voir le stand</span>
+                            <span class="text-indigo" x-text="seeStand"></span>
                         </span>
                     </span>
                 </a>
@@ -99,12 +100,12 @@
         </div>
 
         <div x-show="preview.length === 0" x-cloak class="flex flex-1 items-center justify-center rounded-2xl border border-dashed border-zinc-300 bg-white px-6 text-center">
-            <p class="text-sm text-harmattan">Aucun stand dans cette catégorie pour le moment.</p>
+            <p class="text-sm text-harmattan">{{ __('home.rail.empty') }}</p>
         </div>
 
         <div class="mt-4 flex justify-center">
             <a :href="moreUrl" class="inline-flex h-11 items-center rounded-full bg-kola px-5 text-sm font-semibold text-white hover:bg-kola-deep">
-                Voir plus
+                {{ __('home.rail.see_more') }}
             </a>
         </div>
     </div>

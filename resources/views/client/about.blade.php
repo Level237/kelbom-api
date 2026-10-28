@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kelbom - Notre Histoire</title>
+    <title>{{ __('client.about.title') }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,16 +40,14 @@
 
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
             <span
-                class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-300 font-bold text-sm tracking-wider uppercase mb-6 border border-blue-500/20 backdrop-blur-md">Notre
-                Histoire</span>
+                class="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-300 font-bold text-sm tracking-wider uppercase mb-6 border border-blue-500/20 backdrop-blur-md">{{ __('client.about.badge') }}</span>
             <h1
                 class="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-tight tracking-tight mb-8 drop-shadow-lg">
-                Des sentiers du village <br />à un <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-[#EAB308]">marché
-                    mondial</span>.
+                {{ __('client.about.hero_line') }} <br />{{ __('client.about.hero_to') }} <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-[#EAB308]">{{ __('client.about.hero_highlight') }}</span>.
             </h1>
             <p class="text-lg md:text-xl text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
-                Un hommage à ceux qui ont marché avant nous — et une promesse à ceux qui bâtissent la suite.
+                {{ __('client.about.hero_subtitle') }}
             </p>
         </div>
     </div>
@@ -63,20 +61,18 @@
                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8 tracking-tight">Introduction</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8 tracking-tight">{{ __('client.about.intro_title') }}</h2>
             <div class="space-y-6 text-lg text-slate-600 leading-relaxed font-medium">
                 <p>
-                    Il fut un temps où le marché n'était pas simplement un lieu… c'était un voyage.
-                    Bien avant les smartphones, avant les routes modernes, avant les messages instantanés, <strong
-                        class="text-slate-900">Kelbom existait déjà</strong> — non pas sur des écrans, mais dans le cœur
-                    des hommes et des femmes.
+                    {{ __('client.about.intro_before') }} <strong
+                        class="text-slate-900">{{ __('client.about.intro_strong') }}</strong> {{ __('client.about.intro_after') }}
                 </p>
                 <p
                     class="text-2xl font-semibold text-[#153e82] py-4 italic border-l-4 border-[#EAB308] pl-6 ml-4 text-left">
-                    Dans les villages, on ne disait pas « à demain ». On disait : « on se voit à Kelbom ».
+                    {{ __('client.about.quote') }}
                 </p>
                 <p>
-                    Parce que Kelbom n'était pas tous les jours. C'était le jour.
+                    {{ __('client.about.day') }}
                 </p>
             </div>
         </div>
@@ -88,20 +84,18 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1 relative">
                     <div class="absolute inset-0 bg-blue-100 transform rotate-3 rounded-3xl -z-10"></div>
-                    <img src="{{ asset('images/market_dawn.png') }}" alt="Le temps de la marche"
+                    <img src="{{ asset('images/market_dawn.png') }}" alt="{{ __('client.about.walk_alt') }}"
                         class="rounded-3xl shadow-xl w-full object-cover h-[500px] z-10 relative">
                 </div>
 
                 <div class="order-1 lg:order-2">
-                    <span class="text-blue-600 font-bold tracking-wider uppercase text-sm mb-4 block">Le passé</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Le temps de la marche
+                    <span class="text-blue-600 font-bold tracking-wider uppercase text-sm mb-4 block">{{ __('client.about.past_label') }}</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">{{ __('client.about.past_title') }}
                     </h2>
 
                     <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
                         <p>
-                            Avant les années 50 et après les indépendances, les communautés se reconstruisaient à
-                            travers le commerce, le courage et les relations humaines. Les marchés étaient rares et
-                            précieux.
+                            {{ __('client.about.past_body') }}
                         </p>
 
                         <ul class="space-y-4">
@@ -109,33 +103,31 @@
                                 <span
                                     class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold mt-1">1</span>
                                 <div>
-                                    <strong class="text-slate-900 block">Le mercredi</strong>
-                                    <span>était le petit marché du village.</span>
+                                    <strong class="text-slate-900 block">{{ __('client.about.wednesday') }}</strong>
+                                    <span>{{ __('client.about.wednesday_text') }}</span>
                                 </div>
                             </li>
                             <li class="flex gap-4">
                                 <span
                                     class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold mt-1">2</span>
                                 <div>
-                                    <strong class="text-slate-900 block">Le samedi</strong>
-                                    <span>le grand marché des villages voisins.</span>
+                                    <strong class="text-slate-900 block">{{ __('client.about.saturday') }}</strong>
+                                    <span>{{ __('client.about.saturday_text') }}</span>
                                 </div>
                             </li>
                             <li class="flex gap-4">
                                 <span
                                     class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#EAB308]/20 text-yellow-700 font-bold mt-1">3</span>
                                 <div>
-                                    <strong class="text-slate-900 block">Et parfois…</strong>
-                                    <span>un marché exceptionnel rassemblait toute une région. Ce jour s'appelait
-                                        <strong class="text-[#153e82]">Kelbom</strong> — le jour du marché.</span>
+                                    <strong class="text-slate-900 block">{{ __('client.about.sometimes') }}</strong>
+                                    <span>{{ __('client.about.sometimes_before') }}
+                                        <strong class="text-[#153e82]">Kelbom</strong> {{ __('client.about.sometimes_after') }}</span>
                                 </div>
                             </li>
                         </ul>
 
                         <p class="pt-4 border-t border-slate-200">
-                            Les gens marchaient pendant des jours. Ils traversaient des rivières, gravissaient des
-                            collines, dormaient sous les étoiles. Ce n'était pas facile. Mais quelque chose de plus fort
-                            les faisait avancer.
+                            {{ __('client.about.walk_body') }}
                         </p>
                     </div>
                 </div>
@@ -147,11 +139,10 @@
     <div class="py-24 bg-white relative">
         <div class="max-w-[1200px] mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#EAB308] font-bold tracking-wider uppercase text-sm mb-4 block">La
-                    transformation</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">La joie qui effaçait la fatigue
+                <span class="text-[#EAB308] font-bold tracking-wider uppercase text-sm mb-4 block">{{ __('client.about.transform_label') }}</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">{{ __('client.about.transform_title') }}
                 </h2>
-                <p class="text-lg text-slate-600 mt-6 font-medium">Au bout du chemin… il y avait Kelbom.</p>
+                <p class="text-lg text-slate-600 mt-6 font-medium">{{ __('client.about.transform_lead') }}</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -165,8 +156,8 @@
                                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Les vendeurs</h3>
-                    <p class="text-slate-600">trouvaient des acheteurs</p>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">{{ __('client.about.sellers') }}</h3>
+                    <p class="text-slate-600">{{ __('client.about.sellers_text') }}</p>
                 </div>
 
                 <!-- Card 2 -->
@@ -180,8 +171,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Les acheteurs</h3>
-                    <p class="text-slate-600">trouvaient des trésors</p>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">{{ __('client.about.buyers') }}</h3>
+                    <p class="text-slate-600">{{ __('client.about.buyers_text') }}</p>
                 </div>
 
                 <!-- Card 3 -->
@@ -195,8 +186,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Les amis</h3>
-                    <p class="text-slate-600">se retrouvaient</p>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">{{ __('client.about.friends') }}</h3>
+                    <p class="text-slate-600">{{ __('client.about.friends_text') }}</p>
                 </div>
 
                 <!-- Card 4 -->
@@ -210,8 +201,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Les inconnus</h3>
-                    <p class="text-slate-600">devenaient famille</p>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">{{ __('client.about.strangers') }}</h3>
+                    <p class="text-slate-600">{{ __('client.about.strangers_text') }}</p>
                 </div>
             </div>
 
@@ -220,11 +211,9 @@
                     style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;">
                 </div>
                 <div class="relative z-10">
-                    <p class="text-xl md:text-2xl font-bold mb-6">Kelbom n'était pas seulement un marché. C'était une
-                        fête de la vie.</p>
+                    <p class="text-xl md:text-2xl font-bold mb-6">{{ __('client.about.festival') }}</p>
                     <p class="text-blue-100 font-medium max-w-3xl mx-auto leading-relaxed">
-                        Kelbom était aussi un lieu d'information. Si tu voulais voir quelqu'un, tu attendais Kelbom. Si
-                        tu voulais être connu, tu allais à Kelbom. La présence comptait.
+                        {{ __('client.about.presence') }}
                     </p>
                 </div>
             </div>
@@ -238,17 +227,15 @@
 
         <div class="max-w-[1200px] mx-auto px-6 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-blue-400 font-bold tracking-wider uppercase text-sm mb-4 block">L'ère numérique</span>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Aujourd'hui — Le marché qui vient à vous</h2>
+                <span class="text-blue-400 font-bold tracking-wider uppercase text-sm mb-4 block">{{ __('client.about.digital_label') }}</span>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">{{ __('client.about.digital_title') }}</h2>
                 <p class="text-lg text-slate-400 mt-6 leading-relaxed">
-                    Aujourd'hui, tout a changé. Plus de longues marches. Plus d'attente d'un jour précis.
-                    Kelbom n'est plus un lieu vers lequel on se déplace. C'est un lieu que l'on porte. Dans sa poche.
-                    Dans son téléphone.
+                    {{ __('client.about.digital_body') }}
                 </p>
             </div>
 
             <div class="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-sm">
-                <h3 class="text-2xl font-bold mb-8 text-center">Kelbom n'a pas perdu son âme. Mais aujourd'hui :</h3>
+                <h3 class="text-2xl font-bold mb-8 text-center">{{ __('client.about.soul') }}</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div class="p-6">
@@ -259,7 +246,7 @@
                                     d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                             </svg>
                         </div>
-                        <p class="text-lg font-semibold text-white">Un Stand se crée en quelques secondes</p>
+                        <p class="text-lg font-semibold text-white">{{ __('client.about.point_stand') }}</p>
                     </div>
 
                     <div class="p-6">
@@ -271,7 +258,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class="text-lg font-semibold text-white">Un produit se partage avec un lien</p>
+                        <p class="text-lg font-semibold text-white">{{ __('client.about.point_product') }}</p>
                     </div>
 
                     <div class="p-6">
@@ -283,7 +270,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class="text-lg font-semibold text-white">Un client se contacte instantanément</p>
+                        <p class="text-lg font-semibold text-white">{{ __('client.about.point_client') }}</p>
                     </div>
                 </div>
             </div>
@@ -293,14 +280,13 @@
     <!-- SECTION 5: La vision & CTA -->
     <div class="py-24 bg-white relative">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <span class="text-[#EAB308] font-bold tracking-wider uppercase text-sm mb-4 block">La vision</span>
-            <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight">Le marché sans limites
-                <br /><span class="text-[#153e82]">et l'histoire continue…</span>
+            <span class="text-[#EAB308] font-bold tracking-wider uppercase text-sm mb-4 block">{{ __('client.about.vision_label') }}</span>
+            <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight">{{ __('client.about.vision_title') }}
+                <br /><span class="text-[#153e82]">{{ __('client.about.vision_accent') }}</span>
             </h2>
 
             <p class="text-xl text-slate-600 font-medium leading-relaxed mb-12">
-                Kelbom est un hommage à ceux qui ont marché avant nous. À ceux qui ont porté le commerce sur leurs
-                épaules. Aujourd'hui, Kelbom récompense leur marche.
+                {{ __('client.about.vision_body') }}
             </p>
 
             <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-16">
@@ -308,38 +294,38 @@
                     <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="font-bold text-slate-800">Sans distance</span>
+                    <span class="font-bold text-slate-800">{{ __('client.about.no_distance') }}</span>
                 </div>
                 <div class="hidden md:block w-2 h-2 bg-slate-300 rounded-full"></div>
                 <div class="flex items-center gap-3">
                     <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="font-bold text-slate-800">Sans fermeture</span>
+                    <span class="font-bold text-slate-800">{{ __('client.about.no_closing') }}</span>
                 </div>
                 <div class="hidden md:block w-2 h-2 bg-slate-300 rounded-full"></div>
                 <div class="flex items-center gap-3">
                     <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span class="font-bold text-slate-800">Sans barrières</span>
+                    <span class="font-bold text-slate-800">{{ __('client.about.no_barriers') }}</span>
                 </div>
             </div>
 
             <div class="p-8 bg-blue-50 rounded-2xl mb-16 border border-blue-100">
-                <p class="text-2xl font-bold text-blue-900 mb-2">Un marché partout. Un marché à tout moment.</p>
-                <p class="text-lg text-blue-700">Kelbom n'est pas un souvenir. C'est une renaissance.</p>
+                <p class="text-2xl font-bold text-blue-900 mb-2">{{ __('client.about.everywhere') }}</p>
+                <p class="text-lg text-blue-700">{{ __('client.about.rebirth') }}</p>
             </div>
 
             <!-- CTA Section -->
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="{{ route('client.marketplace') }}"
                     class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-[#153e82] hover:bg-blue-900 rounded-xl transition-colors shadow-lg shadow-blue-900/20">
-                    Explorer le marché
+                    {{ __('client.about.explore') }}
                 </a>
                 <a href="{{ route("seller.register") }}"
                     class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-900 bg-[#EAB308] hover:bg-[#CA8A04] rounded-xl transition-colors shadow-lg shadow-yellow-500/20">
-                    Créer mon Stand
+                    {{ __('client.about.create') }}
                 </a>
             </div>
         </div>

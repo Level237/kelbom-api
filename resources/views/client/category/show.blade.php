@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $category->name }} - Kelbom Marketplace</title>
+    <title>{{ __('client.category.title', ['name' => $category->translatedName()]) }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,11 +34,11 @@
                 <div class="max-w-3xl">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-widest rounded-full border border-blue-100">
-                            Catégorie
+                            {{ __('client.category.badge') }}
                         </span>
                     </div>
                     <h1 class="text-3xl md:text-5xl font-black text-zinc-900 tracking-tight mb-4">
-                        {{ $category->name }}
+                        {{ $category->translatedName() }}
                     </h1>
                     @if($category->description)
                         <p class="text-zinc-500 text-lg md:text-xl leading-relaxed">
@@ -55,7 +55,7 @@
             <section>
                 <div class="flex items-center justify-between mb-8">
                     <h2 class="text-2xl font-black text-zinc-900 flex items-center gap-2">
-                        Boutiques & Stands
+                        {{ __('client.category.stands') }}
                         <span class="bg-zinc-100 text-zinc-600 text-sm py-0.5 px-2.5 rounded-full font-bold ml-2">{{ $stands->count() }}</span>
                     </h2>
                 </div>
@@ -67,8 +67,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-bold text-zinc-900 mb-2">Aucun stand trouvé</h3>
-                        <p class="text-zinc-500">Il n'y a actuellement aucun stand vérifié dans cette catégorie.</p>
+                        <h3 class="text-lg font-bold text-zinc-900 mb-2">{{ __('client.category.empty_stands_title') }}</h3>
+                        <p class="text-zinc-500">{{ __('client.category.empty_stands') }}</p>
                     </div>
                 @else
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -91,10 +91,10 @@
                                     </h3>
                                     <div class="flex items-center gap-1 mb-3">
                                         <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                        <span class="text-[12px] font-bold text-zinc-700">{{ number_format($stand->rating_avg, 1) }}</span>
+                                        <span class="text-[12px] font-bold text-zinc-700">{{ \App\Support\Localize::rating($stand->rating_avg) }}</span>
                                     </div>
                                     <p class="text-sm text-zinc-500 line-clamp-2 mt-auto">
-                                        {{ $stand->description }}
+                                        {{ \App\Support\Localize::line('stands.'.$stand->slug, $stand->description) }}
                                     </p>
                                 </div>
                             </a>
@@ -107,7 +107,7 @@
             <section>
                 <div class="flex items-center justify-between mb-8">
                     <h2 class="text-2xl font-black text-zinc-900 flex items-center gap-2">
-                        Produits
+                        {{ __('client.category.products') }}
                         <span class="bg-zinc-100 text-zinc-600 text-sm py-0.5 px-2.5 rounded-full font-bold ml-2">{{ $products->count() }}</span>
                     </h2>
                 </div>
@@ -119,15 +119,15 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-bold text-zinc-900 mb-2">Aucun produit trouvé</h3>
-                        <p class="text-zinc-500">Aucun produit actif n'est disponible pour cette catégorie.</p>
+                        <h3 class="text-lg font-bold text-zinc-900 mb-2">{{ __('client.category.empty_products_title') }}</h3>
+                        <p class="text-zinc-500">{{ __('client.category.empty_products') }}</p>
                     </div>
                 @else
                     <div class="relative" x-data="{ scroll(direction) { this.$refs.row.scrollBy({ left: direction * this.$refs.row.clientWidth * 0.8, behavior: 'smooth' }) } }">
-                        <button type="button" @click="scroll(-1)" class="absolute top-20 left-0 z-10 hidden h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm md:inline-flex" aria-label="Produits précédents">
+                        <button type="button" @click="scroll(-1)" class="absolute top-20 left-0 z-10 hidden h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm md:inline-flex" aria-label="{{ __('client.category.previous') }}">
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                         </button>
-                        <button type="button" @click="scroll(1)" class="absolute top-20 right-0 z-10 hidden h-9 w-9 translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm md:inline-flex" aria-label="Produits suivants">
+                        <button type="button" @click="scroll(1)" class="absolute top-20 right-0 z-10 hidden h-9 w-9 translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm md:inline-flex" aria-label="{{ __('client.category.next') }}">
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                     <div x-ref="row" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -146,7 +146,7 @@
                                         @if($product->compare_at_price > $product->price)
                                             <div class="text-zinc-400 text-[11px] line-through">{{ number_format($product->compare_at_price, 0, ',', ' ') }} FCFA</div>
                                         @endif
-                                        <span class="mt-2 inline-flex text-[12px] font-semibold text-kola-deep">Voir le stand</span>
+                                        <span class="mt-2 inline-flex text-[12px] font-semibold text-kola-deep">{{ __('client.category.see_stand') }}</span>
                                     </div>
                                 </div>
                             </a>

@@ -2,23 +2,23 @@
     $steps = [
         [
             'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>',
-            'title' => 'Créez votre stand',
-            'description' => 'Choisissez un nom, ajoutez votre logo, décrivez votre activité et votre localisation.'
+            'title' => __('seller.how.steps.stand.title'),
+            'description' => __('seller.how.steps.stand.description')
         ],
         [
             'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>',
-            'title' => 'Ajoutez vos produits ou services',
-            'description' => 'Ajoutez vos produits et services avec photos, prix, descriptions et spécifications techniques.'
+            'title' => __('seller.how.steps.products.title'),
+            'description' => __('seller.how.steps.products.description')
         ],
         [
             'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>',
-            'title' => 'Achetez des crédits',
-            'description' => 'Les crédits BuyLeads vous donnent accès aux demandes d\'acheteurs qualifiés.'
+            'title' => __('seller.how.steps.credits.title'),
+            'description' => __('seller.how.steps.credits.description')
         ],
         [
             'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
-            'title' => 'Contactez les acheteurs',
-            'description' => 'Consultez les leads, envoyez vos devis et concluez vos ventes hors plateforme.'
+            'title' => __('seller.how.steps.buyers.title'),
+            'description' => __('seller.how.steps.buyers.description')
         ]
     ];
 @endphp
@@ -34,14 +34,13 @@
             <span
                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A2E65]/10 text-[#0A2E65] text-xs font-bold tracking-widest uppercase mb-4">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#0A2E65] animate-pulse"></span>
-                Simple et rapide
+                {{ __('seller.how.badge') }}
             </span>
             <h2 class="text-4xl md:text-5xl font-extrabold text-zinc-900 tracking-tight mb-6">
-                Lancez-vous en <span class="text-[#0A2E65] relative inline-block">4 Etapes</span>
+                {{ __('seller.how.title') }} <span class="text-[#0A2E65] relative inline-block">{{ __('seller.how.title_highlight') }}</span>
             </h2>
             <p class="text-lg text-zinc-500">
-                Un processus fluide et transparent pour mettre en valeur votre activité et attirer de nouveaux clients
-                rapidement.
+                {{ __('seller.how.subtitle') }}
             </p>
         </div>
 

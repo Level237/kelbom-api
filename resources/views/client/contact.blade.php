@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kelbom - Contactez-nous</title>
+    <title>{{ __('client.contact.title') }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,14 +45,13 @@
             <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-8 text-center">
                 <span
                     class="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/20 text-blue-200 border border-blue-400/30 text-[13px] font-bold uppercase tracking-widest rounded-full mb-6">
-                    Support 24/7
+                    {{ __('client.contact.badge') }}
                 </span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight">
-                    Nous sommes là pour vous aider
+                    {{ __('client.contact.heading') }}
                 </h1>
                 <p class="text-[16px] md:text-lg text-blue-100 font-medium leading-relaxed max-w-2xl mx-auto">
-                    Une question, un partenariat ou besoin d'assistance ? N'hésitez pas à nous contacter. Notre équipe
-                    vous répondra dans les plus brefs délais.
+                    {{ __('client.contact.intro') }}
                 </p>
             </div>
         </section>
@@ -69,8 +68,8 @@
             @endif
 
             <div class="bg-white rounded-3xl shadow-xl shadow-blue-900/5 border border-slate-200 p-8 md:p-10 mb-12">
-                <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-2 text-center">Envoyez-nous un message</h2>
-                <p class="text-slate-500 mb-8 text-center max-w-2xl mx-auto">Remplissez le formulaire ci-dessous, notre équipe reviendra vers vous rapidement.</p>
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-2 text-center">{{ __('client.contact.form_title') }}</h2>
+                <p class="text-slate-500 mb-8 text-center max-w-2xl mx-auto">{{ __('client.contact.form_subtitle') }}</p>
 
                 <form action="{{ route('client.contact.store') }}" method="POST" class="space-y-6 max-w-3xl mx-auto">
                     @csrf
@@ -78,41 +77,41 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Nom -->
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Votre nom <span
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">{{ __('client.contact.name') }} <span
                                     class="text-red-500">*</span></label>
-                            <input type="text" name="name" required placeholder="Ex: Jean Dupont"
+                            <input type="text" name="name" required placeholder="{{ __('client.contact.name_placeholder') }}"
                                 class="w-full rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 bg-slate-50 py-3.5 px-4 transition-colors">
                         </div>
                         <!-- Email -->
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Votre adresse email
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">{{ __('client.contact.email') }}
                                 <span class="text-red-500">*</span></label>
-                            <input type="email" name="email" required placeholder="Ex: jean@example.com"
+                            <input type="email" name="email" required placeholder="{{ __('client.contact.email_placeholder') }}"
                                 class="w-full rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 bg-slate-50 py-3.5 px-4 transition-colors">
                         </div>
                     </div>
 
                     <!-- Objet -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Objet du message <span
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">{{ __('client.contact.subject') }} <span
                                 class="text-red-500">*</span></label>
                         <input type="text" name="subject" required
-                            placeholder="Ex: Demande de partenariat, Problème technique..."
+                            placeholder="{{ __('client.contact.subject_placeholder') }}"
                             class="w-full rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 bg-slate-50 py-3.5 px-4 transition-colors">
                     </div>
 
                     <!-- Message -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Votre message <span
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">{{ __('client.contact.message') }} <span
                                 class="text-red-500">*</span></label>
-                        <textarea name="message" rows="6" required placeholder="Détaillez votre demande ici..."
+                        <textarea name="message" rows="6" required placeholder="{{ __('client.contact.message_placeholder') }}"
                             class="w-full rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 bg-slate-50 py-3.5 px-4 transition-colors resize-none"></textarea>
                     </div>
 
                     <!-- Submit -->
                     <button type="submit"
                         class="w-full py-4 bg-[#0A2E65] hover:bg-blue-900 text-white font-bold rounded-xl shadow-lg shadow-blue-900/20 transition-all duration-300 flex items-center justify-center gap-2">
-                        Envoyer le message
+                        {{ __('client.contact.send') }}
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -124,7 +123,7 @@
             <!-- Divider -->
             <div class="flex items-center justify-center gap-4 mb-12">
                 <div class="h-px bg-slate-200 flex-1 max-w-[100px]"></div>
-                <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Ou contactez-nous directement via</span>
+                <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">{{ __('client.contact.or') }}</span>
                 <div class="h-px bg-slate-200 flex-1 max-w-[100px]"></div>
             </div>
 
@@ -143,8 +142,7 @@
                         </svg>
                     </div>
                     <h3 class="text-2xl font-bold text-slate-800 mb-2">WhatsApp</h3>
-                    <p class="text-slate-500 mb-8 leading-relaxed max-w-sm">Discutez avec nous instantanément — réponse la
-                        plus rapide garantie.</p>
+                    <p class="text-slate-500 mb-8 leading-relaxed max-w-sm">{{ __('client.contact.whatsapp_text') }}</p>
                     <a href="https://wa.me/237600000000" target="_blank"
                         class="mt-auto flex items-center justify-center gap-2 w-full max-w-[280px] py-3.5 bg-[#25D366] hover:bg-[#1ebd5a] text-white font-bold rounded-xl transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +150,7 @@
                                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
                             </path>
                         </svg>
-                        Ouvrir le chat
+                        {{ __('client.contact.open_chat') }}
                     </a>
                 </div>
 
@@ -166,9 +164,8 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-800 mb-2">Email us</h3>
-                    <p class="text-slate-500 mb-8 leading-relaxed max-w-sm">Écrivez-nous directement — nous vous répondons
-                        dans les 24 heures.</p>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-2">{{ __('client.contact.email_title') }}</h3>
+                    <p class="text-slate-500 mb-8 leading-relaxed max-w-sm">{{ __('client.contact.email_text') }}</p>
                     <a href="mailto:info@kelbom.com"
                         class="mt-auto flex items-center justify-center gap-2 w-full max-w-[280px] py-3.5 bg-[#D4AF37] hover:bg-[#c4a132] text-white font-bold rounded-xl transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

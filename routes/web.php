@@ -13,6 +13,11 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\MarketplaceController;
 use App\Http\Controllers\Client\RequestController;
 use App\Http\Controllers\Client\StandProfileController;
+use App\Http\Controllers\LocaleController;
+
+Route::get('/langue/{locale}', [LocaleController::class, 'update'])
+    ->whereIn('locale', array_keys(config('locales.supported', [])))
+    ->name('locale.switch');
 
 Route::domain(config('app.client_domain'))->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('client.home');

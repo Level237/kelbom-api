@@ -1,9 +1,22 @@
+@php
+    $storyStands = collect($premiumStands ?? [])->map(function ($stand) {
+        return [
+            'id' => $stand->id,
+            'stand_name' => $stand->stand_name,
+            'slug' => $stand->slug,
+            'logo_url' => $stand->logo_url,
+            'cover_url' => $stand->cover_url,
+            'description' => \App\Support\Localize::line('stands.'.$stand->slug, $stand->description),
+        ];
+    })->values();
+@endphp
 <div x-data="{ 
     open: false, 
     activeStoryIndex: 0,
     progress: 0,
     interval: null,
-    stands: {{ Js::from($premiumStands ?? []) }},
+    storyFallback: @js(__('home.story.fallback')),
+    stands: @js($storyStands),
     
     openStory(index) {
         this.activeStoryIndex = index;
@@ -140,11 +153,12 @@
                                 <div>
                                     <h3 class="text-white font-bold text-[15px] drop-shadow-md"
                                         x-text="stands[activeStoryIndex].stand_name"></h3>
-                                    <p class="text-white/80 text-[12px] font-medium drop-shadow-md">Sponsorisé</p>
+                                    <p class="text-white/80 text-[12px] font-medium drop-shadow-md">{{ __('home.story.sponsored') }}</p>
                                 </div>
                             </div>
                             <button @click="closeStory()"
-                                class="w-8 h-8 flex items-center justify-center text-white hover:bg-white/20 rounded-full backdrop-blur-md transition-colors">
+                                class="w-8 h-8 flex items-center justify-center text-white hover:bg-white/20 rounded-full backdrop-blur-md transition-colors"
+                                aria-label="{{ __('home.story.close') }}">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12"></path>
@@ -164,7 +178,7 @@
                             <div
                                 class="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-lg self-start max-w-[85%]">
                                 <p class="text-white text-[15px] leading-relaxed drop-shadow-md font-medium"
-                                    x-text="stands[activeStoryIndex].description || 'Découvrez nos meilleurs produits et offres du moment.'">
+                                    x-text="stands[activeStoryIndex].description || storyFallback">
                                 </p>
                             </div>
 
@@ -178,7 +192,7 @@
                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
                                     </path>
                                 </svg>
-                                Voir la Boutique
+                                {{ __('home.story.see_shop') }}
                             </a>
                         </div>
 

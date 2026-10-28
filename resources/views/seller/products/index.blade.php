@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Produits | Kelbom</title>
+    <title>{{ __('seller.products.index_title') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
@@ -50,9 +50,8 @@
             <!-- Header section -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                 <div>
-                    <h1 class="text-2xl font-extrabold text-zinc-900 tracking-tight">Mes Produits</h1>
-                    <p class="text-zinc-500 text-sm mt-1">Gérez votre catalogue, ajoutez de nouveaux articles et suivez
-                        leurs performances.</p>
+                    <h1 class="text-2xl font-extrabold text-zinc-900 tracking-tight">{{ __('seller.products.heading') }}</h1>
+                    <p class="text-zinc-500 text-sm mt-1">{{ __('seller.products.subtitle') }}</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
                     <button
@@ -61,7 +60,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
                         </svg>
-                        Importer
+                        {{ __('seller.products.import') }}
                     </button>
                     <a href="{{ route('seller.products.create') }}"
                         class="flex-1 sm:flex-none px-4 py-2.5 bg-[#0A2E65] hover:bg-zinc-900 text-white font-bold rounded-xl text-sm transition-all shadow-md active:scale-95 flex items-center justify-center gap-2">
@@ -69,7 +68,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
                             </path>
                         </svg>
-                        Nouveau Produit
+                        {{ __('seller.products.new') }}
                     </a>
                 </div>
             </div>
@@ -84,20 +83,20 @@
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                     <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="Rechercher un produit..."
+                        placeholder="{{ __('seller.products.search') }}"
                         class="w-full pl-10 pr-4 py-2 bg-transparent border-none focus:ring-0 text-sm font-medium text-zinc-900 placeholder-zinc-400">
                 </div>
                 <div class="hidden sm:block w-px h-6 bg-zinc-200"></div>
                 <div class="flex items-center gap-2 w-full sm:w-auto px-2">
                     <select name="status" onchange="this.form.submit()"
                         class="bg-transparent border-none text-sm font-medium text-zinc-600 focus:ring-0 cursor-pointer w-full sm:w-auto py-2">
-                        <option value="">Tous les statuts</option>
-                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Actif</option>
-                        <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Brouillon</option>
-                        <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactif</option>
+                        <option value="">{{ __('seller.products.all_statuses') }}</option>
+                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>{{ __('seller.products.active') }}</option>
+                        <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>{{ __('seller.products.draft') }}</option>
+                        <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>{{ __('seller.products.inactive') }}</option>
                     </select>
                 </div>
-                <button type="submit" class="hidden">Filtrer</button>
+                <button type="submit" class="hidden">{{ __('seller.products.filter') }}</button>
             </form>
 
             <!-- Products Table -->
@@ -107,18 +106,18 @@
                         <thead>
                             <tr class="bg-zinc-50/50 border-b border-zinc-100">
                                 <th class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                                    Produit</th>
-                                <th class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">Prix
+                                    {{ __('seller.products.product') }}</th>
+                                <th class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">{{ __('seller.products.price') }}
                                 </th>
-                                <th class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">Vues
+                                <th class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">{{ __('seller.products.views') }}
                                 </th>
                                 <th class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                                    Demandes</th>
+                                    {{ __('seller.products.inquiries') }}</th>
                                 <th class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                                    Statut</th>
+                                    {{ __('seller.products.status') }}</th>
                                 <th
                                     class="px-6 py-4 text-xs font-semibold text-zinc-500 uppercase tracking-wider text-right">
-                                    Actions</th>
+                                    {{ __('seller.products.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-zinc-100">
@@ -144,8 +143,7 @@
                                                 <p
                                                     class="text-sm font-bold text-zinc-900 group-hover:text-indigo-600 transition-colors">
                                                     {{ $product->name }}</p>
-                                                <p class="text-xs text-zinc-500 mt-0.5 font-medium">Catégorie:
-                                                    {{ $product->category?->name ?? 'N/A' }}</p>
+                                                <p class="text-xs text-zinc-500 mt-0.5 font-medium">{{ __('seller.products.category', ['name' => $product->category?->translatedName() ?? __('seller.products.not_available')]) }}</p>
                                             </div>
                                         </div>
                                     </td>
@@ -170,17 +168,17 @@
                                         @if ($product->status == 'active')
                                             <span
                                                 class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Actif
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> {{ __('seller.products.active') }}
                                             </span>
                                         @elseif($product->status == 'draft')
                                             <span
                                                 class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Brouillon
+                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> {{ __('seller.products.draft') }}
                                             </span>
                                         @else
                                             <span
                                                 class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-zinc-50 text-zinc-700 border border-zinc-200">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span> Inactif
+                                                <span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span> {{ __('seller.products.inactive') }}
                                             </span>
                                         @endif
                                     </td>
@@ -189,7 +187,7 @@
                                             class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <a href="{{ route('seller.products.edit', $product) }}"
                                                 class="p-2 text-zinc-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-                                                title="Modifier">
+                                                title="{{ __('seller.products.edit') }}">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
@@ -197,13 +195,13 @@
                                                 </svg>
                                             </a>
                                             <form action="{{ route('seller.products.destroy', $product) }}" method="POST"
-                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')"
+                                                onsubmit="return confirm(@js(__('seller.products.confirm_delete')))"
                                                 class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
                                                     class="p-2 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                                                    title="Supprimer">
+                                                    title="{{ __('seller.products.delete') }}">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -219,7 +217,7 @@
                             @empty
                                 <tr>
                                     <td colspan="6" class="px-6 py-12 text-center text-zinc-500 font-medium">
-                                        Aucun produit trouvé.
+                                        {{ __('seller.products.empty') }}
                                     </td>
                                 </tr>
                             @endforelse

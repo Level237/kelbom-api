@@ -36,6 +36,6 @@ class RequestController extends Controller
 
         ClientRequest::create($validated);
 
-        return redirect()->back()->with('success', 'Votre demande a été soumise avec succès ! Nos vendeurs vous contacteront très bientôt.');
+        return redirect()->back()->with('success', __('client.request.success'));
     }
 }

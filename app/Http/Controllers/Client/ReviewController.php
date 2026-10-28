@@ -29,6 +29,6 @@ class ReviewController extends Controller
         $stand->recalculateRating();
 
         return redirect()->route('client.stand.show', $stand->slug)
-            ->with('success', 'Votre avis a été ajouté avec succès !');
+            ->with('success', __('client.stand.success'));
     }
 }

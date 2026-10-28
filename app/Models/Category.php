@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Localize;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -35,5 +36,10 @@ class Category extends Model
     public function resolvedKind(): ?string
     {
         return $this->kind ?: $this->parent?->kind;
+    }
+
+    public function translatedName(): string
+    {
+        return Localize::line('categories.'.$this->slug, $this->name);
     }
 }

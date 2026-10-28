@@ -25,6 +25,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //$middleware->statefulApi();  // ← Active le mode cookie pour les routes API
     
         // Enregistrer les alias de middleware
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
+        ]);
+
         $middleware->alias([
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,

@@ -8,13 +8,12 @@
 
         <!-- Section Header -->
         <div class="text-center max-w-3xl mx-auto mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <h2 class="text-sm font-bold tracking-widest text-[#0A2E65] uppercase mb-4">Pourquoi Kelbom ?</h2>
+            <h2 class="text-sm font-bold tracking-widest text-[#0A2E65] uppercase mb-4">{{ __('seller.features.eyebrow') }}</h2>
             <h3 class="text-4xl md:text-5xl font-extrabold text-zinc-900 tracking-tight mb-6">
-                L'infrastructure de pointe pour votre commerce.
+                {{ __('seller.features.title') }}
             </h3>
             <p class="text-lg text-zinc-500 leading-relaxed">
-                Nous avons repensé la vente en ligne pour vous offrir une plateforme robuste, rapide et intuitive.
-                Concentrez-vous sur vos produits, nous gérons la technologie.
+                {{ __('seller.features.subtitle') }}
             </p>
         </div>
 
@@ -32,10 +31,9 @@
                             d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </div>
-                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Performances Extrêmes</h4>
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">{{ __('seller.features.performance_title') }}</h4>
                 <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
-                    Une architecture optimisée pour des temps de chargement instantanés. Ne perdez plus aucune vente à
-                    cause de la lenteur.
+                    {{ __('seller.features.performance_body') }}
                 </p>
             </div>
 
@@ -49,10 +47,9 @@
                             d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                 </div>
-                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Sécurité Bancaire</h4>
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">{{ __('seller.features.security_title') }}</h4>
                 <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
-                    Transactions cryptées de bout en bout et paiements sécurisés. La confiance de vos clients est notre
-                    priorité absolue.
+                    {{ __('seller.features.security_body') }}
                 </p>
             </div>
 
@@ -66,10 +63,9 @@
                             d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
                     </svg>
                 </div>
-                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Gestion Centralisée</h4>
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">{{ __('seller.features.management_title') }}</h4>
                 <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
-                    Un tableau de bord puissant pour piloter vos stocks, vos commandes et analyser vos revenus en temps
-                    réel.
+                    {{ __('seller.features.management_body') }}
                 </p>
             </div>
 
@@ -83,10 +79,9 @@
                             d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                 </div>
-                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">Support Dédié</h4>
+                <h4 class="text-xl font-bold text-zinc-900 mb-3 tracking-tight">{{ __('seller.features.support_title') }}</h4>
                 <p class="text-zinc-500 text-sm leading-relaxed flex-grow">
-                    Une équipe d'experts à votre écoute pour vous accompagner dans votre croissance et résoudre vos
-                    problèmes techniques.
+                    {{ __('seller.features.support_body') }}
                 </p>
             </div>
 
@@ -96,7 +91,7 @@
         <div class="mt-20 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
             <a href=""
                 class="group relative flex items-center gap-3 bg-[#0A2E65] text-white px-8 py-4 rounded-full text-base font-bold shadow-xl shadow-[#0A2E65]/20 hover:bg-[#0A2E65]/90 transition-all active:scale-[0.98]">
-                <span>Commencer à vendre maintenant</span>
+                <span>{{ __('seller.features.cta') }}</span>
                 <span class="bg-white/10 p-1.5 rounded-full group-hover:bg-white/20 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none"

@@ -44,7 +44,7 @@ public function index(Request $request)
 
         if (! $seller) {
             return response()->json([
-                'message'   => 'Créez d\'abord un stand',
+                'message'   => __('seller.flash.create_stand_first'),
                 'has_stand' => false,
             ], 200);
         }
@@ -70,7 +70,7 @@ public function index(Request $request)
         $seller = $request->user()->seller;
 
         if (! $seller) {
-            return response()->json(['message' => 'Créez d\'abord un stand'], 403);
+            return response()->json(['message' => __('seller.flash.create_stand_first')], 403);
         }
 
         $products = $seller->products()

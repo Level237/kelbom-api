@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuration de votre Stand | Kelbom</title>
+    <title>{{ __('seller.loading.title') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +48,9 @@
     </style>
 </head>
 <body class="text-zinc-900 min-h-[100dvh] flex flex-col items-center justify-center p-6 mesh-gradient overflow-hidden">
+    <div class="absolute right-4 top-4 z-20">
+        <x-locale-switch />
+    </div>
     
     <!-- Background Particles (Simplified SVG) -->
     <div class="fixed inset-0 pointer-events-none z-0 opacity-40">
@@ -72,10 +75,10 @@
         <!-- Glass Panel -->
         <div class="w-full liquid-glass rounded-[2.5rem] p-10 md:p-14 text-center animate-in slide-in-from-bottom-8 duration-1000 ease-out">
             <h1 class="text-4xl md:text-5xl font-bold tracking-tighter leading-none mb-4 text-zinc-950">
-                Préparation de <span class="text-[#0A2E65]">votre stand</span>
+                {{ __('seller.loading.heading_before') }} <span class="text-[#0A2E65]">{{ __('seller.loading.heading_highlight') }}</span>
             </h1>
             <p class="text-zinc-500 text-lg md:text-xl font-light mb-12 max-w-[40ch] mx-auto">
-                {{ $user->name }}, nous assemblons les pièces de votre futur stand professionnel.
+                {{ __('seller.loading.subtitle', ['name' => $user->name]) }}
             </p>
 
             <!-- Modern Loader -->
@@ -83,7 +86,7 @@
                 <!-- Progress Label -->
                 <div class="flex justify-between items-end mb-4">
                     <span id="status-message" class="text-xs font-semibold uppercase tracking-widest text-[#0A2E65] transition-all duration-500">
-                        Initialisation...
+                        {{ __('seller.loading.initial') }}
                     </span>
                     <span class="text-2xl font-mono font-medium text-zinc-900" id="progress-percent">
                         00%
@@ -106,7 +109,7 @@
 
         <!-- Footer Note -->
         <p class="mt-8 text-zinc-400 text-sm font-light animate-in fade-in duration-1000 delay-500">
-            Ne fermez pas cette page. Votre tableau de bord sera prêt dans un instant.
+            {{ __('seller.loading.keep_open') }}
         </p>
     </div>
 
@@ -116,14 +119,7 @@
             const progressPercent = document.getElementById('progress-percent');
             const statusMessage = document.getElementById('status-message');
             
-            const messages = [
-                "Analyse des données",
-                "Génération du stand",
-                "Optimisation SEO",
-                "Sécurisation SSL",
-                "Déploiement final",
-                "Bienvenue chez vous"
-            ];
+            const messages = @json(__('seller.loading.messages'));
 
             let progress = 0;
             const duration = 6000; // 6 seconds for extra premium feel

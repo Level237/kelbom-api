@@ -13,8 +13,7 @@
                     </h1>
                 </a>
                 <p class="text-white/60 text-sm leading-relaxed mb-8 max-w-sm">
-                    L'écosystème complet pour les commerçants modernes. Lancez votre stand en ligne, développez vos
-                    ventes et profitez d'une logistique intégrée de pointe.
+                    {{ __('seller.footer.tagline') }}
                 </p>
 
                 <!-- Social Links -->
@@ -55,122 +54,104 @@
 
                 <!-- Ressources Vendeurs -->
                 <div>
-                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">Ressources Vendeur</h4>
+                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">{{ __('seller.footer.seller_resources') }}</h4>
                     <ul class="space-y-3.5 text-sm text-white/60">
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Créer
-                                un stand</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.create_stand') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Tarifs
-                                & Commissions</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.pricing') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Boostez
-                                vos ventes</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.boost') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Acquérir
-                                des BuyLeads</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.buy_leads') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Centre
-                                d'aide Vendeur</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.seller_help') }}</a>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Ressources Livreurs -->
                 <div>
-                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">Ressources Livreur</h4>
+                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">{{ __('seller.footer.driver_resources') }}</h4>
                     <ul class="space-y-3.5 text-sm text-white/60">
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Devenir
-                                partenaire</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.become_partner') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Zones
-                                de couverture</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.coverage') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Application
-                                mobile</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.mobile_app') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Assurance
-                                & Sécurité</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.insurance') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Support
-                                Logistique</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.logistics_support') }}</a>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Entreprise -->
                 <div>
-                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">Entreprise</h4>
+                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">{{ __('seller.footer.company') }}</h4>
                     <ul class="space-y-3.5 text-sm text-white/60">
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">À
-                                propos de Kelbom</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.about') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Nous
-                                rejoindre</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.join') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Espace
-                                Presse</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.press') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Actualités
-                                & Blog</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.news') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Nous
-                                contacter</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.contact') }}</a>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Légal -->
                 <div>
-                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">Légal</h4>
+                    <h4 class="text-white font-bold mb-6 text-sm tracking-wider uppercase">{{ __('seller.footer.legal') }}</h4>
                     <ul class="space-y-3.5 text-sm text-white/60">
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Conditions
-                                Générales</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.terms') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Confidentialité</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.privacy') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Politique
-                                des Cookies</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.cookies') }}</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">Mentions
-                                légales</a>
+                                class="hover:text-[#D4A017] hover:translate-x-1 inline-block transition-all duration-300">{{ __('seller.footer.legal_notice') }}</a>
                         </li>
                     </ul>
                 </div>
@@ -181,7 +162,7 @@
         <!-- Bottom Bar -->
         <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
             <p class="text-white/40 text-sm">
-                &copy; {{ date('Y') }} Kelbom. Tous droits réservés.
+                &copy; {{ date('Y') }} Kelbom. {{ __('seller.footer.rights') }}
             </p>
 
             <!-- Payment Methods / Badges -->

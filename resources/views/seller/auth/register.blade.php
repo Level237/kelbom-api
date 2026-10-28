@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Créer mon compte - Kelbom</title>
+    <title>{{ __('seller.auth.register_title') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#FDFBF4]">
+    <div class="absolute right-4 top-4 z-20">
+        <x-locale-switch />
+    </div>
     <div class="min-h-[100dvh] flex">
         <!-- Left Side: Visual Hero -->
         <div style="background: url('{{ asset('assets/img/register.jpg') }}') center/cover;" class="hidden max-sm:hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#0A2E65] via-[#0A2E65]/90 to-emerald-600/20 flex-col items-center justify-center p-12 relative overflow-hidden">
@@ -25,9 +28,9 @@
                 <!-- Header -->
                 <div class="mb-8 animate-in fade-in slide-in-from-bottom-5 duration-700">
                     <h1 class="text-3xl md:text-4xl font-bold text-zinc-900 mb-2">
-                        Créer mon compte
+                        {{ __('seller.auth.register_heading') }}
                     </h1>
-                    <p class="text-zinc-600">Commencez à vendre en quelques minutes</p>
+                    <p class="text-zinc-600">{{ __('seller.auth.register_subtitle') }}</p>
                 </div>
 
                 <!-- Form -->
@@ -37,13 +40,13 @@
                     <!-- Name Field -->
                     <div class="space-y-2">
                         <label for="name" class="block text-sm font-bold text-zinc-900">
-                            Nom complet
+                            {{ __('seller.auth.full_name') }}
                         </label>
                         <input 
                             type="text" 
                             id="name" 
                             name="name"
-                            placeholder="Entrez votre nom"
+                            placeholder="{{ __('seller.auth.name_placeholder') }}"
                             value="{{ old('name') }}"
                             class="w-full px-4 py-3 rounded-lg border-2 {{ $errors->has('name') ? 'border-red-500 bg-red-50' : 'border-zinc-200 bg-white focus:border-[#0A2E65]' }} transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/10 font-medium"
                             required
@@ -61,13 +64,13 @@
                     <!-- Phone Field -->
                     <div class="space-y-2">
                         <label for="phone_number" class="block text-sm font-bold text-zinc-900">
-                            Numéro de téléphone
+                            {{ __('seller.auth.phone') }}
                         </label>
                         <input 
                             type="tel" 
                             id="phone_number" 
                             name="phone_number"
-                            placeholder="Entrez votre numéro de téléphone"
+                            placeholder="{{ __('seller.auth.phone_enter') }}"
                             value="{{ old('phone_number') }}"
                             class="w-full px-4 py-3 rounded-lg border-2 {{ $errors->has('phone_number') ? 'border-red-500 bg-red-50' : 'border-zinc-200 bg-white focus:border-[#0A2E65]' }} transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/10 font-medium"
                             required
@@ -85,13 +88,13 @@
                     <!-- Password Field -->
                     <div class="space-y-2">
                         <label for="password" class="block text-sm font-bold text-zinc-900">
-                            Mot de passe
+                            {{ __('seller.auth.password') }}
                         </label>
                         <input 
                             type="password" 
                             id="password" 
                             name="password"
-                            placeholder="Entrez votre mot de passe (min 8 caractères)"
+                            placeholder="{{ __('seller.auth.password_enter') }}"
                             class="w-full px-4 py-3 rounded-lg border-2 {{ $errors->has('password') ? 'border-red-500 bg-red-50' : 'border-zinc-200 bg-white focus:border-[#0A2E65]' }} transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/10 font-medium"
                             required
                         />
@@ -108,13 +111,13 @@
                     <!-- Password Confirmation -->
                     <div class="space-y-2">
                         <label for="password_confirmation" class="block text-sm font-bold text-zinc-900">
-                            Confirmer le mot de passe
+                            {{ __('seller.auth.confirm_password') }}
                         </label>
                         <input 
                             type="password" 
                             id="password_confirmation" 
                             name="password_confirmation"
-                            placeholder="Confirmez votre mot de passe"
+                            placeholder="{{ __('seller.auth.confirm_placeholder') }}"
                             class="w-full px-4 py-3 rounded-lg border-2 border-zinc-200 bg-white focus:border-[#0A2E65] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/10 font-medium"
                             required
                         />
@@ -125,7 +128,7 @@
                         type="submit"
                         class="w-full bg-gradient-to-r from-[#0A2E65] to-[#0A2E65]/90 text-white py-3.5 rounded-lg font-bold text-base shadow-lg shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-900/30 hover:to-[#0A2E65] transition-all duration-300 active:scale-95 mt-6 flex items-center justify-center gap-2"
                     >
-                        <span>Créer mon compte</span>
+                        <span>{{ __('seller.auth.submit_register') }}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
@@ -134,9 +137,9 @@
                     <!-- Login Link -->
                     <div class="text-center pt-4 border-t border-zinc-200">
                         <p class="text-zinc-600 text-sm">
-                            Vous avez déjà un compte ? 
+                            {{ __('seller.auth.has_account') }}
                             <a href="{{ route('login') }}" class="font-bold text-[#0A2E65] hover:text-[#0A2E65]/80 transition-colors">
-                                Se connecter
+                                {{ __('seller.auth.submit_login') }}
                             </a>
                         </p>
                     </div>
@@ -149,8 +152,8 @@
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                         </svg>
                         <div class="text-sm">
-                            <p class="font-bold text-zinc-900">Vos données sont sécurisées</p>
-                            <p class="text-zinc-600 mt-1">Chiffrage SSL 256-bit et conformité RGPD</p>
+                            <p class="font-bold text-zinc-900">{{ __('seller.auth.data_title') }}</p>
+                            <p class="text-zinc-600 mt-1">{{ __('seller.auth.data_body') }}</p>
                         </div>
                     </div>
                 </div>

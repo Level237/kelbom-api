@@ -100,6 +100,39 @@ class CreateStandTest extends TestCase
         $this->assertNotNull($stand->buyleadCredits);
     }
 
+    public function test_existing_email_is_shown_on_the_create_form(): void
+    {
+        User::factory()->create([
+            'email' => 'deja@kelbom.com',
+            'phone_number' => '+237600000001',
+        ]);
+
+        $category = Category::create([
+            'name' => 'Mode',
+            'slug' => 'mode-email',
+            'is_active' => true,
+        ]);
+
+        $response = $this->from($this->sellerDomainUrl('/create'))->post($this->sellerDomainUrl('/create'), [
+            'name' => 'Nouveau Vendeur',
+            'stand_name' => 'Stand Nouveau',
+            'kind' => 'product',
+            'category_id' => $category->id,
+            'country' => 'Cameroun',
+            'city' => 'Douala',
+            'phone_number' => '+237600000002',
+            'email' => 'deja@kelbom.com',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+        ]);
+
+        $response->assertRedirect($this->sellerDomainUrl('/create'));
+        $response->assertSessionHasErrors([
+            'email' => 'Cet e-mail est déjà utilisé. Connectez-vous ou indiquez une autre adresse.',
+        ]);
+        $this->assertGuest();
+    }
+
     public function test_seller_with_stand_cannot_access_create_form(): void
     {
         $user = User::factory()->create([

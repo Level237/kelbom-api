@@ -17,7 +17,7 @@ class ProductController extends Controller
         $stand = $request->user()->stand;
 
         if (!$stand) {
-            return redirect()->route('seller.create')->with('error', 'Créez d\'abord un stand');
+            return redirect()->route('seller.create')->with('error', __('seller.flash.create_stand_first'));
         }
 
         $products = Product::where('stand_id', $stand->id)
@@ -50,7 +50,7 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive,draft',
             'main_image' => 'nullable|image|max:5120',
             'images.*' => 'nullable|image|max:5120',
-        ]);
+        ], $this->validationMessages(), $this->validationAttributes());
 
         $stand = $request->user()->stand;
 
@@ -93,7 +93,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('seller.products.index')->with('success', 'Produit ajouté avec succès.');
+        return redirect()->route('seller.products.index')->with('success', __('seller.flash.product_created'));
     }
 
     public function edit(Product $product)
@@ -119,7 +119,7 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive,draft',
             'main_image' => 'nullable|image|max:5120',
             'images.*' => 'nullable|image|max:5120',
-        ]);
+        ], $this->validationMessages(), $this->validationAttributes());
 
         if ($request->name !== $product->name) {
             $product->slug = $product->generateSlug($request->name, $product->stand_id);
@@ -164,7 +164,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('seller.products.index')->with('success', 'Produit mis à jour avec succès.');
+        return redirect()->route('seller.products.index')->with('success', __('seller.flash.product_updated'));
     }
 
     public function destroy(Product $product)
@@ -184,14 +184,28 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('seller.products.index')->with('success', 'Produit supprimé.');
+        return redirect()->route('seller.products.index')->with('success', __('seller.flash.product_deleted'));
     }
 
     private function authorizeOwner(Product $product)
     {
         $stand = auth()->user()->stand;
         if (!$stand || $product->stand_id !== $stand->id) {
-            abort(403, 'Action non autorisée.');
+            abort(403, __('seller.flash.unauthorized'));
         }
+    }
+
+    private function validationMessages(): array
+    {
+        $messages = trans('seller.validation.messages');
+
+        return is_array($messages) ? $messages : [];
+    }
+
+    private function validationAttributes(): array
+    {
+        $attributes = trans('seller.validation.attributes');
+
+        return is_array($attributes) ? $attributes : [];
     }
 }

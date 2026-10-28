@@ -15,7 +15,7 @@
 <header class="sticky top-0 z-50 border-t-[3px] border-kola border-b border-zinc-200 bg-white" x-data="{ mobileMenuOpen: false }">
     <div class="mx-auto flex h-16 max-w-[1400px] items-center gap-3 px-4 md:gap-4 md:px-8">
 
-        <button type="button" @click="mobileMenuOpen = true" class="text-bark focus:outline-none" aria-label="Ouvrir le menu">
+        <button type="button" @click="mobileMenuOpen = true" class="text-bark focus:outline-none" aria-label="{{ __('ui.open_menu') }}">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
@@ -28,11 +28,11 @@
         <div class="hidden items-center gap-1 sm:flex">
             <a href="{{ route('client.products') }}"
                 class="inline-flex h-9 items-center rounded-full px-4 text-sm font-semibold {{ $standsActive ? 'text-bark hover:bg-zinc-100' : 'bg-kola text-white hover:bg-kola-deep' }}">
-                Produits
+                {{ __('ui.products') }}
             </a>
             <a href="{{ route('client.marketplace') }}"
                 class="inline-flex h-9 items-center rounded-full px-3 text-sm font-semibold {{ $standsActive ? 'bg-kola text-white hover:bg-kola-deep' : 'text-bark hover:bg-zinc-100' }}">
-                Stands
+                {{ __('ui.stands') }}
             </a>
         </div>
 
@@ -41,19 +41,21 @@
                 <svg class="h-[18px] w-[18px] shrink-0 text-kola" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <input type="search" name="search" value="{{ request('search') }}" placeholder="Rechercher sur Kelbom"
+                <input type="search" name="search" value="{{ request('search') }}" placeholder="{{ __('ui.search') }}"
                     class="w-full border-none bg-transparent text-sm text-bark placeholder:text-zinc-400 focus:outline-none">
             </label>
         </form>
 
         <div class="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+            <x-locale-switch />
+
             <a href="{{ route('seller.create') }}" class="hidden text-sm font-semibold text-bark hover:text-kola-deep sm:inline">
-                Créer un stand
+                {{ __('ui.create_stand') }}
             </a>
 
             <a href="{{ route('client.stands.nearby') }}"
                 class="inline-flex h-10 items-center rounded-full bg-kola px-4 text-sm font-semibold text-white hover:bg-kola-deep">
-                Près de moi
+                {{ __('ui.near_me') }}
             </a>
         </div>
     </div>
@@ -80,7 +82,7 @@
 
             <div class="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-100 bg-white p-4">
                 <span class="text-xl font-extrabold text-kola-deep">Kelbom</span>
-                <button type="button" @click="mobileMenuOpen = false" class="rounded-full bg-zinc-100 p-2 text-zinc-500 hover:text-zinc-800" aria-label="Fermer le menu">
+                <button type="button" @click="mobileMenuOpen = false" class="rounded-full bg-zinc-100 p-2 text-zinc-500 hover:text-zinc-800" aria-label="{{ __('ui.close_menu') }}">
                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -88,22 +90,22 @@
             <form action="{{ route('client.products') }}" method="GET" class="border-b border-zinc-100 p-4 md:hidden">
                 <label class="flex h-11 items-center rounded-full bg-zinc-100 px-3">
                     <svg class="h-5 w-5 text-kola" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <input type="search" name="search" value="{{ request('search') }}" placeholder="Rechercher sur Kelbom" class="h-full w-full border-none bg-transparent px-3 text-[15px] text-bark placeholder:text-zinc-500 focus:outline-none">
+                    <input type="search" name="search" value="{{ request('search') }}" placeholder="{{ __('ui.search') }}" class="h-full w-full border-none bg-transparent px-3 text-[15px] text-bark placeholder:text-zinc-500 focus:outline-none">
                 </label>
             </form>
 
             <div class="flex gap-2 border-b border-zinc-100 p-4 sm:hidden">
-                <a href="{{ route('client.products') }}" class="inline-flex h-9 items-center rounded-full bg-kola px-4 text-sm font-semibold text-white">Produits</a>
-                <a href="{{ route('client.marketplace') }}" class="inline-flex h-9 items-center rounded-full px-3 text-sm font-semibold text-bark">Stands</a>
+                <a href="{{ route('client.products') }}" class="inline-flex h-9 items-center rounded-full bg-kola px-4 text-sm font-semibold text-white">{{ __('ui.products') }}</a>
+                <a href="{{ route('client.marketplace') }}" class="inline-flex h-9 items-center rounded-full px-3 text-sm font-semibold text-bark">{{ __('ui.stands') }}</a>
             </div>
 
             <nav class="flex-1 p-4 pb-10">
-                <h3 class="mb-4 text-xs font-bold uppercase tracking-wider text-zinc-400">Parcourir</h3>
+                <h3 class="mb-4 text-xs font-bold uppercase tracking-wider text-zinc-400">{{ __('ui.browse') }}</h3>
                 <div class="space-y-1">
                     @foreach ($navCategories as $parent)
                         <div x-data="{ open: false }" class="border-b border-zinc-100 last:border-0">
                             <button type="button" @click="open = !open" class="flex w-full items-center justify-between py-3 text-[15px] font-semibold text-zinc-700 hover:text-indigo">
-                                {{ $parent->name }}
+                                {{ $parent->translatedName() }}
                                 @if ($parent->children->isNotEmpty())
                                     <svg class="h-4 w-4 transition-transform duration-200" :class="open ? 'rotate-180 text-kola-deep' : 'text-zinc-400'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 @endif
@@ -112,7 +114,7 @@
                                 <div x-show="open" x-transition.opacity class="space-y-3 pb-3 pl-3" style="display: none;">
                                     @foreach ($parent->children as $child)
                                         <a href="{{ route('client.category.show', $child->slug) }}" class="block text-[14px] text-zinc-500 hover:text-indigo">
-                                            {{ $child->name }}
+                                            {{ $child->translatedName() }}
                                         </a>
                                     @endforeach
                                 </div>
@@ -123,19 +125,20 @@
             </nav>
 
             <div class="mt-auto space-y-3 border-t border-zinc-100 bg-zinc-50 p-4">
+                <x-locale-switch />
                 <a href="{{ route('client.stands.nearby') }}" class="flex w-full items-center justify-center rounded-full bg-kola py-2.5 text-[15px] font-semibold text-white">
-                    Près de moi
+                    {{ __('ui.near_me') }}
                 </a>
                 <a href="{{ route('seller.create') }}" class="flex w-full items-center justify-center rounded-full border border-zinc-300 bg-white py-2.5 text-[15px] font-semibold text-bark">
-                    Créer un stand
+                    {{ __('ui.create_stand') }}
                 </a>
                 @auth
                     <a href="{{ route('seller.dashboard') }}" class="flex w-full items-center justify-center rounded-full bg-kola py-2.5 text-[15px] font-semibold text-white">
-                        Mon espace
+                        {{ __('ui.my_space') }}
                     </a>
                 @else
                     <a href="{{ route('seller.register') }}" class="flex w-full items-center justify-center rounded-full bg-kola py-2.5 text-[15px] font-semibold text-white">
-                        S'inscrire
+                        {{ __('ui.sign_up') }}
                     </a>
                 @endauth
             </div>

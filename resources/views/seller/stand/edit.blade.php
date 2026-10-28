@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personnaliser mon Stand | Kelbom</title>
+    <title>{{ __('seller.stand.title') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -51,18 +51,18 @@
                 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-12 border-b border-zinc-200/60 pb-8">
                     <div class="max-w-2xl">
                         <div class="flex items-center gap-2 mb-3">
-                            <span class="px-2.5 py-1 bg-zinc-900 text-white text-[10px] font-mono tracking-widest uppercase rounded-md font-semibold">Studio</span>
-                            <span class="text-zinc-400 text-xs font-medium">/ Configuration Vitrine</span>
+                            <span class="px-2.5 py-1 bg-zinc-900 text-white text-[10px] font-mono tracking-widest uppercase rounded-md font-semibold">{{ __('seller.stand.studio') }}</span>
+                            <span class="text-zinc-400 text-xs font-medium">{{ __('seller.stand.path') }}</span>
                         </div>
-                        <h1 class="text-3xl md:text-4xl font-semibold tracking-tighter text-zinc-950 mb-3">Personnaliser votre identité.</h1>
-                        <p class="text-sm md:text-base text-zinc-500 leading-relaxed max-w-[60ch]">Votre stand est votre signature numérique. Structurez votre image de marque pour inspirer confiance et attirer de nouveaux acheteurs.</p>
+                        <h1 class="text-3xl md:text-4xl font-semibold tracking-tighter text-zinc-950 mb-3">{{ __('seller.stand.heading') }}</h1>
+                        <p class="text-sm md:text-base text-zinc-500 leading-relaxed max-w-[60ch]">{{ __('seller.stand.intro') }}</p>
                     </div>
                     <div class="flex items-center gap-3 w-full sm:w-auto self-stretch lg:self-auto">
                         <a href="{{ route('seller.stand.preview') }}" class="flex-1 sm:flex-none px-5 py-3 bg-white border border-zinc-200/80 text-zinc-700 font-medium rounded-xl text-xs uppercase tracking-wider hover:bg-zinc-50 hover:border-zinc-300 input-transition premium-shadow active:scale-[0.98] text-center">
-                            Aperçu live
+                            {{ __('seller.stand.live_preview') }}
                         </a>
                         <button type="submit" class="flex-1 sm:flex-none px-6 py-3 bg-[#0A2E65] hover:bg-zinc-900 text-white font-medium rounded-xl text-xs uppercase tracking-wider input-transition shadow-[0_10px_20px_-5px_rgba(10,46,101,0.2)] hover:shadow-none active:scale-[0.98]">
-                            Enregistrer les modifications
+                            {{ __('seller.stand.save') }}
                         </button>
                     </div>
                 </div>
@@ -88,9 +88,9 @@
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center gap-3">
                                     <div class="w-1.5 h-5 bg-[#0A2E65] rounded-full"></div>
-                                    <h2 class="text-sm font-semibold uppercase tracking-wider text-zinc-800">Identité Visuelle & Médias</h2>
+                                    <h2 class="text-sm font-semibold uppercase tracking-wider text-zinc-800">{{ __('seller.stand.visual') }}</h2>
                                 </div>
-                                <span class="text-[10px] font-mono text-zinc-400 bg-zinc-50 px-2 py-0.5 rounded border border-zinc-100">Ratio 21:9</span>
+                                <span class="text-[10px] font-mono text-zinc-400 bg-zinc-50 px-2 py-0.5 rounded border border-zinc-100">{{ __('seller.stand.ratio') }}</span>
                             </div>
 
                             <!-- Interactive Banner Upload Slot -->
@@ -102,12 +102,12 @@
                                     <template x-if="!coverPreview">
                                         <div class="w-full h-full flex flex-col items-center justify-center gap-2">
                                             <svg class="w-6 h-6 text-zinc-300 group-hover/cover:text-zinc-400 transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path></svg>
-                                            <span class="text-[11px] font-medium text-zinc-400">Aucune bannière configurée</span>
+                                            <span class="text-[11px] font-medium text-zinc-400">{{ __('seller.stand.no_banner') }}</span>
                                         </div>
                                     </template>
                                     <!-- Sleek Refraction Hover Overlay -->
                                     <div class="absolute inset-0 bg-zinc-950/20 opacity-0 group-hover/cover:opacity-100 input-transition flex items-center justify-center">
-                                        <span class="px-4 py-2 bg-white text-zinc-900 font-medium rounded-lg text-xs tracking-wide shadow-xl uppercase border border-zinc-200">Remplacer la bannière</span>
+                                        <span class="px-4 py-2 bg-white text-zinc-900 font-medium rounded-lg text-xs tracking-wide shadow-xl uppercase border border-zinc-200">{{ __('seller.stand.replace_banner') }}</span>
                                     </div>
                                 </div>
                                 <input type="file" name="cover" @change="handleCover" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
@@ -134,12 +134,12 @@
                             <!-- Text Content Input Matrix -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="space-y-1">
-                                    <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block mb-1">Nom du Stand</label>
-                                    <input type="text" name="stand_name" value="{{ old('stand_name', $stand->stand_name) }}" class="w-full px-4 py-3 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-sm hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="Ex: Maison d'Élégance">
+                                    <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block mb-1">{{ __('seller.stand.stand_name') }}</label>
+                                    <input type="text" name="stand_name" value="{{ old('stand_name', $stand->stand_name) }}" class="w-full px-4 py-3 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-sm hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="{{ __('seller.stand.stand_name_placeholder') }}">
                                 </div>
                                 <div class="space-y-1">
-                                    <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block mb-1">Slogan ou accroche</label>
-                                    <input type="text" name="short_desc_placeholder" value="{{ old('description', $stand->description) }}" class="w-full px-4 py-3 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-sm hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="Votre promesse client en une phrase">
+                                    <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block mb-1">{{ __('seller.stand.tagline') }}</label>
+                                    <input type="text" name="short_desc_placeholder" value="{{ old('description', $stand->description) }}" class="w-full px-4 py-3 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-sm hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="{{ __('seller.stand.tagline_placeholder') }}">
                                 </div>
                             </div>
                         </div>
@@ -148,12 +148,12 @@
                         <div class="bg-white rounded-3xl border border-zinc-200/60 p-6 md:p-8 premium-shadow">
                              <div class="flex items-center gap-3 mb-6">
                                 <div class="w-1.5 h-5 bg-zinc-900 rounded-full"></div>
-                                <h2 class="text-sm font-semibold uppercase tracking-wider text-zinc-800">Histoire & Profil de l'entreprise</h2>
+                                <h2 class="text-sm font-semibold uppercase tracking-wider text-zinc-800">{{ __('seller.stand.story') }}</h2>
                             </div>
-                            <textarea name="description" rows="6" class="w-full px-4 py-3.5 bg-white border border-zinc-200/80 rounded-2xl text-zinc-900 text-sm font-normal leading-relaxed hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition resize-none shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="Présentez votre entreprise, vos techniques artisanales, vos engagements et ce qui forge l'authenticité de vos produits...">{{ old('description', $stand->description) }}</textarea>
+                            <textarea name="description" rows="6" class="w-full px-4 py-3.5 bg-white border border-zinc-200/80 rounded-2xl text-zinc-900 text-sm font-normal leading-relaxed hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition resize-none shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="{{ __('seller.stand.story_placeholder') }}">{{ old('description', $stand->description) }}</textarea>
                             <div class="flex items-center gap-2 mt-3 text-zinc-400">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008h-.008v-.008z"></path></svg>
-                                <p class="text-[11px] font-medium tracking-wide">Une biographie soignée augmente votre taux de conversion et votre référencement organique.</p>
+                                <p class="text-[11px] font-medium tracking-wide">{{ __('seller.stand.story_hint') }}</p>
                             </div>
                         </div>
                     </div>
@@ -167,23 +167,23 @@
                             
                             <div class="flex items-center gap-2.5 mb-6 border-b border-zinc-800 pb-4">
                                 <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.454-5.166-3.792-6.618-6.617l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path></svg>
-                                <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-300">Canaux de Communication</h2>
+                                <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-300">{{ __('seller.stand.channels') }}</h2>
                             </div>
                             
                             <div class="space-y-5">
                                 <div class="space-y-1.5">
-                                    <label class="text-[9px] uppercase tracking-widest font-bold text-zinc-500 block">Téléphone Fixe / Portable</label>
+                                    <label class="text-[9px] uppercase tracking-widest font-bold text-zinc-500 block">{{ __('seller.stand.phone') }}</label>
                                     <input type="text" name="contact_phone" value="{{ old('contact_phone', $stand->contact_phone) }}" class="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-white font-mono text-xs tracking-wide focus:border-zinc-700 focus:bg-zinc-900 outline-none input-transition">
                                 </div>
                                 <div class="space-y-1.5">
-                                    <label class="text-[9px] uppercase tracking-widest font-bold text-zinc-500 block">Ligne WhatsApp Business</label>
+                                    <label class="text-[9px] uppercase tracking-widest font-bold text-zinc-500 block">{{ __('seller.stand.whatsapp') }}</label>
                                     <div class="relative">
                                         <input type="text" name="whatsapp_number" value="{{ old('whatsapp_number', $stand->whatsapp_number) }}" class="w-full pl-3.5 pr-8 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-white font-mono text-xs tracking-wide focus:border-zinc-700 focus:bg-zinc-900 outline-none input-transition">
                                         <div class="absolute right-3 top-1/2 -translate-y-1/2 w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
                                     </div>
                                 </div>
                                 <div class="space-y-1.5">
-                                    <label class="text-[9px] uppercase tracking-widest font-bold text-zinc-500 block">Courriel Commercial</label>
+                                    <label class="text-[9px] uppercase tracking-widest font-bold text-zinc-500 block">{{ __('seller.stand.email') }}</label>
                                     <input type="email" name="contact_email" value="{{ old('contact_email', $stand->contact_email) }}" class="w-full px-3.5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl text-zinc-300 text-xs font-normal focus:border-zinc-700 focus:bg-zinc-900 outline-none input-transition">
                                 </div>
                             </div>
@@ -193,22 +193,22 @@
                         <div class="bg-white rounded-3xl border border-zinc-200/60 p-6 md:p-8 premium-shadow">
                             <div class="flex items-center gap-2.5 mb-6 border-b border-zinc-100 pb-4">
                                 <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z"></path></svg>
-                                <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-800">Localisation Administrative</h2>
+                                <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-800">{{ __('seller.stand.location') }}</h2>
                             </div>
                             <div class="space-y-4">
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="space-y-1">
-                                        <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">Ville</label>
+                                        <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">{{ __('seller.stand.city') }}</label>
                                         <input type="text" name="city" value="{{ old('city', $stand->city) }}" class="w-full px-3.5 py-2.5 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-xs hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
                                     </div>
                                     <div class="space-y-1">
-                                        <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">Pays</label>
+                                        <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">{{ __('seller.stand.country') }}</label>
                                         <input type="text" name="country" value="{{ old('country', $stand->country) }}" class="w-full px-3.5 py-2.5 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-xs hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
                                     </div>
                                 </div>
                                 <div class="space-y-1">
-                                    <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">Adresse physique précise</label>
-                                    <input type="text" name="address" value="{{ old('address', $stand->address) }}" class="w-full px-3.5 py-2.5 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-normal text-xs hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="Rue, Quartier, Repères...">
+                                    <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">{{ __('seller.stand.address') }}</label>
+                                    <input type="text" name="address" value="{{ old('address', $stand->address) }}" class="w-full px-3.5 py-2.5 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-normal text-xs hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="{{ __('seller.stand.address_placeholder') }}">
                                 </div>
                             </div>
                         </div>
@@ -217,13 +217,13 @@
                         <div class="bg-white rounded-3xl border border-zinc-200/60 p-6 md:p-8 premium-shadow">
                             <div class="flex items-center gap-2.5 mb-5">
                                 <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 18c-1.11 0-2.08-.402-2.799-1.066M11.25 3.75H12m0 0l.45.9a1.5 1.5 0 001.213.804l1.042.062a1.35 1.35 0 01.762 2.272l-.782.685a1.5 1.5 0 00-.493 1.488l.245 1.053a1.35 1.35 0 01-2.011 1.439l-.933-.538a1.5 1.5 0 00-1.484 0l-.933.538a1.35 1.35 0 01-2.011-1.439l.245-1.053a1.5 1.5 0 00-.493-1.488l-.782-.685a1.35 1.35 0 01.762-2.272l1.042-.062a1.5 1.5 0 001.213-.804l.45-.9z"></path></svg>
-                                <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-800">Écosystème Digital</h2>
+                                <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-800">{{ __('seller.stand.digital') }}</h2>
                             </div>
                             <div class="space-y-1.5">
-                                <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">Site internet externe</label>
+                                <label class="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest block">{{ __('seller.stand.website') }}</label>
                                 <div class="relative flex items-center">
                                     <span class="absolute left-3.5 text-zinc-400 font-mono text-xs select-none">https://</span>
-                                    <input type="text" name="website_url" value="{{ old('website_url', str_replace(['http://', 'https://'], '', $stand->website_url)) }}" class="w-full pl-16 pr-4 py-2.5 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-xs hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="votre-marque.com">
+                                    <input type="text" name="website_url" value="{{ old('website_url', str_replace(['http://', 'https://'], '', $stand->website_url)) }}" class="w-full pl-16 pr-4 py-2.5 bg-white border border-zinc-200/80 rounded-xl text-zinc-900 font-medium text-xs hover:border-zinc-300 focus:border-zinc-900 focus:ring-4 focus:ring-zinc-900/4 outline-none input-transition shadow-[0_1px_2px_rgba(0,0,0,0.01)]" placeholder="{{ __('seller.stand.website_placeholder') }}">
                                 </div>
                             </div>
                         </div>

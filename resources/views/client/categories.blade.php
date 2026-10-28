@@ -1,9 +1,9 @@
 <section class="max-w-[1400px] mx-auto px-4 md:px-8 py-10">
     <!-- Header -->
     <div class="flex items-end justify-between mb-6">
-        <h2 class="text-2xl md:text-[28px] font-black text-[#0A2E65] tracking-tight">Catégories Principales</h2>
+        <h2 class="text-2xl md:text-[28px] font-black text-[#0A2E65] tracking-tight">{{ __('client.categories.title') }}</h2>
         <a href="#" class="text-[14px] font-bold text-[#0A2E65] hover:text-blue-800 flex items-center gap-1.5 transition-colors group">
-            Voir tout 
+            {{ __('client.categories.see_all') }} 
             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
     </div>
@@ -35,20 +35,20 @@
             <div class="relative z-10 mt-auto pt-44">
                 <ul class="space-y-2.5 mb-5 text-[14px] text-blue-100 font-medium">
                     <li class="hover:text-white cursor-pointer transition-colors flex items-center gap-2">
-                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> Produits Populaires
+                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> {{ __('client.categories.popular') }}
                     </li>
                     <li class="hover:text-white cursor-pointer transition-colors flex items-center gap-2">
-                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> Nouvelles Tendances
+                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> {{ __('client.categories.trends') }}
                     </li>
                     <li class="hover:text-white cursor-pointer transition-colors flex items-center gap-2">
-                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> Ventes Flash
+                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> {{ __('client.categories.flash') }}
                     </li>
                     <li class="hover:text-white cursor-pointer transition-colors flex items-center gap-2">
-                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> Offres Spéciales
+                        <span class="w-1 h-1 rounded-full bg-blue-400"></span> {{ __('client.categories.offers') }}
                     </li>
                 </ul>
                 <a href="#" class="block w-full py-2.5 bg-white text-[#132A5A] text-center font-bold rounded-lg hover:bg-zinc-100 transition-colors shadow-sm text-sm">
-                    Tout voir
+                    {{ __('client.categories.see_everything') }}
                 </a>
             </div>
         </div>
@@ -57,12 +57,12 @@
         <div class="lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($categories as $category)
             <div class="bg-white rounded-xl border border-zinc-200 p-5 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all group">
-                <h3 class="font-bold text-zinc-900 mb-3 text-[15px] group-hover:text-[#0A2E65] transition-colors">{{ $category->name }}</h3>
+                <h3 class="font-bold text-zinc-900 mb-3 text-[15px] group-hover:text-[#0A2E65] transition-colors">{{ $category->translatedName() }}</h3>
                 <ul class="space-y-2.5">
                     @foreach($category->children as $child)
                     <li>
                         <a href="#" class="text-[14px] text-zinc-600 hover:text-[#0A2E65] transition-colors line-clamp-1">
-                            {{ $child->name }}
+                            {{ $child->translatedName() }}
                         </a>
                     </li>
                     @endforeach

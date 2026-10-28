@@ -10,7 +10,7 @@
 
                 <div
                     class="relative h-[700px] w-full rounded-3xl overflow-hidden shadow-2xl shadow-zinc-200/60 z-10 group">
-                    <img src="{{ asset('assets/img/slide.png') }}" alt="Kelbom Dashboard"
+                    <img src="{{ asset('assets/img/slide.png') }}" alt="{{ __('seller.why.image_alt') }}"
                         class="w-full h-full object-contain object-center rounded-2xl transition-transform duration-1000 ">
                 </div>
             </div>
@@ -21,20 +21,18 @@
 
                 <span
                     class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0A2E65]/10 text-[#0A2E65] text-xs font-bold tracking-widest uppercase mb-6">
-                    Pour les professionnels
+                    {{ __('seller.why.badge') }}
                 </span>
 
                 <h2
                     class="text-4xl md:text-3xl lg:text-[2.5rem] font-extrabold text-zinc-900 tracking-tight mb-8 leading-[1.1]">
-                    Pourquoi choisir Kelbom pour <span class="text-[#0A2E65]">votre business ?</span>
+                    {{ __('seller.why.title') }} <span class="text-[#0A2E65]">{{ __('seller.why.title_highlight') }}</span>
                 </h2>
 
                 <p class="text-lg md:text-md text-zinc-500 leading-relaxed mb-10 max-w-lg">
-                    Ne laissez plus la technique freiner vos ambitions. Notre plateforme a été conçue sur-mesure pour
-                    propulser vos ventes instantanément.
+                    {{ __('seller.why.body_1') }}
                     <br><br>
-                    Profitez d'une interface ultra-intuitive, d'outils de gestion puissants et d'une visibilité accrue
-                    pour transformer chaque visiteur en client fidèle.
+                    {{ __('seller.why.body_2') }}
                 </p>
 
                 <!-- Key Benefits List -->
@@ -47,7 +45,7 @@
                                     d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
-                        Gestion centralisée de votre inventaire
+                        {{ __('seller.why.benefit_inventory') }}
                     </li>
                     <li class="flex items-center gap-4 text-zinc-800 font-bold text-md">
                         <div
@@ -57,14 +55,14 @@
                                     d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
-                        Support client dédié 24/7
+                        {{ __('seller.why.benefit_support') }}
                     </li>
                 </ul>
 
                 <!-- CTA -->
                 <a href=""
                     class="group relative flex items-center gap-3 bg-[#0A2E65] text-white px-8 py-4 rounded-full text-base font-bold shadow-xl shadow-[#0A2E65]/20 hover:bg-[#0A2E65]/90 transition-all active:scale-[0.98]">
-                    <span>Ouvrir un stand</span>
+                    <span>{{ __('seller.why.cta') }}</span>
                     <span class="bg-white/10 p-1.5 rounded-full group-hover:bg-white/20 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none"

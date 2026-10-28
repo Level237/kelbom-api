@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $stand->stand_name }} | Aperçu Live</title>
+    <title>{{ __('seller.preview.title', ['name' => $stand->stand_name]) }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -31,11 +31,12 @@
     <div class="bg-zinc-950 text-zinc-300 px-4 py-2.5 text-center text-[11px] font-mono tracking-tight border-b border-zinc-800/60 sticky top-0 z-50 flex items-center justify-center gap-4 shadow-sm">
         <div class="flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-            <span class="text-zinc-400 font-medium">MODE APERÇU LIVE &bull; Visualisation publique de votre vitrine</span>
+            <span class="text-zinc-400 font-medium">{{ __('seller.preview.mode') }}</span>
         </div>
         <a href="{{ route('seller.stand.edit') }}" class="px-2.5 py-0.5 bg-zinc-800 text-zinc-200 border border-zinc-700 hover:border-zinc-500 hover:text-white rounded font-mono text-[10px] premium-transition uppercase tracking-wider">
-            Retour à l'édition
+            {{ __('seller.preview.back') }}
         </a>
+        <x-locale-switch />
     </div>
 
     <!-- Master Showcase Header -->
@@ -76,7 +77,7 @@
                         <div class="flex flex-wrap items-center gap-2.5 mb-2">
                             <h1 class="text-2xl md:text-4xl font-semibold tracking-tighter text-zinc-950">{{ $stand->stand_name }}</h1>
                             @if($stand->is_verified)
-                                <div class="bg-zinc-950 text-white p-0.5 rounded-full shadow-sm" title="Vérifié">
+                                <div class="bg-zinc-950 text-white p-0.5 rounded-full shadow-sm" title="{{ __('seller.preview.verified') }}">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
                                 </div>
                             @endif
@@ -91,7 +92,7 @@
                             <div class="flex items-center gap-1.5">
                                 <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                 <span class="font-mono text-[11px] font-bold text-zinc-800">{{ $stand->rating_avg ?? '5.0' }}</span>
-                                <span class="text-zinc-400 font-normal">({{ $stand->total_reviews ?? '0' }} avis)</span>
+                                <span class="text-zinc-400 font-normal">{{ __('seller.preview.reviews', ['count' => $stand->total_reviews ?? '0']) }}</span>
                             </div>
                         </div>
                     </div>
@@ -100,7 +101,7 @@
                 <!-- Strategic Contact Interface Node -->
                 <div class="flex items-center gap-2.5 w-full sm:w-auto self-stretch md:self-auto md:mb-2">
                     <button class="flex-1 sm:flex-none px-5 py-2.5 bg-zinc-950 text-white font-medium text-xs uppercase tracking-wider rounded-xl hover:bg-zinc-800 premium-transition active:scale-[0.97] shadow-sm">
-                        Contacter
+                        {{ __('seller.preview.contact') }}
                     </button>
                     @if($stand->whatsapp_number)
                         <a href="https://wa.me/{{ preg_replace('/\D/', '', $stand->whatsapp_number) }}"
@@ -125,9 +126,9 @@
             <!-- Left: Curated Product Showcase -->
             <div class="lg:col-span-8">
                 <div class="flex items-center justify-between border-b border-zinc-100 pb-4 mb-8">
-                    <h2 class="text-sm font-semibold uppercase tracking-wider text-zinc-800">Catalogue de la Collection</h2>
+                    <h2 class="text-sm font-semibold uppercase tracking-wider text-zinc-800">{{ __('seller.preview.catalog') }}</h2>
                     <span class="text-xs font-mono font-medium text-zinc-400 bg-zinc-50 border border-zinc-100 px-2 py-0.5 rounded">
-                        {{ $stand->products->count() }} articles dispos
+                        {{ __('seller.preview.items', ['count' => $stand->products->count()]) }}
                     </span>
                 </div>
 
@@ -141,7 +142,7 @@
                                         class="w-full h-full object-cover group-hover:scale-[1.02] premium-transition duration-500">
                                 @endif
                                 <div class="absolute top-3 left-3 px-2 py-0.5 bg-zinc-950/80 backdrop-blur rounded text-[9px] font-semibold text-white uppercase tracking-widest">
-                                    Nouveau
+                                    {{ __('seller.preview.new') }}
                                 </div>
                             </div>
                             
@@ -149,7 +150,7 @@
                                 <h3 class="text-sm font-semibold text-zinc-900 group-hover:text-zinc-600 premium-transition">
                                     {{ $product->name }}
                                 </h3>
-                                <p class="text-xs text-zinc-400 font-medium">{{ $product->category?->name ?? 'Catégorie Générale' }}</p>
+                                <p class="text-xs text-zinc-400 font-medium">{{ $product->category?->translatedName() ?? __('seller.preview.general_category') }}</p>
                                 <p class="text-sm font-bold font-mono tracking-tight text-zinc-950 pt-1">
                                     {{ number_format($product->price, 0, ',', ' ') }} FCFA
                                 </p>
@@ -159,7 +160,7 @@
                         <!-- Perfectly Composed Empty Showroom State -->
                         <div class="col-span-2 py-20 flex flex-col items-center justify-center gap-3 text-center bg-zinc-50 rounded-2xl border border-dashed border-zinc-200/80 p-8">
                             <svg class="w-6 h-6 text-zinc-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 Carlsbad 5.197m0 0A7.5 7.5 0 105.196 12m5.004-6.804A7.5 7.5 0 0012 21.75a7.5 7.5 0 006.804-10.5M12 7.5V12l3 3"></path></svg>
-                            <p class="text-xs font-medium text-zinc-400 tracking-wide">Aucun produit n'est actuellement exposé dans la vitrine.</p>
+                            <p class="text-xs font-medium text-zinc-400 tracking-wide">{{ __('seller.preview.empty') }}</p>
                         </div>
                     @endforelse
                 </div>
@@ -170,15 +171,15 @@
                 
                 <!-- Narrative Section -->
                 <section class="space-y-4">
-                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">À propos de l'atelier</h2>
+                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{{ __('seller.preview.about') }}</h2>
                     <p class="text-sm text-zinc-600 leading-relaxed font-normal">
-                        {{ $stand->description ?? 'Aucune description rédigée pour le moment.' }}
+                        {{ $stand->description ?? __('seller.preview.no_description') }}
                     </p>
                 </section>
 
                 <!-- Location Block -->
                 <section class="space-y-4">
-                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Point d'ancrage</h2>
+                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{{ __('seller.preview.anchor') }}</h2>
                     <div class="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-5 shadow-[0_2px_8px_rgba(0,0,0,0.01)]">
                         <div class="flex items-start gap-3.5">
                             <div class="p-2 bg-white rounded-lg border border-zinc-200 shadow-sm shrink-0 text-zinc-800">
@@ -194,16 +195,16 @@
 
                 <!-- Artisan / Owner Block -->
                 <section class="space-y-4">
-                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Responsable d'établissement</h2>
+                    <h2 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">{{ __('seller.preview.owner') }}</h2>
                     <div class="flex items-center gap-3.5 p-4 bg-zinc-950 text-white rounded-2xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] relative overflow-hidden">
                         <div class="absolute -right-8 -bottom-8 w-20 h-20 bg-zinc-800/30 rounded-full blur-xl pointer-events-none"></div>
                         <div class="w-10 h-10 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center font-mono text-xs font-bold text-zinc-200 shrink-0 select-none">
                             {{ substr($stand->user->name ?? 'V', 0, 1) }}
                         </div>
                         <div class="space-y-0.5">
-                            <p class="text-xs font-medium text-white tracking-tight">{{ $stand->user->name ?? 'Artisan Partenaire' }}</p>
+                            <p class="text-xs font-medium text-white tracking-tight">{{ $stand->user->name ?? __('seller.preview.owner_fallback') }}</p>
                             <p class="text-[10px] text-zinc-500 font-medium">
-                                Enregistré en {{ $stand->created_at ? $stand->created_at->format('M Y') : '2026' }}
+                                {{ __('seller.preview.registered', ['date' => $stand->created_at ? $stand->created_at->format('M Y') : '2026']) }}
                             </p>
                         </div>
                     </div>
@@ -215,8 +216,8 @@
 
     <!-- Refined Minimalist Signature Footer -->
     <footer class="border-t border-zinc-100 py-12 text-center text-zinc-400 text-xs font-normal space-y-1.5 bg-zinc-50/50 mt-12">
-        <p>&copy; {{ date('Y') }} &bull; {{ $stand->stand_name }} &bull; Vitrine Artisanale Autonome.</p>
-        <p class="text-[10px] font-medium tracking-wide text-zinc-400">Propulsé par <span class="text-zinc-950 font-semibold tracking-tighter">kelbom.</span></p>
+        <p>&copy; {{ date('Y') }} &bull; {{ $stand->stand_name }} &bull; {{ __('seller.preview.footer') }}</p>
+        <p class="text-[10px] font-medium tracking-wide text-zinc-400">{{ __('seller.preview.powered') }} <span class="text-zinc-950 font-semibold tracking-tighter">kelbom.</span></p>
     </footer>
 
 </body>

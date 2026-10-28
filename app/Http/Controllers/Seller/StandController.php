@@ -33,8 +33,8 @@ class StandController extends Controller
             ->map(fn (Category $category) => [
                 'id' => $category->id,
                 'label' => $category->parent
-                    ? $category->parent->name.' — '.$category->name
-                    : $category->name,
+                    ? $category->parent->translatedName().' — '.$category->translatedName()
+                    : $category->translatedName(),
                 'kind' => $category->resolvedKind(),
             ])
             ->filter(fn (array $category) => $category['kind'] !== null)
@@ -106,7 +106,7 @@ class StandController extends Controller
         }
 
         return redirect()->route('seller.loading-stand')
-            ->with('success', 'Votre stand a été créé avec succès.');
+            ->with('success', __('seller.flash.stand_created'));
     }
 
     public function reverseGeocode(Request $request): JsonResponse
@@ -114,7 +114,7 @@ class StandController extends Controller
         $validated = $request->validate([
             'lat' => ['required', 'numeric', 'between:-90,90'],
             'lon' => ['required', 'numeric', 'between:-180,180'],
-        ]);
+        ], $this->validationMessages(), $this->validationAttributes());
 
         try {
             $response = Http::timeout(8)
@@ -130,7 +130,7 @@ class StandController extends Controller
                 ]);
 
             if (! $response->successful()) {
-                return response()->json(['message' => 'Géocodage indisponible'], 502);
+                return response()->json(['message' => __('seller.flash.geocode_unavailable')], 502);
             }
 
             $address = $response->json('address', []);
@@ -150,7 +150,7 @@ class StandController extends Controller
         } catch (\Throwable $e) {
             Log::warning('reverseGeocode failed: '.$e->getMessage());
 
-            return response()->json(['message' => 'Géocodage impossible'], 502);
+            return response()->json(['message' => __('seller.flash.geocode_failed')], 502);
         }
     }
 
@@ -158,7 +158,7 @@ class StandController extends Controller
     {
         $stand = $request->user()->stand;
         if (! $stand) {
-            return redirect()->route('seller.create')->with('error', 'Veuillez d\'abord créer un stand.');
+            return redirect()->route('seller.create')->with('error', __('seller.flash.create_stand_first_please'));
         }
 
         return view('seller.stand.edit', compact('stand'));
@@ -180,7 +180,7 @@ class StandController extends Controller
             'country' => 'required|string|max:100',
             'logo' => 'nullable|image|max:2048',
             'cover' => 'nullable|image|max:2048',
-        ]);
+        ], $this->validationMessages(), $this->validationAttributes());
 
         if ($validated['stand_name'] !== $stand->stand_name) {
             $stand->slug = $stand->generateSlug($validated['stand_name']);
@@ -202,17 +202,31 @@ class StandController extends Controller
 
         $stand->update(collect($validated)->except(['logo', 'cover'])->toArray());
 
-        return redirect()->back()->with('success', 'Votre stand a été mis à jour.');
+        return redirect()->back()->with('success', __('seller.flash.stand_updated'));
     }
 
     public function show(Request $request)
     {
         $stand = $request->user()->stand;
         if (! $stand) {
-            return redirect()->route('seller.create')->with('error', 'Veuillez d\'abord créer un stand.');
+            return redirect()->route('seller.create')->with('error', __('seller.flash.create_stand_first_please'));
         }
         $stand->load(['products', 'activeSubscription']);
 
         return view('seller.stand.preview', compact('stand'));
+    }
+
+    private function validationMessages(): array
+    {
+        $messages = trans('seller.validation.messages');
+
+        return is_array($messages) ? $messages : [];
+    }
+
+    private function validationAttributes(): array
+    {
+        $attributes = trans('seller.validation.attributes');
+
+        return is_array($attributes) ? $attributes : [];
     }
 }

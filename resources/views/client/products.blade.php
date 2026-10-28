@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kelbom - Tous les produits</title>
+    <title>{{ __('client.products.title') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@
             class="relative bg-[#0A2E65] h-[300px] md:h-[350px] flex items-center justify-center overflow-hidden border-b border-zinc-200">
             <!-- Background Image with light opacity -->
             <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1920&auto=format&fit=crop"
-                alt="Products Background"
+                alt="{{ __('client.products.background_alt') }}"
                 class="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-[10s] hover:scale-105">
 
             <!-- Dark Overlay Gradient -->
@@ -48,13 +48,13 @@
             <div class="relative z-10 text-center px-4 max-w-3xl mx-auto">
                 <span
                     class="inline-block px-3 py-1 bg-white/10 text-white border border-white/20 text-[12px] font-bold uppercase tracking-widest rounded-full mb-5 backdrop-blur-sm shadow-sm">
-                    Tous les Produits
+                    {{ __('client.products.badge') }}
                 </span>
                 <h1 class="text-4xl md:text-5xl font-black text-white mb-5 tracking-tight">
-                    Trouvez ce qu'il vous faut
+                    {{ __('client.products.heading') }}
                 </h1>
                 <p class="text-[16px] md:text-lg text-blue-100 font-medium leading-relaxed max-w-2xl mx-auto">
-                    Parcourez des milliers de produits proposés par nos stands vérifiés.
+                    {{ __('client.products.intro') }}
                 </p>
             </div>
         </section>
@@ -76,15 +76,15 @@
                                     d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
                                 </path>
                             </svg>
-                            Filtres
+                            {{ __('client.products.filters') }}
                         </h3>
                         <button type="button"
-                            class="text-[13px] font-bold text-blue-600 hover:text-blue-800 lg:hidden">Fermer</button>
+                            class="text-[13px] font-bold text-blue-600 hover:text-blue-800 lg:hidden">{{ __('client.products.close') }}</button>
                     </div>
 
                     <!-- Categories -->
                     <div class="mb-6">
-                        <h4 class="font-bold text-zinc-800 text-[15px] mb-3">Catégories</h4>
+                        <h4 class="font-bold text-zinc-800 text-[15px] mb-3">{{ __('client.products.categories') }}</h4>
                         <div class="space-y-3 max-h-[300px] overflow-y-auto pr-2 no-scrollbar">
                             @foreach($categories as $category)
                                 <label class="flex items-center gap-3 cursor-pointer group">
@@ -92,7 +92,7 @@
                                         onchange="this.form.submit()" {{ in_array($category->id, request('categories', [])) ? 'checked' : '' }}
                                         class="w-4 h-4 rounded border-zinc-300 text-[#0A2E65] focus:ring-[#0A2E65] cursor-pointer">
                                     <span
-                                        class="text-[14px] {{ in_array($category->id, request('categories', [])) ? 'text-zinc-900 font-medium' : 'text-zinc-600 group-hover:text-zinc-900' }} transition-colors">{{ $category->name }}</span>
+                                        class="text-[14px] {{ in_array($category->id, request('categories', [])) ? 'text-zinc-900 font-medium' : 'text-zinc-600 group-hover:text-zinc-900' }} transition-colors">{{ $category->translatedName() }}</span>
                                 </label>
                             @endforeach
                         </div>
@@ -102,26 +102,26 @@
 
                     <!-- Price -->
                     <div class="mb-6">
-                        <h4 class="font-bold text-zinc-800 text-[15px] mb-3">Gamme de Prix (FCFA)</h4>
+                        <h4 class="font-bold text-zinc-800 text-[15px] mb-3">{{ __('client.products.price_range') }}</h4>
                         <div class="flex items-center gap-3">
                             <div class="flex-1">
-                                <input type="number" name="min_price" placeholder="Min" value="{{ request('min_price') }}"
+                                <input type="number" name="min_price" placeholder="{{ __('client.products.min') }}" value="{{ request('min_price') }}"
                                     class="w-full h-10 px-3 text-[14px] border border-zinc-300 rounded-lg focus:ring-2 focus:ring-[#0A2E65] focus:border-[#0A2E65] outline-none transition-all">
                             </div>
                             <span class="text-zinc-400 font-medium">-</span>
                             <div class="flex-1">
-                                <input type="number" name="max_price" placeholder="Max" value="{{ request('max_price') }}"
+                                <input type="number" name="max_price" placeholder="{{ __('client.products.max') }}" value="{{ request('max_price') }}"
                                     class="w-full h-10 px-3 text-[14px] border border-zinc-300 rounded-lg focus:ring-2 focus:ring-[#0A2E65] focus:border-[#0A2E65] outline-none transition-all">
                             </div>
                         </div>
                         <button type="submit" class="w-full mt-4 py-2 bg-[#0A2E65] text-white text-[13px] font-bold rounded-lg hover:bg-blue-900 transition-colors">
-                            Appliquer le prix
+                            {{ __('client.products.apply_price') }}
                         </button>
                     </div>
 
                     <a href="{{ route('client.products') }}"
                         class="block text-center w-full py-2.5 bg-zinc-50 hover:bg-zinc-100 text-zinc-700 font-bold rounded-xl border border-zinc-200 transition-colors text-[14px]">
-                        Réinitialiser
+                        {{ __('client.products.reset') }}
                     </a>
                 </form>
             </aside>
@@ -130,8 +130,8 @@
             <div class="lg:w-3/4">
 
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-xl md:text-2xl font-black text-zinc-900">Tous les produits <span
-                            class="text-zinc-500 font-medium text-base ml-2">({{ $products->total() }} résultats)</span>
+                    <h2 class="text-xl md:text-2xl font-black text-zinc-900">{{ __('client.products.all') }} <span
+                            class="text-zinc-500 font-medium text-base ml-2">({{ $products->total() }} {{ __('client.products.results') }})</span>
                     </h2>
                     <!-- Mobile Filter Button -->
                     <button
@@ -141,16 +141,16 @@
                                 d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
                             </path>
                         </svg>
-                        Filtres
+                        {{ __('client.products.filters') }}
                     </button>
                 </div>
 
                 <!-- Products Grid -->
                 <div class="relative" x-data="{ scroll(direction) { this.$refs.row.scrollBy({ left: direction * this.$refs.row.clientWidth * 0.8, behavior: 'smooth' }) } }">
-                    <button type="button" @click="scroll(-1)" class="absolute top-24 left-0 z-10 hidden h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex" aria-label="Produits précédents">
+                    <button type="button" @click="scroll(-1)" class="absolute top-24 left-0 z-10 hidden h-9 w-9 -translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex" aria-label="{{ __('client.products.previous') }}">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
-                    <button type="button" @click="scroll(1)" class="absolute top-24 right-0 z-10 hidden h-9 w-9 translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex" aria-label="Produits suivants">
+                    <button type="button" @click="scroll(1)" class="absolute top-24 right-0 z-10 hidden h-9 w-9 translate-x-1/2 items-center justify-center rounded-full border border-zinc-200 bg-white text-bark shadow-sm hover:border-kola md:inline-flex" aria-label="{{ __('client.products.next') }}">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 <div x-ref="row" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -179,7 +179,7 @@
                                     @if($product->compare_at_price > $product->price)
                                         <div class="text-zinc-400 text-[12px] line-through">{{ number_format($product->compare_at_price, 0, ',', ' ') }} FCFA</div>
                                     @endif
-                                    <span class="mt-2 inline-flex text-[13px] font-semibold text-kola-deep">Voir le stand</span>
+                                    <span class="mt-2 inline-flex text-[13px] font-semibold text-kola-deep">{{ __('client.products.see_stand') }}</span>
                                 </div>
                             </div>
                         </a>
@@ -190,8 +190,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-lg font-bold text-zinc-900 mb-2">Aucun produit trouvé</h3>
-                            <p class="text-zinc-500">Modifiez vos filtres ou effectuez une autre recherche.</p>
+                            <h3 class="text-lg font-bold text-zinc-900 mb-2">{{ __('client.products.empty_title') }}</h3>
+                            <p class="text-zinc-500">{{ __('client.products.empty') }}</p>
                         </div>
                     @endforelse
                 </div>

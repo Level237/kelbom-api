@@ -31,8 +31,8 @@
     <!-- Section Header -->
     <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
-            <h2 class="text-3xl md:text-4xl font-black text-zinc-950 tracking-tight">Stands Premiums</h2>
-            <p class="text-zinc-500 mt-2 font-medium">Découvrez nos meilleurs vendeurs certifiés.</p>
+            <h2 class="text-3xl md:text-4xl font-black text-zinc-950 tracking-tight">{{ __('client.premium.title') }}</h2>
+            <p class="text-zinc-500 mt-2 font-medium">{{ __('client.premium.subtitle') }}</p>
         </div>
 
         <div class="flex items-center gap-4">
@@ -55,7 +55,7 @@
 
             <a href="{{ route('client.marketplace') }}"
                 class="inline-flex items-center gap-2 text-[15px] font-bold text-blue-600 hover:text-blue-800 transition-colors group">
-                Voir tous les stands
+                {{ __('client.premium.see_all') }}
                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -78,7 +78,7 @@
                     <div class="h-28 bg-zinc-100 relative overflow-hidden">
                         @if($stand->cover_url)
                             <img src="{{ str_starts_with($stand->cover_url, 'http') ? $stand->cover_url : Storage::url($stand->cover_url) }}"
-                                alt="Cover {{ $stand->stand_name }}"
+                                alt="{{ __('client.premium.cover_alt', ['name' => $stand->stand_name]) }}"
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         @else
                             <div class="w-full h-full bg-blue-100"></div>
@@ -110,7 +110,7 @@
                                 {{ $stand->stand_name }}
                             </h3>
                             <p class="text-[13px] text-zinc-500 font-medium mt-0.5 line-clamp-1">{{ $stand->city }},
-                                {{ $stand->country }}</p>
+                                {{ \App\Support\Localize::line('places.'.$stand->country, $stand->country) }}</p>
                         </div>
                         <!-- Rating Badge -->
                         <div
@@ -120,18 +120,18 @@
                                     d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                 </path>
                             </svg>
-                            <span class="text-xs font-bold text-amber-700">{{ $stand->rating_avg }}</span>
+                            <span class="text-xs font-bold text-amber-700">{{ \App\Support\Localize::rating($stand->rating_avg) }}</span>
                         </div>
                     </div>
 
                     <p class="text-[14px] text-zinc-600 mb-6 line-clamp-2 leading-relaxed flex-1">
-                        {{ $stand->description ?? 'Découvrez les produits incroyables de ' . $stand->stand_name . '.' }}
+                        {{ $stand->description !== null ? \App\Support\Localize::line('stands.'.$stand->slug, $stand->description) : __('client.premium.fallback', ['name' => $stand->stand_name]) }}
                     </p>
 
                     <!-- Action Button -->
                     <div
                         class="w-full py-2.5 bg-zinc-50 border border-zinc-200 text-zinc-800 font-bold rounded-xl group-hover:bg-[#0A2E65] group-hover:border-[#0A2E65] group-hover:text-white transition-all duration-300 text-[14px] flex items-center justify-center gap-2">
-                        Visiter le stand
+                        {{ __('client.premium.visit') }}
                         <svg class="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -142,7 +142,7 @@
             </a>
         @empty
             <div class="w-full text-center py-10 text-zinc-500">
-                Aucun stand premium pour le moment.
+                {{ __('client.premium.empty') }}
             </div>
         @endforelse
     </div>

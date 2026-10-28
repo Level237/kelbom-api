@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Stand;
+use App\Support\Localize;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -37,9 +38,9 @@ class HomeController extends Controller
                     'name' => $stand->stand_name,
                     'slug' => $stand->slug,
                     'city' => $stand->city,
-                    'country' => $stand->country,
-                    'description' => $stand->description,
-                    'rating' => number_format((float) $stand->rating_avg, 1, ',', ' '),
+                    'country' => Localize::line('places.'.$stand->country, $stand->country),
+                    'description' => Localize::line('stands.'.$stand->slug, $stand->description),
+                    'rating' => Localize::rating($stand->rating_avg),
                     'logo' => $logo,
                     'cover' => $cover,
                     'initial' => mb_strtoupper(mb_substr($stand->stand_name, 0, 1)),

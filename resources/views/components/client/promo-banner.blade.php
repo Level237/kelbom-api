@@ -2,7 +2,7 @@
     <a href="{{ route('seller.register') ?? '#' }}"
         class="block w-full rounded-3xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-amber-500/10 transition-all duration-500 group relative">
         <div class="w-full relative overflow-hidden "> <!-- Couleur de fond jaune en fallback -->
-            <img src="{{ asset('assets/img/client/create-stand.png') }}" alt="Devenez Vendeur sur Kelbom"
+            <img src="{{ asset('assets/img/client/create-stand.png') }}" alt="{{ __('client.promo.alt') }}"
                 class="w-full h-auto max-h-[500px] object-cover sm:object-contain transition-transform duration-700 group-hover:scale-105">
 
             <!-- Optional: A subtle hover overlay effect -->
